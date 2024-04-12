@@ -75,6 +75,16 @@ const Register = () => {
                 <PrimaryButton text="Sign up" onClick={() => {}} />
                 <SSOButton onClick={() => {}} />
               </div>
+              <div className="text-center">
+                <h3 className="text-sm text-[#696969]">
+                  Already have an account? &nbsp;
+                  <a
+                    className="text-[#2957FA] text-[15px] font-bold"
+                    href="/login">
+                    Login
+                  </a>
+                </h3>
+              </div>
             </form>
           </div>
         </div>
