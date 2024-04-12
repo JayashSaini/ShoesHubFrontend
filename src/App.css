@@ -29,3 +29,31 @@ body {
   font-weight: 400;
   font-style: normal;
 }
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+.custom-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.border-custom::before {
+  content: "";
+  border-radius: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: linear-gradient(to right, #b706f3, #4049f8);
+  margin: -3px;
+}
+
+.border-custom {
+  background-color: white;
+  position: relative;
+  border-radius: 20px;
+}
