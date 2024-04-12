@@ -3,9 +3,11 @@ import sidesection from "../assets/sidesection.jpg";
 import { Input, PrimaryButton, SSOButton } from "../Components";
 import { gsap } from "gsap";
 
-const Login = () => {
+const Register = () => {
+  const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
 
   const imgRef = useRef(null);
 
@@ -32,7 +34,16 @@ const Login = () => {
         <div className="w-[45%] p-16 h-full custom-flex">
           <div className="w-full min-w-[300px] h-auto px-8 py-3 border-custom">
             <form>
-              <h2 className="roboto-bold text-3xl text-center">Log in</h2>
+              <h2 className="roboto-bold text-3xl text-center">Sign up</h2>
+              <Input
+                label="Username"
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                }}
+                type="text"
+                placeholder="username here"
+                value={username}
+              />
               <Input
                 label="Email"
                 onChange={(e) => {
@@ -51,26 +62,18 @@ const Login = () => {
                 placeholder="atleast 8 characters"
                 value={password}
               />
-              <div className="text-right">
-                <a
-                  className="text-[#2957FA] text-sm font-medium"
-                  href="/forgot-password">
-                  Forgot Password?
-                </a>
-              </div>
+              <Input
+                label="Confirm password"
+                onChange={(e) => {
+                  setConfirmPassword(e.target.value);
+                }}
+                type="password"
+                placeholder="Re-enter Password"
+                value={confirmPassword}
+              />
               <div className="my-10 flex flex-col gap-4">
-                <PrimaryButton text="Log in" onClick={() => {}} />
+                <PrimaryButton text="Sign up" onClick={() => {}} />
                 <SSOButton onClick={() => {}} />
-              </div>
-              <div className="text-center">
-                <h3 className="text-sm text-[#696969]">
-                  Don't have an account? &nbsp;
-                  <a
-                    className="text-[#2957FA] text-[15px] font-bold"
-                    href="/register">
-                    Register
-                  </a>
-                </h3>
               </div>
             </form>
           </div>
@@ -80,4 +83,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
