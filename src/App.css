@@ -57,3 +57,34 @@ body {
   position: relative;
   border-radius: 20px;
 }
+
+.primary-button-bg {
+  background: linear-gradient(to right, #b706f3, #4049f8);
+}
+
+.button-wrapper {
+  width: 100%;
+  position: relative;
+  display: inline-block;
+  z-index: 5;
+}
+
+.button-wrapper::before {
+  content: "";
+  position: absolute;
+  border-radius: 8px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: linear-gradient(to right, #b706f3, #4049f8);
+  margin: -2px;
+}
+
+.button {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
