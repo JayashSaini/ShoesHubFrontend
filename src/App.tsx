@@ -8,6 +8,7 @@ import {
   ForgotPassword,
   OtpVerification,
   ResetPassword,
+  VerifyEmail,
 } from "./Pages";
 import Layout from "./Layout.jsx";
 
@@ -23,6 +24,7 @@ function App() {
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/verify-otp" element={<OtpVerification />} />
             <Route path="reset-password" element={<ResetPassword />} />
+            <Route path="email-verification" element={<VerifyEmail />} />
           </Route>
         </Routes>
       </BrowserRouter>

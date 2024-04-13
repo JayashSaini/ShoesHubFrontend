@@ -2,12 +2,15 @@ import { useState, useEffect, useRef } from "react";
 import sidesection from "../assets/sidesection.jpg";
 import { Input, PrimaryButton, SSOButton } from "../Components";
 import { gsap } from "gsap";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+
+  const navigate = useNavigate();
 
   const imgRef = useRef(null);
 
@@ -20,6 +23,9 @@ const Register = () => {
     });
   }, []);
 
+  const registerHandler = () => {
+    navigate("/email-verification");
+  };
   return (
     <>
       <div className="w-full h-screen flex justify-around items-center">
@@ -74,7 +80,7 @@ const Register = () => {
                 value={confirmPassword}
               />
               <div className="sm:my-10 my-6  flex flex-col sm:gap-4 gap-3">
-                <PrimaryButton text="Sign up" onClick={() => {}} />
+                <PrimaryButton text="Sign up" onClick={registerHandler} />
                 <SSOButton onClick={() => {}} />
               </div>
               <div className="text-center">

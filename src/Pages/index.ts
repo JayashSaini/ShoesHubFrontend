@@ -4,6 +4,7 @@ import Register from "./Register.js";
 import ForgotPassword from "./ForgotPassword.js";
 import OtpVerification from "./OtpVerification.js";
 import ResetPassword from "./ResetPassword.js";
+import VerifyEmail from "./VerifyEmail.js";
 
 export {
   Home,
@@ -12,4 +13,5 @@ export {
   ForgotPassword,
   OtpVerification,
   ResetPassword,
+  VerifyEmail,
 };
