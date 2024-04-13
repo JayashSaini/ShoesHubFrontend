@@ -4,6 +4,8 @@
     { "source": "/login", "destination": "/index.html" },
     { "source": "/register", "destination": "/index.html" },
     { "source": "/forgot-password", "destination": "/index.html" },
-    { "source": "/verify-otp", "destination": "/index.html" }
+    { "source": "/reset-password", "destination": "/index.html" },
+    { "source": "/email-verification", "destination": "/index.html" },
+    { "source": "/email-verification/success", "destination": "/index.html" }
   ]
 }
