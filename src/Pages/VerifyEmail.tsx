@@ -10,11 +10,11 @@ const VerifyEmail = () => {
           <div className="md:w-[500px] h-auto px-7 sm:px-16 py-4 border-custom custom-flex flex-col">
             <img
               src={blueEnvelope}
-              className="w-[140px] transform rotate-[-15deg]"
+              className="w-[140px] transform rotate-[-15deg] "
               alt="enevelope"
             />
             <form>
-              <h2 className="text-[#2957FA] roboto-bold sm:text-3xl text-2xl text-center">
+              <h2 className="text-[#2957FA] roboto-bold sm:text-3xl text-2xl text-center mt-1">
                 Verify your email address
               </h2>
               <p className="text-center sm:text-sm text-[12px] text-gray-500 sm:my-3 my-2">
