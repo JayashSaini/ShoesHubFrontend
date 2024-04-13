@@ -47,6 +47,7 @@ const ResetPassword = () => {
                     type="text"
                     value={value}
                     maxLength={1}
+                    inputMode="numeric"
                     onChange={(e) => handleChange(index, e.target.value)}
                     className="no-arrows sm:w-12 sm:h-12 w-9 h-9 text-3xl text-center border border-gray-300 rounded-lg"
                     ref={(input) => (otpInputs.current[index] = input)}

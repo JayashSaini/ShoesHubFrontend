@@ -29,10 +29,12 @@ const Login = () => {
             ref={imgRef}
           />
         </div>
-        <div className="w-[45%] p-16 h-full custom-flex">
-          <div className="w-full min-w-[300px] h-auto px-8 py-3 border-custom">
+        <div className="w-full md:w-[45%] p-2 md:p-4 h-full custom-flex">
+          <div className="w-full md:w-[90%]  sm:w-[60%] w-[90%] h-auto px-4 md:px-8 py-3 border-custom">
             <form>
-              <h2 className="roboto-bold text-3xl text-center">Log in</h2>
+              <h2 className="roboto-bold sm:text-3xl text-2xl md:text-4xl text-center mb-6">
+                Log in
+              </h2>
               <Input
                 label="Email"
                 onChange={(e) => {
@@ -53,20 +55,20 @@ const Login = () => {
               />
               <div className="text-right">
                 <a
-                  className="text-[#2957FA] text-sm font-medium"
+                  className="text-[#2957FA] sm:text-sm text-[11px] font-medium"
                   href="/forgot-password">
                   Forgot Password?
                 </a>
               </div>
-              <div className="my-10 flex flex-col gap-4">
+              <div className="sm:my-10 my-6 flex flex-col sm:gap-4 gap-0">
                 <PrimaryButton text="Log in" onClick={() => {}} />
                 <SSOButton onClick={() => {}} />
               </div>
               <div className="text-center">
-                <h3 className="text-sm text-[#696969]">
+                <h3 className="sm:text-sm text-[12px] text-gray-600">
                   Don't have an account? &nbsp;
                   <a
-                    className="text-[#2957FA] text-[15px] font-bold"
+                    className="text-[#2957FA] sm:text-[15px] text-[13px] font-bold"
                     href="/register">
                     Register
                   </a>

@@ -31,17 +31,19 @@ const Register = () => {
             ref={imgRef}
           />
         </div>
-        <div className="w-[45%] p-16 h-full custom-flex">
-          <div className="w-full min-w-[300px] h-auto px-8 py-3 border-custom">
+        <div className="w-full md:w-[45%] p-2 md:p-4 h-full custom-flex">
+          <div className="w-full md:w-[90%]  sm:w-[60%] w-[90%] h-auto px-4 md:px-8 py-3 border-custom">
             <form>
-              <h2 className="roboto-bold text-3xl text-center">Sign up</h2>
+              <h2 className="roboto-bold sm:text-3xl text-2xl md:text-4xl text-center mb-6">
+                Sign up
+              </h2>
               <Input
                 label="Username"
                 onChange={(e) => {
                   setUsername(e.target.value);
                 }}
                 type="text"
-                placeholder="username here"
+                placeholder="Username here"
                 value={username}
               />
               <Input
@@ -50,7 +52,7 @@ const Register = () => {
                   setEmail(e.target.value);
                 }}
                 type="email"
-                placeholder="enter your email"
+                placeholder="Enter your email"
                 value={email}
               />
               <Input
@@ -59,7 +61,7 @@ const Register = () => {
                   setPassword(e.target.value);
                 }}
                 type="password"
-                placeholder="atleast 8 characters"
+                placeholder="At least 8 characters"
                 value={password}
               />
               <Input
@@ -71,16 +73,14 @@ const Register = () => {
                 placeholder="Re-enter Password"
                 value={confirmPassword}
               />
-              <div className="my-10 flex flex-col gap-4">
+              <div className="sm:my-10 my-6  flex flex-col sm:gap-4 gap-0">
                 <PrimaryButton text="Sign up" onClick={() => {}} />
                 <SSOButton onClick={() => {}} />
               </div>
               <div className="text-center">
-                <h3 className="text-sm text-[#696969]">
-                  Already have an account? &nbsp;
-                  <a
-                    className="text-[#2957FA] text-[15px] font-bold"
-                    href="/login">
+                <h3 className="sm:text-sm text-[12px] text-gray-600">
+                  Already have an account?&nbsp;
+                  <a href="/login" className="text-blue-500 font-bold">
                     Login
                   </a>
                 </h3>

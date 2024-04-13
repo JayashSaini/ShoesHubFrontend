@@ -6,7 +6,7 @@ const PrimaryButton: React.FC<ButtonData> = ({ text = "Click", onClick }) => {
     <div>
       <button
         onClick={onClick}
-        className=" w-full primary-button-bg rounded-md p-3 text-center text-sm font-bold text-white my-3">
+        className=" w-full primary-button-bg rounded-md sm:p-3 p-2 text-center text-sm font-bold text-white my-3">
         {text}
       </button>
     </div>

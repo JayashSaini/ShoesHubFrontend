@@ -11,13 +11,13 @@ const ForgotPassword = () => {
   return (
     <>
       <div className="w-full h-screen custom-flex">
-        <div className="w-full p-16 h-full custom-flex">
-          <div className="h-auto px-8 sm:px-16 py-4 border-custom">
+        <div className="w-full sm:p-16 px-4  h-full custom-flex">
+          <div className="h-auto px-4 sm:px-16 py-4 border-custom">
             <form>
-              <h2 className="text-[#2957FA] roboto-bold text-3xl text-center">
+              <h2 className="text-[#2957FA] roboto-bold sm:text-3xl text-2xl text-center">
                 Forgot your Password
               </h2>
-              <p className="text-center text-sm text-gray-500 my-3">
+              <p className="text-center sm:text-sm text-[12px] text-gray-500 sm:my-3 my-2">
                 Your password will be reset by email
               </p>
               <Input
@@ -30,12 +30,12 @@ const ForgotPassword = () => {
                 value={email}
               />
 
-              <div className="my-4 flex flex-col gap-4">
+              <div className="sm:my-4 my-2 flex flex-col gap-4">
                 <PrimaryButton text="Next" onClick={otpHandler} />
               </div>
               <div className="text-center">
                 <a
-                  className="text-[#2957FA] text-[15px] font-bold"
+                  className="text-[#2957FA] sm:text-sm text-[12px] font-bold"
                   href="/login">
                   Back to log in
                 </a>
