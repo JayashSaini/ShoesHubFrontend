@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Input, PrimaryButton } from "../Components";
 import { useNavigate } from "react-router-dom";
+import shield from "../assets/shield .png";
+
 const ForgotPassword = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
@@ -12,7 +14,8 @@ const ForgotPassword = () => {
     <>
       <div className="w-full h-screen custom-flex">
         <div className="w-full sm:p-16 px-6  h-full custom-flex">
-          <div className="md:w-[500px] w-full h-auto px-7 sm:px-16 py-4 border-custom">
+          <div className="md:w-[500px] w-full h-auto px-7 sm:px-16 py-4 border-custom custom-flex flex-col">
+            <img src={shield} className="w-[60px] my-3 " alt="successfull" />
             <form>
               <h2 className="text-[#2957FA] roboto-bold sm:text-3xl text-2xl text-center">
                 Forgot your Password?
