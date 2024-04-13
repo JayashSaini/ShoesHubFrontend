@@ -87,11 +87,8 @@ body {
 }
 
 .button-wrapper:hover::before {
-  background: linear-gradient(
-    to left,
-    #b706f3,
-    #4049f8
-  ); /* Change direction on hover */
+  background: linear-gradient(to right, #b706f3 20%, #4049f8);
+  /* Change direction on hover */
 }
 
 .button {

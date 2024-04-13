@@ -1,7 +1,13 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { Home, Login, Register, ForgotPassword, ResetPassword } from "./Pages";
+import {
+  Home,
+  Login,
+  Register,
+  ForgotPassword,
+  OtpVerification,
+} from "./Pages";
 import Layout from "./Layout.jsx";
 
 function App() {
@@ -14,7 +20,7 @@ function App() {
             <Route path="/login" index element={<Login />} />
             <Route path="/register" index element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/verify-otp" element={<OtpVerification />} />
           </Route>
         </Routes>
       </BrowserRouter>
