@@ -30,7 +30,7 @@ const Login = () => {
           />
         </div>
         <div className="w-full md:w-[45%] p-2 md:p-4 h-full custom-flex">
-          <div className="w-full md:w-[90%]  sm:w-[60%] w-[90%] h-auto px-4 md:px-8 py-3 border-custom">
+          <div className="w-full md:w-[90%]  sm:w-[60%] w-[80%] h-auto px-4 md:px-8 py-3 border-custom">
             <form>
               <h2 className="roboto-bold sm:text-3xl text-2xl md:text-4xl text-center mb-6">
                 Log in

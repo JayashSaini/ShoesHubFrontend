@@ -27,7 +27,7 @@ const Input: React.FC<InputData> = ({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className="sm:p-3 p-[5px] remove-arrow w-full border-gray-300 hover:border-gray-400 border-2 rounded-md text-gray-800  appearance-none roboto-light sm:text-sm text-[10px] tracking-wider focus:border-gray-400 outline-none duration-200 ease-out"
+          className="sm:p-3 p-[5px] remove-arrow w-full border-gray-300 hover:border-gray-400 border-2 rounded-md text-gray-800  appearance-none  sm:text-sm text-[10px] tracking-wider focus:border-gray-400 outline-none duration-200 ease-out"
         />
         {type === "password" && ( // Conditionally render eye button section
           <button
