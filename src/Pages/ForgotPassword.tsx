@@ -15,10 +15,11 @@ const ForgotPassword = () => {
           <div className="h-auto px-7 sm:px-16 py-4 border-custom">
             <form>
               <h2 className="text-[#2957FA] roboto-bold sm:text-3xl text-2xl text-center">
-                Forgot your Password
+                Forgot your Password?
               </h2>
               <p className="text-center sm:text-sm text-[12px] text-gray-500 sm:my-3 my-2">
-                Your password will be reset by email
+                Please enter your email we will sent a code <br />
+                to restart your password
               </p>
               <Input
                 label="Email"
@@ -26,16 +27,16 @@ const ForgotPassword = () => {
                   setEmail(e.target.value);
                 }}
                 type="email"
-                placeholder="enter your email"
+                placeholder="enter your email address"
                 value={email}
               />
 
               <div className="sm:my-4 my-2 flex flex-col gap-4">
-                <PrimaryButton text="Next" onClick={otpHandler} />
+                <PrimaryButton text="Confirm email" onClick={otpHandler} />
               </div>
               <div className="text-center">
                 <a
-                  className="text-[#2957FA] sm:text-sm text-[12px] font-bold"
+                  className="text-[#2957FA] sm:text-sm text-[10px] font-medium"
                   href="/login">
                   Back to log in
                 </a>

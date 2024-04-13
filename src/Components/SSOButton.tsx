@@ -6,7 +6,7 @@ const SSOButton: React.FC<SSOButtonData> = ({ onClick }) => {
     <div className="button-wrapper rounded-lg">
       <button
         onClick={onClick}
-        className=" button w-full rounded-md sm:p-3 p-2 text-center text-sm font-medium  flex items-center justify-center gap-2 text-black rounded-lg ">
+        className=" button w-full rounded-md sm:p-[9px] p-1 text-center text-sm font-medium  flex items-center justify-center gap-2 text-black rounded-lg ">
         <img
           src="https://www.vectorlogo.zone/logos/google/google-icon.svg"
           alt=""

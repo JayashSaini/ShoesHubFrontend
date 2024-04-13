@@ -3,10 +3,10 @@ import { ButtonData } from "../types";
 
 const PrimaryButton: React.FC<ButtonData> = ({ text = "Click", onClick }) => {
   return (
-    <div>
+    <div className="button-wrapper">
       <button
         onClick={onClick}
-        className=" w-full primary-button-bg rounded-md sm:p-3 p-2 text-center text-sm font-bold text-white my-3">
+        className=" w-full primary-button-bg rounded-lg sm:p-[9px] p-1 text-center sm:text-sm text-[12px] font-bold text-white button">
         {text}
       </button>
     </div>

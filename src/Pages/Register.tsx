@@ -69,11 +69,11 @@ const Register = () => {
                 onChange={(e) => {
                   setConfirmPassword(e.target.value);
                 }}
-                type="password"
+                type="confirmPassword"
                 placeholder="Re-enter Password"
                 value={confirmPassword}
               />
-              <div className="sm:my-10 my-6  flex flex-col sm:gap-4 gap-0">
+              <div className="sm:my-10 my-6  flex flex-col sm:gap-4 gap-3">
                 <PrimaryButton text="Sign up" onClick={() => {}} />
                 <SSOButton onClick={() => {}} />
               </div>
