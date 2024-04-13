@@ -11,8 +11,8 @@ const ForgotPassword = () => {
   return (
     <>
       <div className="w-full h-screen custom-flex">
-        <div className="w-full sm:p-16 px-4  h-full custom-flex">
-          <div className="h-auto px-4 sm:px-16 py-4 border-custom">
+        <div className="w-full sm:p-16 px-2  h-full custom-flex">
+          <div className="h-auto px-7 sm:px-16 py-4 border-custom">
             <form>
               <h2 className="text-[#2957FA] roboto-bold sm:text-3xl text-2xl text-center">
                 Forgot your Password

@@ -31,8 +31,8 @@ const ResetPassword = () => {
   return (
     <>
       <div className="w-full h-screen custom-flex">
-        <div className="w-full p-3 h-full custom-flex">
-          <div className=" max-w-[450px] h-auto  px-4 sm:px-8 sm:px-16 py-4 border-custom">
+        <div className="w-full px-8  h-full custom-flex">
+          <div className=" h-auto px-4 sm:px-8 sm:px-16 py-4 border-custom">
             <form>
               <h2 className="text-[#2957FA] roboto-bold text-3xl text-center">
                 Reset Password
