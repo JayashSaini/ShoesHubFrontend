@@ -33,8 +33,8 @@ const OtpVerification = () => {
     otpInputs.current[0]?.focus();
   }, []);
 
-  const resetHandler = () => {
-    navigate("/login");
+  const otpHandler = () => {
+    navigate("/reset-password");
   };
 
   return (
@@ -63,7 +63,7 @@ const OtpVerification = () => {
             ))}
           </div>
           <div className="flex justify-center my-2">
-            <PrimaryButton text="Confirm OTP" onClick={resetHandler} />
+            <PrimaryButton text="Confirm OTP" onClick={otpHandler} />
           </div>
         </form>
       </div>

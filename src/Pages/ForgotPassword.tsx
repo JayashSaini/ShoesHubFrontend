@@ -6,7 +6,7 @@ const ForgotPassword = () => {
   const [email, setEmail] = useState<string>("");
 
   const otpHandler = () => {
-    navigate("/reset-password");
+    navigate("/verify-otp");
   };
   return (
     <>
