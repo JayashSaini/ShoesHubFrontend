@@ -1,6 +1,5 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import {
   Home,
   Login,
@@ -12,8 +11,24 @@ import {
   VerifyEmailSuccess,
 } from "./Pages";
 import Layout from "./Layout.jsx";
+import { ApiCall } from "./utils";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    const sendData = async () => {
+      try {
+        await ApiCall({
+          url: "/api/v1/healthcheck",
+          method: "GET",
+          data: {},
+          debounceTime: 1000,
+        });
+      } catch (error) {}
+    };
+    sendData();
+  }, []);
+
   return (
     <>
       <BrowserRouter>

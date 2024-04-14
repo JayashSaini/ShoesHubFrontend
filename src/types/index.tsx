@@ -1,3 +1,5 @@
+import { Method } from "axios";
+
 export interface InputData {
   label: string;
   type?: string;
@@ -12,4 +14,12 @@ export interface ButtonData {
 }
 export interface SSOButtonData {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+export interface ApiCallProps {
+  url: string;
+  method?: Method;
+  params?: object;
+  data?: object;
+  debounceTime?: number;
 }
