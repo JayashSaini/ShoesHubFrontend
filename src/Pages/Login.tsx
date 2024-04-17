@@ -61,7 +61,7 @@ const Login = () => {
                 </a>
               </div>
               <div className="sm:my-10 my-6 flex flex-col sm:gap-4 gap-3">
-                <PrimaryButton text="Log in" onClick={() => {}} />
+                <PrimaryButton text="Log in" />
                 <SSOButton onClick={() => {}} />
               </div>
               <div className="text-center">

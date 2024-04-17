@@ -1,9 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { PrimaryButton } from "../Components";
-import { useNavigate } from "react-router-dom";
 
 const OtpVerification = () => {
-  const navigate = useNavigate();
   const [otp, setOtp] = useState<string[]>(Array(6).fill("")); // Initialize an array with 6 empty strings for OTP
 
   const otpInputs = useRef<(HTMLInputElement | null)[]>([]);
@@ -33,10 +31,6 @@ const OtpVerification = () => {
     otpInputs.current[0]?.focus();
   }, []);
 
-  const otpHandler = () => {
-    navigate("/reset-password");
-  };
-
   return (
     <div className="w-full h-screen flex justify-center items-center">
       <div className="max-w-[450px] h-auto px-4 sm:px-16 sm:py-8 py-4 border-custom">
@@ -63,7 +57,7 @@ const OtpVerification = () => {
             ))}
           </div>
           <div className="flex justify-center my-2">
-            <PrimaryButton text="Confirm OTP" onClick={otpHandler} />
+            <PrimaryButton text="Confirm OTP" />
           </div>
         </form>
       </div>

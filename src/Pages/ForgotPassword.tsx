@@ -1,15 +1,10 @@
 import { useState } from "react";
 import { Input, PrimaryButton } from "../Components";
-import { useNavigate } from "react-router-dom";
 import shield from "../assets/shield .png";
 
 const ForgotPassword = () => {
-  const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
 
-  const otpHandler = () => {
-    navigate("/verify-otp");
-  };
   return (
     <>
       <div className="w-full h-screen custom-flex">
@@ -35,7 +30,7 @@ const ForgotPassword = () => {
               />
 
               <div className="sm:my-4 my-2 flex flex-col gap-4">
-                <PrimaryButton text="Confirm email" onClick={otpHandler} />
+                <PrimaryButton text="Confirm email" />
               </div>
               <div className="text-center">
                 <a
