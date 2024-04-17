@@ -4,7 +4,7 @@ import { ApiCallProps } from "../types";
 
 interface ApiResponse<T> {
   data: T | null;
-  error: string | null;
+  error: any;
 }
 
 const ApiCallComponent = async ({
@@ -18,7 +18,6 @@ const ApiCallComponent = async ({
 
     error: null,
   };
-
   const fetchData = async () => {
     try {
       const res = await axios({
@@ -29,7 +28,7 @@ const ApiCallComponent = async ({
       });
       response.data = res.data;
     } catch (error: any) {
-      response.error = error.response?.data?.message || "An error occurred";
+      response.error = error.response || "An error occurred";
     }
   };
 

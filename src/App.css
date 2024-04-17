@@ -106,3 +106,30 @@ body {
 .no-arrows {
   appearance: textfield;
 }
+
+/* notification css */
+
+.Toastify__toast-container {
+  width: 400px; /* Example width */
+}
+
+.Toastify__toast {
+  min-height: 60px; /* Example height */
+  padding: 12px 16px; /* Example padding */
+  font-size: 17px;
+  /* Add other styling properties as needed */
+}
+
+/* Media query for viewport width below 768px */
+@media (max-width: 768px) {
+  .Toastify__toast-container {
+    width: 200px; /* Adjust width for smaller screens */
+  }
+
+  .Toastify__toast {
+    min-height: 40px;
+    padding: 8px 12px;
+    font-size: 12px;
+    /* Adjust styles for smaller screens */
+  }
+}
