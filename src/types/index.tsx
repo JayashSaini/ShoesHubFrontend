@@ -10,7 +10,6 @@ export interface InputData {
 
 export interface ButtonData {
   text: string;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 export interface SSOButtonData {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -22,4 +21,19 @@ export interface ApiCallProps {
   params?: object;
   data?: object;
   debounceTime?: number;
+}
+
+export interface AuthState {
+  isAuthenticated: boolean;
+  user: User;
+  error: string | null;
+}
+
+export interface User {
+  id: string;
+  username: string;
+  email: string;
+  avatar: string;
+  isEmailVerified: boolean;
+  role: string;
 }

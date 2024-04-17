@@ -10,7 +10,6 @@ import {
   ResetPassword,
   VerifyEmail,
   VerifyEmailSuccess,
-  Temp,
 } from "./Pages";
 import Layout from "./Layout.jsx";
 import { ApiCall } from "./utils";
@@ -39,13 +38,12 @@ function App() {
             <Route path="/" index element={<Home />} />
             <Route path="/login" index element={<Login />} />
             <Route path="/register" index element={<Register />} />
-            <Route path="/register-success" index element={<Temp />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/verify-otp" element={<OtpVerification />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/email-verification" element={<VerifyEmail />}></Route>
             <Route
-              path="/email-verification/success"
+              path="/email-verification/:token"
               element={<VerifyEmailSuccess />}
             />
           </Route>

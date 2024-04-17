@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { Input, PrimaryButton } from "../Components";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const ResetPassword = () => {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const resetHandler = () => {
-    navigate("/login");
-  };
+  // const resetHandler = () => {
+  //   navigate("/login");
+  // };
   return (
     <>
       <>
@@ -41,7 +41,7 @@ const ResetPassword = () => {
                 />
 
                 <div className="sm:my-4 my-2 flex flex-col gap-4">
-                  <PrimaryButton text="Reset Password" onClick={resetHandler} />
+                  <PrimaryButton text="Reset Password" />
                 </div>
               </form>
             </div>
