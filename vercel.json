@@ -8,5 +8,14 @@
     { "source": "/verify-otp", "destination": "/index.html" },
     { "source": "/email-verification", "destination": "/index.html" },
     { "source": "/email-verification/:token", "destination": "/index.html" }
+  ],
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "https://shoeshubbackend.onrender.com/api/$1"
+    }
   ]
 }
