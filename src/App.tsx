@@ -19,12 +19,13 @@ function App() {
   useEffect(() => {
     const sendData = async () => {
       try {
-        await ApiCall({
-          url: "/api/v1/healthcheck",
+        const response = await ApiCall({
+          url: "https://shoeshubbackend.onrender.com/api/v1/healthcheck",
           method: "GET",
           data: {},
           debounceTime: 1000,
         });
+        console.log("res" + JSON.stringify(response));
       } catch (error) {}
     };
     sendData();
