@@ -7,10 +7,6 @@
     { "source": "/reset-password", "destination": "/index.html" },
     { "source": "/verify-otp", "destination": "/index.html" },
     { "source": "/email-verification", "destination": "/index.html" },
-    { "source": "/email-verification/:token", "destination": "/index.html" },
-    {
-      "source": "/api/(.*)",
-      "destination": "https://shoeshubbackend.onrender.com/api/$1"
-    }
+    { "source": "/email-verification/:token", "destination": "/index.html" }
   ]
 }
