@@ -14,8 +14,8 @@
       "handle": "filesystem"
     },
     {
-      "src": "/api/v1/(.*)",
-      "dest": "https://shoeshubbackend.onrender.com/api/v1/$1"
+      "src": "/api/(.*)",
+      "dest": "https://shoeshubbackend.onrender.com/api/$1"
     }
   ]
 }
