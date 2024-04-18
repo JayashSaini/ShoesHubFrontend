@@ -17,5 +17,11 @@
       "src": "/api/(.*)",
       "dest": "https://shoeshubbackend.onrender.com/api/$1"
     }
-  ]
+  ],
+  "functions": {
+    "api": { "runtime": "nodejs14.x" }
+  },
+  "env": {
+    "API_URL": "https://shoeshubbackend.onrender.com"
+  }
 }
