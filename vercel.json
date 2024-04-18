@@ -7,15 +7,10 @@
     { "source": "/reset-password", "destination": "/index.html" },
     { "source": "/verify-otp", "destination": "/index.html" },
     { "source": "/email-verification", "destination": "/index.html" },
-    { "source": "/email-verification/:token", "destination": "/index.html" }
-  ],
-  "routes": [
+    { "source": "/email-verification/:token", "destination": "/index.html" },
     {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "https://shoeshubbackend.onrender.com/api/$1"
+      "source": "/api/(.*)",
+      "destination": "https://shoeshubbackend.onrender.com/api/$1"
     }
   ],
   "functions": {
