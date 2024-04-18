@@ -20,12 +20,12 @@ function App() {
     const sendData = async () => {
       try {
         const response = await ApiCall({
-          url: "https://shoeshubbackend.onrender.com/api/v1/healthcheck",
+          url: "/api/v1/healthcheck",
           method: "GET",
           data: {},
           debounceTime: 1000,
         });
-        console.log("res" + JSON.stringify(response));
+        console.log("res : ", JSON.stringify(response));
       } catch (error) {}
     };
     sendData();
