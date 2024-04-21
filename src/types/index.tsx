@@ -20,20 +20,34 @@ export interface ApiCallProps {
   method?: Method;
   params?: object;
   data?: object;
+  headers?: object;
   debounceTime?: number;
 }
 
 export interface AuthState {
   isAuthenticated: boolean;
-  user: User;
+  user: UserState;
   error: string | null;
 }
 
-export interface User {
-  id: string;
+export interface UserState {
+  accessToken: string | null;
+  refreshToken: string | null;
+  username: string;
+  avatar: string;
+  email: string;
+  userId: string;
+  isEmailVerified: boolean;
+  role: string;
+  isLoggedIn: boolean;
+}
+
+export interface LoginPayload {
+  accessToken: string | null;
+  refreshToken: string | null;
   username: string;
   email: string;
-  avatar: string;
+  userId: string;
   isEmailVerified: boolean;
   role: string;
 }

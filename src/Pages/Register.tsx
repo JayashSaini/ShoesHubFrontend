@@ -5,13 +5,6 @@ import { gsap } from "gsap";
 import { useNavigate } from "react-router-dom";
 import { ApiCall } from "../utils";
 import { toast, ToastContainer } from "react-toastify";
-import { useDispatch } from "react-redux";
-import {
-  registerFailure,
-  registerStart,
-  registerSuccess,
-} from "../features/auth/index.js";
-import { User } from "../types";
 import { ThreeDots } from "react-loader-spinner";
 
 const Register = () => {
@@ -21,7 +14,6 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   //validators variables
@@ -70,7 +62,6 @@ const Register = () => {
 
     try {
       if (!errorMessage && !error) {
-        dispatch(registerStart());
         setIsLoading(true);
         const response = await ApiCall({
           url: "/api/v1/users/register",
@@ -85,17 +76,6 @@ const Register = () => {
         });
         setIsLoading(false);
         if (response.data) {
-          const user: any = response.data?.data?.user;
-          const userInput: User = {
-            id: user?._id,
-            username: user?.username,
-            email: user?.email,
-            avatar: user?.avatar?.url,
-            isEmailVerified: user?.isEmailVerified,
-            role: user?.role,
-          };
-
-          dispatch(registerSuccess(userInput));
           navigate("/email-verification");
         }
         if (response.error) {
@@ -110,14 +90,12 @@ const Register = () => {
                 position: "top-center",
                 autoClose: 3000,
               });
-              dispatch(registerFailure(errorMessage));
             } else if (response.error.data.message) {
               toast.error(response.error.data.message, {
                 position: "top-center",
                 autoClose: 3000,
                 hideProgressBar: false,
               });
-              dispatch(registerFailure(response.error.data.message));
             }
           } else if (response.error.data.message) {
             toast.error(response.error.data.message, {
@@ -125,7 +103,6 @@ const Register = () => {
               autoClose: 3000,
               hideProgressBar: false,
             });
-            dispatch(registerFailure(response.error.data.message));
           }
         }
       }

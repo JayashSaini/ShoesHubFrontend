@@ -1,65 +1,65 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AuthState, User } from "../../types";
+import { AuthState } from "../../types";
 
 const initialState: AuthState = {
   isAuthenticated: false,
   user: {
-    id: "0",
+    accessToken: null,
+    refreshToken: null,
     username: "",
     email: "",
     avatar: "https://via.placeholder.com/200x200.png",
+    userId: "",
     isEmailVerified: false,
-    role: "USER",
+    role: "user", // Default role, can be adjusted based on your application logic
+    isLoggedIn: false,
   },
   error: null,
 };
 
-const authSlice = createSlice({
-  name: "auth",
+const userSlice = createSlice({
+  name: "user",
   initialState,
   reducers: {
-    registerStart(state) {
-      state.error = null;
-    },
-    registerSuccess(state, action: PayloadAction<User>) {
+    login(state, action: PayloadAction<AuthState>) {
+      const {
+        accessToken,
+        refreshToken,
+        username,
+        email,
+        avatar,
+        userId,
+        isEmailVerified,
+        role,
+      } = action.payload.user;
       state.isAuthenticated = true;
-      state.user = {
-        id: action.payload.id,
-        username: action.payload.username,
-        email: action.payload.email,
-        isEmailVerified: action.payload.isEmailVerified,
-        avatar: action.payload.avatar,
-        role: action.payload.role,
-      };
+
+      // user credentials
+      state.user.accessToken = accessToken;
+      state.user.refreshToken = refreshToken;
+      state.user.username = username;
+      state.user.email = email;
+      state.user.avatar = avatar;
+      state.user.userId = userId;
+      state.user.isEmailVerified = isEmailVerified;
+      state.user.role = role;
+      state.user.isLoggedIn = true;
+
       state.error = null;
     },
-    registerFailure(state, action: PayloadAction<string>) {
+    loginFailed(state, action) {
       state.error = action.payload;
+      state.isAuthenticated = false;
+      state.user = initialState.user;
     },
-    googleSignInStart(state) {
-      state.error = null;
+    logout(state) {
+      // Reset user state on logout
+      Object.assign(state, initialState);
     },
-    googleSignInSuccess(state, action: PayloadAction<User>) {
-      state.isAuthenticated = true;
-      state.user = action.payload;
-    },
-    googleSignInFailure(state, action: PayloadAction<string>) {
-      state.error = action.payload;
-    },
-    emailVerification(state, action: PayloadAction<boolean>) {
-      state.user.isEmailVerified = action.payload;
-    },
+    // Add other reducers as needed (e.g., for updating user profile, email verification status, etc.)
   },
 });
 
-export const {
-  registerStart,
-  registerSuccess,
-  registerFailure,
-  googleSignInStart,
-  googleSignInSuccess,
-  googleSignInFailure,
-  emailVerification,
-} = authSlice.actions;
-
-export default authSlice.reducer;
+// Export actions and reducer
+export const { login, logout, loginFailed } = userSlice.actions;
+export default userSlice.reducer;

@@ -11,7 +11,8 @@ const ApiCallComponent = async ({
   url,
   method = "GET",
   params = {},
-  data = {}, // Add a default empty object for data
+  data = {},
+  headers = {}, // Add a default empty object for data
 }: ApiCallProps): Promise<ApiResponse<any>> => {
   const response: ApiResponse<any> = {
     data: null,
@@ -25,6 +26,7 @@ const ApiCallComponent = async ({
         url,
         params,
         data, // Include the data in the request
+        headers,
       });
       response.data = res.data;
     } catch (error: any) {

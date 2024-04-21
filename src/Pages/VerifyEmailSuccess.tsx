@@ -5,16 +5,12 @@ import { useEffect, useState } from "react";
 import { ApiCall } from "../utils";
 import { ThreeDots } from "react-loader-spinner";
 import { toast, ToastContainer } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { emailVerification } from "../features/auth";
 
 const VerifyEmailSuccess = () => {
   const navigate = useNavigate();
   const { token } = useParams();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [emailVerified, setEmailVerified] = useState<boolean>(false);
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
@@ -28,7 +24,6 @@ const VerifyEmailSuccess = () => {
         setIsLoading(false);
         if (response.data) {
           setEmailVerified(true);
-          dispatch(emailVerification(true));
         } else if (
           response.error &&
           response.error.data &&

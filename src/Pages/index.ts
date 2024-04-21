@@ -6,7 +6,7 @@ import OtpVerification from "./OtpVerification.js";
 import ResetPassword from "./ResetPassword.js";
 import VerifyEmail from "./VerifyEmail.js";
 import VerifyEmailSuccess from "./VerifyEmailSuccess.js";
-
+import NotFound from "./NotFound.js";
 export {
   Home,
   Login,
@@ -16,4 +16,5 @@ export {
   ResetPassword,
   VerifyEmail,
   VerifyEmailSuccess,
+  NotFound,
 };

@@ -1,6 +1,6 @@
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import {
   Home,
   Login,
@@ -10,47 +10,65 @@ import {
   ResetPassword,
   VerifyEmail,
   VerifyEmailSuccess,
+  NotFound,
 } from "./Pages";
 import Layout from "./Layout.jsx";
 import { ApiCall } from "./utils";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 function App() {
+  const isAuthenticated = () => {
+    let authenticated = useSelector((state: any) => state.authenticated);
+    if (authenticated) return true;
+    const accessTokne = localStorage.getItem("accessToken");
+    return accessTokne ? true : false;
+  };
+
   useEffect(() => {
     const sendData = async () => {
       try {
-        const response = await ApiCall({
+        await ApiCall({
           url: "/api/v1/healthcheck",
           method: "GET",
           data: {},
           debounceTime: 1000,
         });
-        console.log("res : ", JSON.stringify(response));
       } catch (error) {}
     };
     sendData();
   }, []);
-
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="/" index element={<Home />} />
-            <Route path="/login" index element={<Login />} />
-            <Route path="/register" index element={<Register />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/verify-otp" element={<OtpVerification />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/email-verification" element={<VerifyEmail />}></Route>
-            <Route
-              path="/email-verification/:token"
-              element={<VerifyEmailSuccess />}
-            />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          {/* Define your home route here */}
+          <Route
+            path="/"
+            element={isAuthenticated() ? <Home /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/login"
+            element={isAuthenticated() ? <Navigate to="/" /> : <Login />}
+          />
+          <Route
+            path="/register"
+            element={isAuthenticated() ? <Navigate to="/" /> : <Register />}
+          />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/verify-otp" element={<OtpVerification />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/email-verification" element={<VerifyEmail />} />
+          <Route
+            path="/email-verification/:token"
+            element={<VerifyEmailSuccess />}
+          />
+
+          {/* Define the 404 route */}
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

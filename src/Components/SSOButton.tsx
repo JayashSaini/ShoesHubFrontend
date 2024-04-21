@@ -5,6 +5,7 @@ const SSOButton: React.FC<SSOButtonData> = ({ onClick }) => {
   return (
     <div className="button-wrapper rounded-lg">
       <button
+        type="button"
         onClick={onClick}
         className=" button w-full rounded-md sm:p-[9px] p-1 text-center text-sm font-medium  flex items-center justify-center gap-2 text-black rounded-lg ">
         <img
