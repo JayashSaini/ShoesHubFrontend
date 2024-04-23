@@ -100,7 +100,7 @@ const Home = () => {
   return (
     <>
       <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-        <h1 className="text-3xl text-blue-600 mb-8">
+        <h1 className="text-3xl text-blue-600 text=center mb-8">
           Welcome to Your Dashboard
         </h1>
         {/* Your dashboard content goes here */}

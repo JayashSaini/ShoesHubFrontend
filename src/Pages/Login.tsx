@@ -131,8 +131,15 @@ const Login = () => {
     }
   };
 
-  const handlerGoogleSingin = () => {
-    // console.log("sing in handlerGoogleSingin");
+  const SSOHandler = () => {
+    try {
+      window.open(`${import.meta.env.VITE_SSO_URI}`, "_self");
+    } catch (error) {
+      toast.error("Sing in Failed", {
+        position: "top-center",
+        autoClose: 5000,
+      });
+    }
   };
 
   return (
@@ -179,7 +186,7 @@ const Login = () => {
               </div>
               <div className="sm:my-10 my-6 flex flex-col sm:gap-4 gap-3">
                 <PrimaryButton text="Log in" />
-                <SSOButton onClick={handlerGoogleSingin} />
+                <SSOButton onClick={SSOHandler} />
               </div>
               <div className="text-center">
                 <h3 className="sm:text-sm text-[12px] text-gray-600">

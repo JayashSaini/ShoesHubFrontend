@@ -11,19 +11,16 @@ import {
   VerifyEmail,
   VerifyEmailSuccess,
   NotFound,
+  Redirect,
 } from "./Pages";
 import Layout from "./Layout.jsx";
 import { ApiCall } from "./utils";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+// import PrivateRoute from "./Components/PrivateRoute"; // Correct import
 
 function App() {
-  const isAuthenticated = () => {
-    let authenticated = useSelector((state: any) => state.authenticated);
-    if (authenticated) return true;
-    const accessTokne = localStorage.getItem("accessToken");
-    return accessTokne ? true : false;
-  };
+  // useSelector should be inside the functional component body
 
   useEffect(() => {
     const sendData = async () => {
@@ -38,22 +35,35 @@ function App() {
     };
     sendData();
   }, []);
+
+  const Authenticated = () => {
+    const isAuthenticated = useSelector((state: any) => state.authenticated);
+    if (isAuthenticated) return true;
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) return true;
+    return false;
+  };
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        {/* Place the layout only once outside the Routes */}
+        <Route element={<Layout />}>
           {/* Define your home route here */}
           <Route
             path="/"
-            element={isAuthenticated() ? <Home /> : <Navigate to="/login" />}
+            element={Authenticated() ? <Home /> : <Navigate to="/login" />}
           />
           <Route
             path="/login"
-            element={isAuthenticated() ? <Navigate to="/" /> : <Login />}
+            element={Authenticated() ? <Navigate to="/" /> : <Login />}
           />
           <Route
             path="/register"
-            element={isAuthenticated() ? <Navigate to="/" /> : <Register />}
+            element={Authenticated() ? <Navigate to="/" /> : <Register />}
+          />
+          <Route
+            path="/user/:accessToken/:refreshToken"
+            element={<Redirect />}
           />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/verify-otp" element={<OtpVerification />} />

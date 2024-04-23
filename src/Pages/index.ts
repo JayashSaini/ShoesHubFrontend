@@ -7,6 +7,8 @@ import ResetPassword from "./ResetPassword.js";
 import VerifyEmail from "./VerifyEmail.js";
 import VerifyEmailSuccess from "./VerifyEmailSuccess.js";
 import NotFound from "./NotFound.js";
+import Redirect from "./Redirect.js";
+
 export {
   Home,
   Login,
@@ -17,4 +19,5 @@ export {
   VerifyEmail,
   VerifyEmailSuccess,
   NotFound,
+  Redirect,
 };
