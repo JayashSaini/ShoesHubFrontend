@@ -8,6 +8,11 @@
     { "source": "/verify-otp", "destination": "/index.html" },
     { "source": "/email-verification", "destination": "/index.html" },
     { "source": "/email-verification/:token", "destination": "/index.html" },
+    { "source": "*", "destination": "/index.html" },
+    {
+      "source": "/user/:accessToken/:refreshToken",
+      "destination": "/index.html"
+    },
     {
       "source": "/api/(.*)",
       "destination": "https://shoeshubbackend.onrender.com/api/$1"
