@@ -10,7 +10,7 @@ const Redirect = () => {
   localStorage.setItem("refreshToken", refreshToken);
 
   useEffect(() => {
-    window.location.href = "http://localhost:3000/";
+    window.location.href = "https://online-shoeshub.vercel.app/";
   }, []);
   return (
     <>

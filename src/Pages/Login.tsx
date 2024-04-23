@@ -133,7 +133,10 @@ const Login = () => {
 
   const SSOHandler = () => {
     try {
-      window.open(`${import.meta.env.VITE_SSO_URI}`, "_self");
+      window.open(
+        "https://shoeshubbackend.onrender.com/api/v1/users/google/callback",
+        "_self"
+      );
     } catch (error) {
       toast.error("Sing in Failed", {
         position: "top-center",
