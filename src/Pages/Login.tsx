@@ -134,7 +134,7 @@ const Login = () => {
   const SSOHandler = () => {
     try {
       window.open(
-        "https://shoeshubbackend.onrender.com/api/v1/users/google/callback",
+        "https://shoeshubbackend.onrender.com/api/v1/users/google",
         "_self"
       );
     } catch (error) {
