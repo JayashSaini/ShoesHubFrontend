@@ -37,17 +37,12 @@ const Login = () => {
     } else {
       try {
         setIsLoading(true);
-        const accessToken = localStorage.getItem("accessToken");
         const response = await ApiCall({
           url: "/api/v1/users/login",
           method: "POST",
           data: {
             email,
             password,
-          },
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
           },
         });
         setIsLoading(false);
