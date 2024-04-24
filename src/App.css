@@ -22,6 +22,11 @@
   font-style: normal;
 }
 
+*::selection {
+  background-color: #4049f8;
+  color: white;
+}
+
 body {
   font-family: "Inter";
   font-size: 10px;

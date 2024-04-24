@@ -8,7 +8,7 @@ import { ThreeDots } from "react-loader-spinner";
 import { toast, ToastContainer } from "react-toastify";
 
 const VerifyEmail = () => {
-  const userEmail = useSelector((state: any) => state.auth.user?.email);
+  const userEmail = useSelector((state: any) => state.user.user?.email);
   const [email, setEmail] = useState<string>(userEmail || "");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -54,28 +54,22 @@ const VerifyEmail = () => {
   return (
     <div className="w-full h-screen flex justify-center items-center">
       <div className="w-full sm:p-16 px-4 h-full flex justify-center items-center">
-        <div className="md:w-[500px] h-auto px-7 sm:px-16 py-4 border-custom flex flex-col items-center">
+        <div className="md:w-[500px] h-auto px-7 sm:px-16 sm:py-10 py-6 border-custom flex flex-col items-center">
           <img
             src={blueEnvelope}
-            className="w-[140px] transform rotate-[-15deg]"
+            className="sm:w-[80px] w-[60px] "
             alt="envelope"
           />
           <form onSubmit={resendEmailVerificationHandler} className="w-full">
-            <h2 className="text-[#2957FA] font-bold text-3xl sm:text-4xl text-center mt-4">
+            <h2 className="text-[#2957FA] font-bold text-2xl sm:text-3xl text-center mt-4">
               Verify your email address
             </h2>
             <p className="text-center text-xs sm:text-sm text-gray-500 my-4">
               A verification link has been sent to your email address:{" "}
-              <a href={`mailto:${email}`} className="text-blue-500">
-                {email}
-              </a>
+              <span className="text-blue-500">{email}</span>
               <br />
               Please check your email and click on the link provided to complete
               your account registration.
-            </p>
-            <p className="text-center text-xs sm:text-sm text-gray-500 mb-4">
-              If you didn't receive the email within 2 minutes, use the button
-              below to resend the verification email.
             </p>
             <div className="flex justify-center">
               <PrimaryButton text="Resend" />

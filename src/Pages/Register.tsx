@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { ApiCall } from "../utils";
 import { toast, ToastContainer } from "react-toastify";
 import { ThreeDots } from "react-loader-spinner";
+import { useDispatch } from "react-redux";
+import { register } from "../features/auth";
 
 const Register = () => {
   const [username, setUsername] = useState<string>("");
@@ -15,6 +17,7 @@ const Register = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   //validators variables
   const [errorMessage, setErrorMessage] = useState("");
@@ -90,6 +93,11 @@ const Register = () => {
         });
         setIsLoading(false);
         if (response.data) {
+          console.log(
+            "res.data is : ",
+            JSON.stringify(response.data.data.user.email)
+          );
+          dispatch(register(response.data.data.user.email));
           navigate("/email-verification");
         }
         if (response.error) {
