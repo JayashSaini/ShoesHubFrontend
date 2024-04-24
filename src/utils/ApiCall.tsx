@@ -12,7 +12,9 @@ const ApiCallComponent = async ({
   method = "GET",
   params = {},
   data = {},
-  headers = {}, // Add a default empty object for data
+  headers = {
+    "Content-Type": "application/json",
+  }, // Add a default empty object for data
 }: ApiCallProps): Promise<ApiResponse<any>> => {
   const response: ApiResponse<any> = {
     data: null,

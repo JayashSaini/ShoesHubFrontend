@@ -11,6 +11,7 @@ const Redirect = () => {
 
   useEffect(() => {
     window.location.href = "https://online-shoeshub.vercel.app/";
+    // window.location.href = "http://localhost:3000/";
   }, []);
   return (
     <>

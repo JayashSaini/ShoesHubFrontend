@@ -16,6 +16,7 @@ const Home = () => {
 
   const logoutHandler = () => {
     localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
     window.location.reload();
   };
 
@@ -24,16 +25,22 @@ const Home = () => {
       if (!isAuthenticated) {
         try {
           setIsLoading(true);
+          const accessToken = localStorage.getItem("accessToken");
+          const refreshToken = localStorage.getItem("refreshToken");
+
           const response = await ApiCall({
             url: "/api/v1/users/self",
             method: "GET",
             data: {},
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
           });
           setIsLoading(false);
           if (response.data) {
             const user: any = response.data?.data;
-            const accessToken = localStorage.getItem("accessToken");
-            const refreshToken = localStorage.getItem("refreshToken");
+
+            console.log("user is : ", user);
 
             const userState: UserState = {
               userId: user?._id,
@@ -95,8 +102,7 @@ const Home = () => {
       }
     })();
   }, []);
-  const state = useSelector((state: any) => state.user);
-  console.log("current state : " + state);
+
   return (
     <>
       <div className="flex flex-col items-center justify-center h-screen bg-gray-100">

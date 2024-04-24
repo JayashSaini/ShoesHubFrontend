@@ -28,6 +28,7 @@ const Register = () => {
         "https://shoeshubbackend.onrender.com/api/v1/users/google",
         "_self"
       );
+      // window.open("http://localhost:8000/api/v1/users/google", "_self");
     } catch (error) {
       toast.error("Sing in Failed", {
         position: "top-center",
