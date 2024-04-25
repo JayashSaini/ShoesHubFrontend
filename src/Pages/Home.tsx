@@ -40,8 +40,6 @@ const Home = () => {
           if (response.data) {
             const user: any = response.data?.data;
 
-            console.log("user is : ", user);
-
             const userState: UserState = {
               userId: user?._id,
               username: user?.username,
@@ -92,7 +90,6 @@ const Home = () => {
             }
           }
         } catch (error) {
-          console.log("Error is : " + error);
           toast.error("Login Failed", {
             position: "top-center",
             autoClose: 3000,

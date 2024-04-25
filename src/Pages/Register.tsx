@@ -27,11 +27,11 @@ const Register = () => {
 
   const SSOHandler = () => {
     try {
-      window.open(
-        "https://shoeshubbackend.onrender.com/api/v1/users/google",
-        "_self"
-      );
-      // window.open("http://localhost:8000/api/v1/users/google", "_self");
+      // window.open(
+      //   "https://shoeshubbackend.onrender.com/api/v1/users/google",
+      //   "_self"
+      // );
+      window.open("http://localhost:8000/api/v1/users/google", "_self");
     } catch (error) {
       toast.error("Sing in Failed", {
         position: "top-center",
@@ -93,10 +93,6 @@ const Register = () => {
         });
         setIsLoading(false);
         if (response.data) {
-          console.log(
-            "res.data is : ",
-            JSON.stringify(response.data.data.user.email)
-          );
           dispatch(register(response.data.data.user.email));
           navigate("/email-verification");
         }

@@ -38,14 +38,13 @@ const VerifyEmail = () => {
           position: "top-center",
           autoClose: 3000,
         });
-      } else if (response.error.data.message) {
+      }
+      if (response.error.data.message) {
         toast.error(response.error.data.message, {
           position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
         });
-      } else {
-        console.log("else part");
       }
     } catch (error) {
       console.log("verify email error: " + error);

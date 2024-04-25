@@ -57,9 +57,7 @@ const Login = () => {
               localStorage.setItem("refreshToken", refreshToken),
               localStorage.setItem("username", user?.username),
             ]);
-          } catch (error) {
-            console.error("Error saving data to local storage:", error);
-          }
+          } catch (error) {}
 
           const userState: UserState = {
             userId: user?._id,
@@ -128,11 +126,11 @@ const Login = () => {
 
   const SSOHandler = () => {
     try {
-      window.open(
-        "https://shoeshubbackend.onrender.com/api/v1/users/google",
-        "_self"
-      );
-      // window.open("http://localhost:8000/api/v1/users/google", "_self");
+      // window.open(
+      //   "https://shoeshubbackend.onrender.com/api/v1/users/google",
+      //   "_self"
+      // );
+      window.open("http://localhost:8000/api/v1/users/google", "_self");
     } catch (error) {
       toast.error("Sing in Failed", {
         position: "top-center",

@@ -56,10 +56,13 @@ const userSlice = createSlice({
       // Reset user state on logout
       Object.assign(state, initialState);
     },
+    register(state, action) {
+      state.user.email = action.payload;
+    },
     // Add other reducers as needed (e.g., for updating user profile, email verification status, etc.)
   },
 });
 
 // Export actions and reducer
-export const { login, logout, loginFailed } = userSlice.actions;
+export const { login, logout, loginFailed, register } = userSlice.actions;
 export default userSlice.reducer;

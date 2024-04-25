@@ -6,7 +6,6 @@ import {
   Login,
   Register,
   ForgotPassword,
-  OtpVerification,
   ResetPassword,
   VerifyEmail,
   VerifyEmailSuccess,
@@ -31,6 +30,7 @@ function App() {
           data: {},
           debounceTime: 1000,
         });
+        console.log("running");
       } catch (error) {}
     };
     sendData();
@@ -66,8 +66,7 @@ function App() {
             element={<Redirect />}
           />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/verify-otp" element={<OtpVerification />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/email-verification" element={<VerifyEmail />} />
           <Route
             path="/email-verification/:token"

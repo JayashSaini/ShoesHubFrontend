@@ -24,7 +24,8 @@ const VerifyEmailSuccess = () => {
         setIsLoading(false);
         if (response.data) {
           setEmailVerified(true);
-        } else if (
+        }
+        if (
           response.error &&
           response.error.data &&
           response.error.data.message
@@ -34,8 +35,6 @@ const VerifyEmailSuccess = () => {
             autoClose: 3000,
             hideProgressBar: false,
           });
-        } else {
-          console.log("Unhandled error", response.error);
         }
       } catch (error) {
         console.log("verifyemailsuccess error", error);
