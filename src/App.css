@@ -115,7 +115,8 @@ body {
 /* notification css */
 
 .Toastify__toast-container {
-  width: 400px; /* Example width */
+  width: auto;
+  min-width: 400px; /* Example width */
 }
 
 .Toastify__toast {

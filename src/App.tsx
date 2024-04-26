@@ -11,6 +11,7 @@ import {
   VerifyEmailSuccess,
   NotFound,
   Redirect,
+  ErrorMessage,
 } from "./Pages";
 import Layout from "./Layout.jsx";
 import { useEffect, useState } from "react";
@@ -121,6 +122,8 @@ function App() {
             path="/email-verification/:token"
             element={<VerifyEmailSuccess />}
           />
+          {/* error message handler route*/}
+          <Route path="/error" element={<ErrorMessage />} />
           {/* Define the 404 route */}
           <Route path="*" element={<NotFound />} />
         </Route>

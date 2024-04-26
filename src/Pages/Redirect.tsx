@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
 
 const Redirect = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const { accessToken = "", refreshToken = "" } = useParams();
 
   localStorage.removeItem("accessToken");
@@ -12,8 +13,7 @@ const Redirect = () => {
   localStorage.setItem("refreshToken", refreshToken);
 
   useEffect(() => {
-    window.location.href = "https://online-shoeshub.vercel.app/";
-    // window.location.href = "http://localhost:3000/";
+    navigate("/");
   }, []);
 
   return (
