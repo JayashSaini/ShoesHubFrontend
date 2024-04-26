@@ -3,5 +3,13 @@ import PrimaryButton from "./PrimaryButton";
 import SSOButton from "./SSOButton";
 import AuthMiddleware from "./AuthMiddleware";
 import PrivateRoute from "./PrivateRoute";
+import Loading from "./Loading";
 
-export { Input, PrimaryButton, SSOButton, AuthMiddleware, PrivateRoute };
+export {
+  Input,
+  PrimaryButton,
+  SSOButton,
+  AuthMiddleware,
+  PrivateRoute,
+  Loading,
+};

@@ -13,13 +13,15 @@ import {
   Redirect,
 } from "./Pages";
 import Layout from "./Layout.jsx";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { ApiCall } from "./utils";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
-// import PrivateRoute from "./Components/PrivateRoute"; // Correct import
+import { login } from "./features/auth";
+import { UserState, AuthState } from "./types";
+import { Loading } from "./Components";
 
 function App() {
-  // useSelector should be inside the functional component body
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const sendData = async () => {
@@ -30,37 +32,84 @@ function App() {
           data: {},
           debounceTime: 1000,
         });
-        console.log("running");
       } catch (error) {}
     };
     sendData();
   }, []);
 
-  const Authenticated = () => {
-    const isAuthenticated = useSelector((state: any) => state.authenticated);
-    if (isAuthenticated) return true;
+  const Authenticated = async () => {
     const accessToken = localStorage.getItem("accessToken");
-    if (accessToken) return true;
-    return false;
+    const refreshToken = localStorage.getItem("refreshToken");
+    if (!accessToken || accessToken.trim() == "") {
+      return false;
+    }
+
+    try {
+      const response = await ApiCall({
+        url: "/api/v1/users/self",
+        method: "GET",
+        data: {},
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      if (response.data) {
+        const user: any = response.data?.data;
+        const userState: UserState = {
+          userId: user?._id,
+          username: user?.username,
+          email: user?.email,
+          isEmailVerified: user?.isEmailVerified,
+          avatar: user?.avatar,
+          role: user?.role,
+          accessToken: accessToken,
+          refreshToken: refreshToken,
+          isLoggedIn: true,
+        };
+
+        const loginPayload: AuthState = {
+          isAuthenticated: true,
+          user: userState,
+          error: null,
+        };
+        dispatch(login(loginPayload));
+        return true;
+      } else if (response.error) {
+        return false;
+      }
+    } catch (error) {
+      return false;
+    }
   };
+
+  const AuthRoute = () => {
+    const [loading, setLoading] = useState(true);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    useEffect(() => {
+      const checkAuthentication = async () => {
+        const isAuthenticated = await Authenticated();
+        setIsAuthenticated(isAuthenticated || false);
+        setLoading(false); // Set loading to false when authentication check is complete
+      };
+      checkAuthentication();
+    }, []);
+
+    if (loading) {
+      return <Loading />;
+    }
+
+    return isAuthenticated ? <Home /> : <Navigate to="/login" />;
+  };
+
   return (
     <BrowserRouter>
       <Routes>
-        {/* Place the layout only once outside the Routes */}
         <Route element={<Layout />}>
-          {/* Define your home route here */}
-          <Route
-            path="/"
-            element={Authenticated() ? <Home /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/login"
-            element={Authenticated() ? <Navigate to="/" /> : <Login />}
-          />
-          <Route
-            path="/register"
-            element={Authenticated() ? <Navigate to="/" /> : <Register />}
-          />
+          {/* secure route  */}
+          <Route path="/" element={<AuthRoute />} />;{/* public route  */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route
             path="/user/:accessToken/:refreshToken"
             element={<Redirect />}
@@ -72,7 +121,6 @@ function App() {
             path="/email-verification/:token"
             element={<VerifyEmailSuccess />}
           />
-
           {/* Define the 404 route */}
           <Route path="*" element={<NotFound />} />
         </Route>

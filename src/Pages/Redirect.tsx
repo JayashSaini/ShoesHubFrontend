@@ -15,6 +15,7 @@ const Redirect = () => {
     window.location.href = "https://online-shoeshub.vercel.app/";
     // window.location.href = "http://localhost:3000/";
   }, []);
+
   return (
     <>
       <div className="w-full h-screen custom-flex fixed top-0 left-0 bg-white z-50">
