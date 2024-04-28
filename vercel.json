@@ -13,6 +13,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "*",
+      "destination": "/index.html"
+    },
+    {
       "source": "/api/(.*)",
       "destination": "https://shoeshubbackend.onrender.com/api/$1"
     }
