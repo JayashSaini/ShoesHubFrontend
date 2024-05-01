@@ -53,7 +53,7 @@ body {
   right: 0;
   bottom: 0;
   z-index: -1;
-  background: linear-gradient(to right, #b706f3, #4049f8);
+  background: linear-gradient(to right, #f76161, #fa2045);
   margin: -3px;
 }
 
@@ -64,11 +64,11 @@ body {
 }
 
 .primary-button-bg {
-  background: linear-gradient(to right, #b706f3, #4049f8);
+  background: linear-gradient(to right, #ce0e2d, #f5546f);
 }
 
 .primary-button-bg:hover {
-  background: linear-gradient(to right, #b706f3 20%, #4049f8);
+  background: linear-gradient(to right, #ce0e2d 20%, #f5546f);
 }
 .button-wrapper {
   width: 100%;
@@ -86,13 +86,13 @@ body {
   right: 0;
   bottom: 0;
   z-index: -1;
-  background: linear-gradient(to right, #b706f3, #4049f8);
+  background: linear-gradient(to right, #ce0e2d, #f5546f);
   margin: -2px;
   transition: background 0.3s ease;
 }
 
 .button-wrapper:hover::before {
-  background: linear-gradient(to right, #b706f3 20%, #4049f8);
+  background: linear-gradient(to right, #ce0e2d 20%, #f5546f);
   /* Change direction on hover */
 }
 
@@ -125,6 +125,18 @@ body {
   font-size: 17px;
   /* Add other styling properties as needed */
 }
+
+/* Home section  */
+.home-bg {
+  background-image: url("./assets/home.jpg");
+  background-size: cover;
+  background-position: 70% center; /* Adjust the percentage as needed */
+  background-repeat: no-repeat;
+}
+.custom-text-shadow {
+  text-shadow: 3px 3px 3px rgb(102, 99, 99);
+}
+/* Home section  */
 
 /* Media query for viewport width below 768px */
 @media (max-width: 768px) {

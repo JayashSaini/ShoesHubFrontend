@@ -53,19 +53,19 @@ const VerifyEmail = () => {
   return (
     <div className="w-full h-screen flex justify-center items-center">
       <div className="w-full sm:p-16 px-4 h-full flex justify-center items-center">
-        <div className="md:w-[500px] h-auto px-7 sm:px-16 sm:py-10 py-6 border-custom flex flex-col items-center">
+        <div className="md:w-[500px] h-auto px-7 sm:px-16 sm:py-10 py-6  flex flex-col items-center">
           <img
             src={blueEnvelope}
             className="sm:w-[80px] w-[60px] "
             alt="envelope"
           />
           <form onSubmit={resendEmailVerificationHandler} className="w-full">
-            <h2 className="text-[#2957FA] font-bold text-2xl sm:text-3xl text-center mt-4">
+            <h2 className="text-[#000] font-bold text-2xl sm:text-3xl text-center mt-4">
               Verify your email address
             </h2>
             <p className="text-center text-xs sm:text-sm text-gray-500 my-4">
               A verification link has been sent to your email address:{" "}
-              <span className="text-blue-500">{email}</span>
+              <span className="text-[#fa2045]">{email}</span>
               <br />
               Please check your email and click on the link provided to complete
               your account registration.
@@ -83,7 +83,7 @@ const VerifyEmail = () => {
             visible={true}
             height="80"
             width="80"
-            color="#4049f8"
+            color="#ce0e2d"
             radius="9"
             ariaLabel="three-dots-loading"
             wrapperStyle={{}}
