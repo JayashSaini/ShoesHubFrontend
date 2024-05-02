@@ -141,7 +141,7 @@ const Register = () => {
           />
         </div>
         <div className="w-full md:w-[45%] p-6 md:p-4 h-full custom-flex">
-          <div className="w-full md:w-[90%]  sm:w-[60%] w-full h-auto px-4 md:px-8 py-3 border-custom">
+          <div className="w-full md:w-[90%]  sm:w-[60%] w-full h-auto px-4 md:px-8 py-3">
             <form onSubmit={registerHandler}>
               <h2 className="roboto-bold sm:text-3xl text-2xl md:text-4xl text-center mb-6">
                 Sign up
@@ -207,7 +207,7 @@ const Register = () => {
               <div className="text-center">
                 <h3 className="sm:text-sm text-[12px] text-gray-600">
                   Already have an account?&nbsp;
-                  <a href="/login" className="text-blue-500 font-bold">
+                  <a href="/login" className="text-[#fa2045] font-bold">
                     Login
                   </a>
                 </h3>
@@ -224,7 +224,7 @@ const Register = () => {
             visible={true}
             height="80"
             width="80"
-            color="#4049f8"
+            color="#ce0e2d"
             radius="9"
             ariaLabel="three-dots-loading"
             wrapperStyle={{}}

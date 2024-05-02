@@ -23,7 +23,7 @@ const Redirect = () => {
           visible={true}
           height="80"
           width="80"
-          color="#4049f8"
+          color="#ce0e2d"
           radius="9"
           ariaLabel="three-dots-loading"
           wrapperStyle={{}}

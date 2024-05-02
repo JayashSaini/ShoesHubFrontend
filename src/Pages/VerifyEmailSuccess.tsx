@@ -51,19 +51,19 @@ const VerifyEmailSuccess = () => {
       <div className="w-full h-screen custom-flex">
         <div className="w-full sm:p-16 px-6 h-full custom-flex">
           {emailVerified && (
-            <div className="md:w-[600px] w-full h-auto px-7 sm:px-16 py-4 border-custom custom-flex flex-col">
+            <div className="md:w-[600px] w-full h-auto px-7 sm:px-16 py-4  custom-flex flex-col">
               <>
                 <img
                   src={righttick}
                   className="w-[50px] my-3"
                   alt="successfull"
                 />
-                <h2 className="text-[#2957FA] roboto-medium sm:text-3xl text-2xl text-center mt-1">
+                <h2 className="text-[#000] roboto-medium sm:text-3xl text-2xl text-center mt-1">
                   Your email has been verified successfully
                 </h2>
                 <div className="w-full custom-flex sm:my-4 my-4">
                   <button
-                    className="w-[200px] rounded-lg sm:p-[9px] p-1 text-center sm:text-sm text-[12px] font-bold text-[#2857FA] border-[#2857FA] border-2 hover:scale-[1.02]"
+                    className="w-[200px] rounded-lg sm:p-[9px] p-1 text-center sm:text-sm text-[12px] font-bold text-[#000] border-2 border-custom hover:scale-[1.02]"
                     onClick={verifySuccessHandler}>
                     Go Back to Log in
                   </button>
@@ -80,7 +80,7 @@ const VerifyEmailSuccess = () => {
             visible={true}
             height="80"
             width="80"
-            color="#4049f8"
+            color="#ce0e2d"
             radius="9"
             ariaLabel="three-dots-loading"
             wrapperStyle={{}}

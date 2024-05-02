@@ -70,9 +70,9 @@ const ResetPassword = () => {
       <>
         <div className="w-full h-screen custom-flex">
           <div className="w-full sm:p-16 px-6  h-full custom-flex">
-            <div className="md:w-[500px] w-full h-auto md:px-16  px-8 md:py-10 py-6 border-custom">
+            <div className="md:w-[500px] w-full h-auto md:px-16  px-8 md:py-10 py-6">
               <form onSubmit={resetPasswordHandler}>
-                <h2 className="text-[#2957FA] roboto-bold sm:text-3xl text-2xl text-center">
+                <h2 className="text-[#000] roboto-bold sm:text-3xl text-2xl text-center">
                   Reset Password
                 </h2>
 
@@ -116,7 +116,7 @@ const ResetPassword = () => {
             visible={true}
             height="80"
             width="80"
-            color="#4049f8"
+            color="#ce0e2d"
             radius="9"
             ariaLabel="three-dots-loading"
             wrapperStyle={{}}
