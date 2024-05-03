@@ -6,6 +6,8 @@ import PrivateRoute from "./PrivateRoute";
 import Loading from "./Loading";
 import Header from "./Header";
 import Drawer from "./Drawer";
+import Product from "./Product";
+import SliderProduct from "./SliderProduct";
 
 export {
   Input,
@@ -16,4 +18,6 @@ export {
   Loading,
   Header,
   Drawer,
+  Product,
+  SliderProduct,
 };

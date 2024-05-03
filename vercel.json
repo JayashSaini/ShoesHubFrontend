@@ -16,6 +16,7 @@
     {
       "source": "/api/(.*)",
       "destination": "https://shoeshubbackend.onrender.com/api/$1"
-    }
+    },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

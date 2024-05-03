@@ -108,7 +108,7 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           {/* secure route  */}
-          <Route path="/" element={AuthRoute()} />;{/* public route  */}
+          <Route path="/" element={<Home />} />;{/* public route  */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route
