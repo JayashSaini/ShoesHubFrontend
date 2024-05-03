@@ -8,7 +8,7 @@ import { ApiCall } from "../utils";
 import { useDispatch } from "react-redux";
 import { login, loginFailed } from "../features/auth";
 import { AuthState, UserState } from "../types/state";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -18,7 +18,7 @@ const Login = () => {
   const imgRef = useRef(null);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     gsap.to(imgRef.current, {
@@ -83,8 +83,10 @@ const Login = () => {
 
           const getAccessToken = localStorage.getItem("accessToken");
           if (getAccessToken) {
-            navigate("/");
+            window.location.reload();
+            // navigate("/");
             // window.location.href = "http://localhost:3000/";
+            window.location.href = "https://online-shoeshub.netlify.app/";
           }
         }
         if (response.error) {
@@ -129,11 +131,11 @@ const Login = () => {
 
   const SSOHandler = () => {
     try {
-      // window.open(
-      //   "https://shoeshubbackend.onrender.com/api/v1/users/google",
-      //   "_self"
-      // );
-      window.open("http://localhost:8000/api/v1/users/google", "_self");
+      window.open(
+        "https://shoeshubbackend.onrender.com/api/v1/users/google",
+        "_self"
+      );
+      // window.open("http://localhost:8000/api/v1/users/google", "_self");
     } catch (error) {
       toast.error("Sing in Failed", {
         position: "top-center",
