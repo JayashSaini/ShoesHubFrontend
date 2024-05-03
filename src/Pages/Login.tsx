@@ -86,7 +86,7 @@ const Login = () => {
             window.location.reload();
             // navigate("/");
             // window.location.href = "http://localhost:3000/";
-            window.location.href = "https://online-shoeshub.netlify.app/";
+            window.location.href = "https://shoeshub-store.vercel.app/";
           }
         }
         if (response.error) {
