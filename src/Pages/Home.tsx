@@ -1,8 +1,45 @@
 import { SliderProduct } from "@/Components";
 import blockWomen from "@/assets/BLOCK-WOMEN.jpg";
 import blockMen from "@/assets/BLOCK-MEN.jpg";
+import category1 from "@/assets/Collection-1.jpg";
+import category2 from "@/assets/sidesection.jpg";
+import category3 from "@/assets/Collection4.jpg";
+import category4 from "@/assets/Collection3.jpg";
 import { MdArrowRightAlt } from "react-icons/md";
+import Slider from "react-slick";
 const Home = () => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1.1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
   return (
     <>
       <div>
@@ -50,6 +87,60 @@ const Home = () => {
               </div>
             </a>
           </div>
+        </div>
+      </div>
+      <div className="md:px-16 px-10 py-10">
+        <div className="slider-container">
+          <Slider {...settings}>
+            <div className=" p-4 w-auto relative h-auto ">
+              <img
+                src={category1}
+                alt="women"
+                className="min-w-[150px] cursor-pointer"
+              />
+              <a
+                href="#"
+                className="absolute bottom-9 left-10 z-10 sm:text-xl text-sm text-white  font-bold hover:scale-105 ">
+                Shop Now!
+              </a>
+            </div>
+            <div className=" p-4 w-auto relative h-auto ">
+              <img
+                src={category2}
+                alt="women"
+                className="min-w-[150px] cursor-pointer"
+              />
+              <a
+                href="#"
+                className="absolute bottom-9 left-10 z-10 sm:text-xl text-sm text-white  font-bold hover:scale-105 ">
+                Shop Now!
+              </a>
+            </div>
+            <div className=" p-4 w-auto relative h-auto ">
+              <img
+                src={category3}
+                alt="women"
+                className="min-w-[150px] cursor-pointer"
+              />
+              <a
+                href="#"
+                className="absolute bottom-9 left-10 z-10 sm:text-xl text-sm text-white  font-bold hover:scale-105 ">
+                Shop Now!
+              </a>
+            </div>
+            <div className=" p-4 w-auto relative h-auto ">
+              <img
+                src={category4}
+                alt="women"
+                className="min-w-[150px] cursor-pointer"
+              />
+              <a
+                href="#"
+                className="absolute bottom-9 left-10 z-10 sm:text-xl text-sm text-white  font-bold hover:scale-105 ">
+                Shop Now!
+              </a>
+            </div>
+          </Slider>
         </div>
       </div>
     </>
