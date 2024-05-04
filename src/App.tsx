@@ -12,6 +12,7 @@ import {
   NotFound,
   Redirect,
   ErrorMessage,
+  Product,
 } from "./Pages";
 import Layout from "./Layout.jsx";
 import { useEffect /*,useState*/ } from "react";
@@ -120,6 +121,11 @@ function App() {
           <Route
             path="/email-verification/:token"
             element={<VerifyEmailSuccess />}
+          />
+          {/* product routes */}
+          <Route
+            path="/product/:productTitle/:productId"
+            element={<Product />}
           />
           {/* error message handler route*/}
           <Route path="/error" element={<ErrorMessage />} />

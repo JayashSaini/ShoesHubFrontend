@@ -42,6 +42,11 @@
   from = "/user/:accessToken/:refreshToken"
   to = "/index.html"
   status = 200
+  
+[[redirects]]
+  from = "/product/:productTitle/:productId"
+  to = "/index.html"
+  status = 200
 
 [[redirects]]
   from = "/*"

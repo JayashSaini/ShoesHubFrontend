@@ -17,11 +17,10 @@ const SliderProduct: React.FC<SliderProps> = ({ title, categoryID }) => {
         page: 1,
       },
     })
-      .then((response) => {
+      .then((response: any) => {
         setProducts([...response.data.data.products]);
       })
-      .catch((err) => {
-        console.log("error", err);
+      .catch(() => {
         return <></>;
       });
   }, []);
@@ -71,9 +70,7 @@ const SliderProduct: React.FC<SliderProps> = ({ title, categoryID }) => {
   return (
     <div className="w-full  px-5 my-10 overflow-hidden ">
       <div className="sm:my-10 my-3 ">
-        <h3 className="md:text-5xl sm:text-4xl text-2xl font-normal ">
-          {title}
-        </h3>
+        <h3 className=" sm:text-4xl text-2xl font-normal ">{title}</h3>
       </div>
       <div className="slider-container relative">
         <Slider {...settings}>

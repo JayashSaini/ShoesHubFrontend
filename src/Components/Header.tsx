@@ -159,7 +159,7 @@ const Header: React.FC = () => {
           </div>
         </div>
         {showCategoryContainer && (
-          <div className="w-full min-h-[300px] bg-white py-6 px-8 flex justify-between">
+          <div className="w-full min-h-[300px] fixed bg-white py-6 px-8 flex justify-between z-50 ">
             <div className="px-5 w-1/2">
               <h2 className="text-[#f68c23] roboto-bold sm:text-3xl text-2xl text-left mb-8 ">
                 Men Shoes

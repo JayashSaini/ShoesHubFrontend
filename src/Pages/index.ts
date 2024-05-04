@@ -8,6 +8,7 @@ import VerifyEmailSuccess from "./VerifyEmailSuccess.js";
 import NotFound from "./NotFound.js";
 import Redirect from "./Redirect.js";
 import ErrorMessage from "./ErrorMessage.js";
+import Product from "./Product.js";
 
 export {
   Home,
@@ -20,4 +21,5 @@ export {
   NotFound,
   Redirect,
   ErrorMessage,
+  Product,
 };

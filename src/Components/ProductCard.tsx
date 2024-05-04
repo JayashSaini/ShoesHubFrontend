@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { ProductCardType } from "@/types/product";
+import { useNavigate } from "react-router-dom";
+
 const Product: React.FC<ProductCardType> = ({ product }) => {
+  const [hovered, setHovered] = useState(false);
+  const naviagate = useNavigate();
+
   return (
     <>
       <div className="min-w-[150px] h-auto mx-4">
         <div className="w-full max-h-[450px] overflow-hidden flex justify-center items-center ">
           <img
-            src={product.mainImage.url}
+            src={hovered ? product.subImages[0].url : product.mainImage.url}
             alt={product.description}
-            className="w-full h-full cursor-pointer duration-100 transition-all hover:scale-105"
+            className="w-full h-full cursor-pointer transition-all duration-500 ease-in-out delay-500 hover:scale-105"
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+            onClick={() => {
+              naviagate(`/product/${product.name}/${product._id}`);
+              window.location.reload();
+            }}
           />
         </div>
         <div className="p-1">
