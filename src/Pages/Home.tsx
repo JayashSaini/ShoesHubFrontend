@@ -51,8 +51,14 @@ const Home = () => {
         </section>
       </div>
       <div>
-        <SliderProduct title="Women's New Arrivals" />
-        <SliderProduct title="Men's New Arrivals" />
+        <SliderProduct
+          title="Men's New Arrivals"
+          categoryID="662fd7c3ef0b27b2064e5092"
+        />
+        <SliderProduct
+          title="Women's New Arrivals"
+          categoryID="6636597b2542298af701506c"
+        />
       </div>
       <div className="custom-flex sm:flex-row flex-col md:gap-16 gap-8 md:px-24 px-10 py-10 ">
         <div className="sm:w-1/2  w-full h-auto">

@@ -36,5 +36,5 @@ export interface LoginPayload {
 
 export interface SliderProps {
   title: string;
-  categoryID?: React.ReactNode;
+  categoryID: React.ReactNode;
 }

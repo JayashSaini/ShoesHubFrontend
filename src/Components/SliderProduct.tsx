@@ -1,16 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Slider from "react-slick";
-import Product from "./Product";
+import ProductCard from "./ProductCard";
 import { SliderProps } from "../types";
+import { ApiCall } from "@/utils";
+import { ProductType } from "@/types/product.ts";
 
-const SliderProduct: React.FC<SliderProps> = ({ title }) => {
+const SliderProduct: React.FC<SliderProps> = ({ title, categoryID }) => {
+  const [products, setProducts] = React.useState<any>([]);
+  const autoPlaySpeed = categoryID === "662fd7c3ef0b27b2064e5092" ? 2500 : 3000;
+  useEffect(() => {
+    ApiCall({
+      url: `/api/v1/product//category/${categoryID}`,
+      method: "GET",
+      params: {
+        limit: 8,
+        page: 1,
+      },
+    })
+      .then((response) => {
+        setProducts([...response.data.data.products]);
+      })
+      .catch((err) => {
+        console.log("error", err);
+        return <></>;
+      });
+  }, []);
+
   const settings = {
     infinite: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: autoPlaySpeed,
     responsive: [
       {
         breakpoint: 1024,
@@ -46,7 +68,6 @@ const SliderProduct: React.FC<SliderProps> = ({ title }) => {
       );
     },
   };
-
   return (
     <div className="w-full  px-5 my-10 overflow-hidden ">
       <div className="sm:my-10 my-3 ">
@@ -57,24 +78,11 @@ const SliderProduct: React.FC<SliderProps> = ({ title }) => {
       <div className="slider-container relative">
         <Slider {...settings}>
           {/* Render the Product component within Slider */}
-          <div>
-            <Product />
-          </div>
-          <div>
-            <Product />
-          </div>
-          <div>
-            <Product />
-          </div>
-          <div>
-            <Product />
-          </div>
-          <div>
-            <Product />
-          </div>
-          <div>
-            <Product />
-          </div>
+          {products.map((product: ProductType) => (
+            <div key={product._id}>
+              <ProductCard product={product} />
+            </div>
+          ))}
         </Slider>
       </div>
     </div>
