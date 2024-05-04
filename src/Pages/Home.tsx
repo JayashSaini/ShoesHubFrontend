@@ -9,7 +9,6 @@ import { MdArrowRightAlt } from "react-icons/md";
 import Slider from "react-slick";
 const Home = () => {
   const settings = {
-    dots: true,
     infinite: true,
     speed: 1000,
     slidesToShow: 3,
@@ -90,6 +89,14 @@ const Home = () => {
         </div>
       </div>
       <div className="md:px-16 px-10 py-10">
+        <div className="sm:my-2 md:px-2 px-0">
+          <p className="md:text-xl sm:text-base  font-normal ">
+            SHOP BY CATEGORY
+          </p>
+          <h2 className="md:text-5xl sm:text-3xl text-xl font-base ">
+            Featured Collections
+          </h2>
+        </div>
         <div className="slider-container">
           <Slider {...settings}>
             <div className=" p-4 w-auto relative h-auto ">
