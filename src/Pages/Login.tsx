@@ -181,7 +181,7 @@ const Login = () => {
               />
               <div className="text-right">
                 <a
-                  className="text-[#fa2045] sm:text-sm text-[11px] font-medium"
+                  className="text-[#f68c23] sm:text-sm text-[11px] font-medium"
                   href="/forgot-password">
                   Forgot Password?
                 </a>
@@ -194,7 +194,7 @@ const Login = () => {
                 <h3 className="sm:text-sm text-[12px] text-gray-600">
                   Don't have an account? &nbsp;
                   <a
-                    className="text-[#fa2045] sm:text-[15px] text-[13px] font-bold"
+                    className="text-[#f68c23] sm:text-[15px] text-[13px] font-bold"
                     href="/register">
                     Register
                   </a>
@@ -211,7 +211,7 @@ const Login = () => {
             visible={true}
             height="80"
             width="80"
-            color="#ce0e2d"
+            color="#f68c23"
             radius="9"
             ariaLabel="three-dots-loading"
             wrapperStyle={{}}

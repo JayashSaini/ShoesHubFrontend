@@ -66,7 +66,7 @@ const Home = () => {
               className="flex items-center gap-2 sm:text-sm text-xs group">
               Shop Now
               <div className="transition-transform duration-150 ease-in transform group-hover:translate-x-2">
-                <MdArrowRightAlt className="text-[#fa2045] text-2xl" />
+                <MdArrowRightAlt className="text-[#f68c23] text-2xl" />
               </div>
             </a>
           </div>
@@ -82,7 +82,7 @@ const Home = () => {
               className="flex items-center gap-2 sm:text-sm text-xs group">
               Shop Now
               <div className="transition-transform duration-150 ease-in transform group-hover:translate-x-2">
-                <MdArrowRightAlt className="text-[#fa2045] text-2xl" />
+                <MdArrowRightAlt className="text-[#f68c23] text-2xl" />
               </div>
             </a>
           </div>

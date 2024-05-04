@@ -52,8 +52,8 @@ const Header: React.FC = () => {
                   to="/"
                   className={({ isActive }) =>
                     isActive
-                      ? "text-sm px-3 text-[#ce0e2d]"
-                      : "text-sm px-3 hover:text-[#ce0e2d]"
+                      ? "text-sm px-3 text-[#f68c23]"
+                      : "text-sm px-3 hover:text-[#f68c23]"
                   }>
                   Home
                 </NavLink>
@@ -63,8 +63,8 @@ const Header: React.FC = () => {
                   to="/new"
                   className={({ isActive }) =>
                     isActive
-                      ? "text-sm px-3 text-[#ce0e2d]"
-                      : "text-sm px-3 hover:text-[#ce0e2d]"
+                      ? "text-sm px-3 text-[#f68c23]"
+                      : "text-sm px-3 hover:text-[#f68c23]"
                   }>
                   New
                 </NavLink>
@@ -74,8 +74,8 @@ const Header: React.FC = () => {
                   to="/men"
                   className={({ isActive }) =>
                     isActive
-                      ? "text-sm px-3 text-[#ce0e2d]"
-                      : "text-sm px-3 hover:text-[#ce0e2d]"
+                      ? "text-sm px-3 text-[#f68c23]"
+                      : "text-sm px-3 hover:text-[#f68c23]"
                   }
                   onMouseEnter={() => {
                     handleMouseEnter("men");
@@ -88,8 +88,8 @@ const Header: React.FC = () => {
                   to="/women"
                   className={({ isActive }) =>
                     isActive
-                      ? "text-sm px-3 text-[#ce0e2d]"
-                      : "text-sm px-3 hover:text-[#ce0e2d]"
+                      ? "text-sm px-3 text-[#f68c23]"
+                      : "text-sm px-3 hover:text-[#f68c23]"
                   }
                   onMouseEnter={() => {
                     handleMouseEnter("women");
@@ -137,26 +137,26 @@ const Header: React.FC = () => {
         {showCategoryContainer && (
           <div className="w-full min-h-[300px] bg-white py-6 px-8 flex justify-between">
             <div className="px-5 w-1/2">
-              <h2 className="text-[#ce0e2d] roboto-bold sm:text-3xl text-2xl text-left mb-8 ">
+              <h2 className="text-[#f68c23] roboto-bold sm:text-3xl text-2xl text-left mb-8 ">
                 Men Shoes
               </h2>
               <ul className="grid grid-cols-2 gap-x-20 gap-y-4">
-                <li className="text-base hover:text-[#ce0e2d]">
+                <li className="text-base hover:text-[#f68c23]">
                   <a href="#"> Boots</a>
                 </li>
-                <li className="text-base hover:text-[#ce0e2d]">
+                <li className="text-base hover:text-[#f68c23]">
                   <a href="#"> Sneaker</a>
                 </li>
-                <li className="text-base hover:text-[#ce0e2d]">
+                <li className="text-base hover:text-[#f68c23]">
                   <a href="#"> Boat Shoes</a>
                 </li>
-                <li className="text-base hover:text-[#ce0e2d]">
+                <li className="text-base hover:text-[#f68c23]">
                   <a href="#"> Loafers</a>
                 </li>
-                <li className="text-base hover:text-[#ce0e2d]">
+                <li className="text-base hover:text-[#f68c23]">
                   <a href="#"> Sandals</a>
                 </li>
-                <li className="text-base hover:text-[#ce0e2d]">
+                <li className="text-base hover:text-[#f68c23]">
                   <a href="#"> Slip-ons</a>
                 </li>
               </ul>

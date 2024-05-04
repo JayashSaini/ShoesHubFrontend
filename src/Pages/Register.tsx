@@ -207,7 +207,7 @@ const Register = () => {
               <div className="text-center">
                 <h3 className="sm:text-sm text-[12px] text-gray-600">
                   Already have an account?&nbsp;
-                  <a href="/login" className="text-[#fa2045] font-bold">
+                  <a href="/login" className="text-[#f68c23] font-bold">
                     Login
                   </a>
                 </h3>
@@ -224,7 +224,7 @@ const Register = () => {
             visible={true}
             height="80"
             width="80"
-            color="#ce0e2d"
+            color="#f68c23"
             radius="9"
             ariaLabel="three-dots-loading"
             wrapperStyle={{}}

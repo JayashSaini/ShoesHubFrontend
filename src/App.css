@@ -53,7 +53,7 @@ body {
   right: 0;
   bottom: 0;
   z-index: -1;
-  background: linear-gradient(to right, #f76161, #fa2045);
+  background: linear-gradient(to right, #f68c23, #f48617);
   margin: -3px;
 }
 
@@ -64,11 +64,11 @@ body {
 }
 
 .primary-button-bg {
-  background: linear-gradient(to right, #ce0e2d, #f5546f);
+  background: linear-gradient(to right, #f68c23, #f48617);
 }
 
 .primary-button-bg:hover {
-  background: linear-gradient(to right, #ce0e2d 20%, #f5546f);
+  background: linear-gradient(to right, #f68c23 40%, #e97705);
 }
 .button-wrapper {
   width: 100%;
@@ -86,13 +86,13 @@ body {
   right: 0;
   bottom: 0;
   z-index: -1;
-  background: linear-gradient(to right, #ce0e2d, #f5546f);
+  background: linear-gradient(to right, #f68c23, #e97705);
   margin: -2px;
   transition: background 0.3s ease;
 }
 
 .button-wrapper:hover::before {
-  background: linear-gradient(to right, #ce0e2d 20%, #f5546f);
+  background: linear-gradient(to right, #f68c23 20%, #e97705);
   /* Change direction on hover */
 }
 

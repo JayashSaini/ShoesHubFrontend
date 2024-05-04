@@ -143,7 +143,7 @@ const ForgotPassword = () => {
                   </div>
                   <div className="text-center">
                     <a
-                      className="text-[#fa2045] sm:text-sm text-[10px] font-medium"
+                      className="text-[#f68c23] sm:text-sm text-[10px] font-medium"
                       href="/login">
                       Back to log in
                     </a>
@@ -196,7 +196,7 @@ const ForgotPassword = () => {
               visible={true}
               height="80"
               width="80"
-              color="#ce0e2d"
+              color="#f68c23"
               radius="9"
               ariaLabel="three-dots-loading"
               wrapperStyle={{}}

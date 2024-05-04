@@ -65,7 +65,7 @@ const VerifyEmail = () => {
             </h2>
             <p className="text-center text-xs sm:text-sm text-gray-500 my-4">
               A verification link has been sent to your email address:{" "}
-              <span className="text-[#fa2045]">{email}</span>
+              <span className="text-[#f68c23]">{email}</span>
               <br />
               Please check your email and click on the link provided to complete
               your account registration.
@@ -83,7 +83,7 @@ const VerifyEmail = () => {
             visible={true}
             height="80"
             width="80"
-            color="#ce0e2d"
+            color="#f68c23"
             radius="9"
             ariaLabel="three-dots-loading"
             wrapperStyle={{}}
