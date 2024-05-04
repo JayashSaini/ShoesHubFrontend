@@ -33,3 +33,8 @@ export interface LoginPayload {
   isEmailVerified: boolean;
   role: string;
 }
+
+export interface SliderProps {
+  title: string;
+  categoryID?: React.ReactNode;
+}

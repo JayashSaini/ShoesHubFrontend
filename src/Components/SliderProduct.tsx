@@ -1,8 +1,9 @@
 import React from "react";
 import Slider from "react-slick";
 import Product from "./Product";
+import { SliderProps } from "../types";
 
-const SliderProduct: React.FC = () => {
+const SliderProduct: React.FC<SliderProps> = ({ title }) => {
   const settings = {
     infinite: true,
     speed: 500,
@@ -50,7 +51,7 @@ const SliderProduct: React.FC = () => {
     <div className="w-full  px-5 my-10 overflow-hidden ">
       <div className="sm:my-10 my-3 ">
         <h3 className="md:text-5xl sm:text-4xl text-2xl font-normal ">
-          Men's New Arrivals
+          {title}
         </h3>
       </div>
       <div className="slider-container relative">
