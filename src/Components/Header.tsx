@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Logo from "../assets/favicon1.svg";
 import { NavLink } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
@@ -15,6 +15,8 @@ import men1 from "../assets/men1.jpg";
 const Header: React.FC = () => {
   const hamburger = useSelector((state: RootState) => state.features.hamburger);
   const [showCategoryContainer, setShowCategoryContainer] = useState(false);
+  const [isFixed, setIsFixed] = useState(false);
+
   const dispatch = useDispatch();
 
   const handleMouseEnter = (category: string) => {
@@ -31,10 +33,32 @@ const Header: React.FC = () => {
     dispatch(toggleHamburger()); // Dispatch the action
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      // Check if the window has scrolled past a certain threshold (e.g., 100px)
+      const scrollThreshold = 100;
+      if (window.pageYOffset > scrollThreshold) {
+        setIsFixed(true);
+      } else {
+        setIsFixed(false);
+      }
+    };
+
+    // Add event listener for scroll events
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up event listener on component unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
       <div
-        className="w-full h-auto fixed z-40 "
+        className={`w-full h-auto ${
+          isFixed ? "fixed top-0 z-40 transition-all duration-500" : ""
+        }`}
         onMouseLeave={handleMouseLeave}>
         <div className="w-full h-auto bg-white  md:px-16 px-4 py-2 flex justify-between items-center border-b-2 border-gray-200 ">
           <div>
