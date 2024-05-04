@@ -8,7 +8,7 @@ import { ApiCall } from "../utils";
 import { useDispatch } from "react-redux";
 import { login, loginFailed } from "../features/auth";
 import { AuthState, UserState } from "../types/state";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -18,7 +18,7 @@ const Login = () => {
   const imgRef = useRef(null);
 
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     gsap.to(imgRef.current, {
@@ -83,10 +83,7 @@ const Login = () => {
 
           const getAccessToken = localStorage.getItem("accessToken");
           if (getAccessToken) {
-            window.location.reload();
-            // navigate("/");
-            // window.location.href = "http://localhost:3000/";
-            window.location.href = "https://shoeshub-store.vercel.app/";
+            navigate("/", { replace: true });
           }
         }
         if (response.error) {

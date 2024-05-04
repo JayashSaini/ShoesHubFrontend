@@ -1,6 +1,6 @@
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route /*, Navigate */ } from "react-router-dom";
 import {
   Home,
   Login,
@@ -14,7 +14,7 @@ import {
   ErrorMessage,
 } from "./Pages";
 import Layout from "./Layout.jsx";
-import { useEffect } from "react";
+import { useEffect /*,useState*/ } from "react";
 import { ApiCall } from "./utils";
 // import { useDispatch } from "react-redux";
 // import { login } from "./features/auth";
@@ -99,7 +99,6 @@ function App() {
   //   if (loading) {
   //     return <Loading />;
   //   }
-
   //   return isAuthenticated ? <Home /> : <Navigate to="/login" />;
   // };
 
