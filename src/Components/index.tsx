@@ -8,6 +8,7 @@ import Header from "./Header";
 import Drawer from "./Drawer";
 import ProductCard from "./ProductCard";
 import SliderProduct from "./SliderProduct";
+import Footer from "./Footer";
 
 export {
   Input,
@@ -20,4 +21,5 @@ export {
   Drawer,
   ProductCard,
   SliderProduct,
+  Footer,
 };

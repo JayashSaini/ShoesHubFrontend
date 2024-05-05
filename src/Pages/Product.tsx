@@ -70,7 +70,7 @@ const Product: React.FC = () => {
 
   return (
     <>
-      {!loading && (
+      {!loading ? (
         <div className="w-full relative md:px-10 sm:px-6 px-4 py-4">
           <div className="w-full flex flex-col sm:flex-row justify-between sm:items-center items-start">
             <h4 className="text-sm font-base text-gray-500">
@@ -243,6 +243,8 @@ const Product: React.FC = () => {
             )}
           </div>
         </div>
+      ) : (
+        <div className="w-full h-[100vh]"></div>
       )}
     </>
   );

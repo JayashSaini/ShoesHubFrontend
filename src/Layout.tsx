@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { ApiCall } from "./utils";
-import { Header } from "./Components";
+import { Header, Footer } from "./Components";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "./types/state.js";
@@ -41,6 +41,7 @@ const Layout = () => {
     <>
       {!isSecurePage && <Header />}
       {hamburger ? "" : <Outlet />}
+      {!isSecurePage && <Footer />}
     </>
   );
 };
