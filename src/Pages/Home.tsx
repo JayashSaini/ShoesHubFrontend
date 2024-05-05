@@ -73,7 +73,7 @@ const Home = () => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: collectionRef.current,
-          start: "top 50%", // Start animation when the top of the element is 80% in view
+          start: "top 50%",
         },
       }
     );
@@ -86,7 +86,7 @@ const Home = () => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: featureRef.current,
-          start: "top 10%", // Start animation when the top of the element is 80% in view
+          start: "top 50%",
         },
       }
     );
