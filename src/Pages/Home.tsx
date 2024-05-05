@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { SliderProduct } from "@/Components";
 import blockWomen from "@/assets/BLOCK-WOMEN.jpg";
 import blockMen from "@/assets/BLOCK-MEN.jpg";
@@ -7,6 +8,10 @@ import category3 from "@/assets/Collection4.jpg";
 import category4 from "@/assets/Collection3.jpg";
 import { MdArrowRightAlt } from "react-icons/md";
 import Slider from "react-slick";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
 const Home = () => {
   const settings = {
     infinite: true,
@@ -39,10 +44,60 @@ const Home = () => {
       },
     ],
   };
+  const homeRef = useRef<HTMLDivElement>(null);
+  const collectionRef = useRef<HTMLDivElement>(null);
+  const featureRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    gsap.fromTo(
+      homeRef.current,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        duration: 2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: homeRef.current,
+          start: "top 50%", // Start animation when the top of the element is 80% in view
+        },
+      }
+    );
+    gsap.fromTo(
+      collectionRef.current,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        duration: 2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: collectionRef.current,
+          start: "top 50%", // Start animation when the top of the element is 80% in view
+        },
+      }
+    );
+    gsap.fromTo(
+      featureRef.current,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        duration: 2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: featureRef.current,
+          start: "top 10%", // Start animation when the top of the element is 80% in view
+        },
+      }
+    );
+  }, []);
+
   return (
     <>
       <div>
-        <section className="home-bg w-full h-[85vh] flex justify-center items-end py-24 px-3">
+        <section
+          ref={homeRef}
+          className="home-bg w-full h-[85vh] flex justify-center items-end py-24 px-3">
           <div className="hidden sm:block">
             <h2 className="text-white md:text-6xl sm:text-4xl text-5xl font-extrabold sm:text-center text-left text-shadow-lg custom-text-shadow ">
               Comfort Meets Style. Discover <br /> Your Perfect Pair Today.
@@ -60,7 +115,9 @@ const Home = () => {
           categoryID="6636597b2542298af701506c"
         />
       </div>
-      <div className="custom-flex sm:flex-row flex-col md:gap-16 gap-8 md:px-24 px-10 py-10 ">
+      <div
+        ref={collectionRef}
+        className="custom-flex sm:flex-row flex-col md:gap-16 gap-8 md:px-24 px-10 py-10 ">
         <div className="sm:w-1/2  w-full h-auto">
           <div>
             <img src={blockWomen} alt="women" />
@@ -94,7 +151,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="md:px-16 px-10 py-10">
+      <div ref={featureRef} className="md:px-16 px-10 py-10">
         <div className="sm:my-2 md:px-2 px-0">
           <p className="md:text-xl sm:text-base  font-normal ">
             SHOP BY CATEGORY

@@ -1,12 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { MdOutlineSendToMobile } from "react-icons/md";
 import { FaInstagram, FaSquareGithub, FaLinkedin } from "react-icons/fa6";
 import { ApiCall } from "@/utils";
 import { toast, ToastContainer } from "react-toastify";
+import { useLocation } from "react-router-dom";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 const Footer: React.FC = () => {
   const [email, setEmail] = useState("");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const location = useLocation();
+
+  const footerRef = useRef(null);
+  useEffect(() => {
+    const footer = footerRef.current; // Access the current DOM element
+    const route = location.pathname;
+    let start = "top 50%";
+    if (route == "/") {
+      start = "top -100%";
+    }
+
+    if (!footer) return;
+    gsap.fromTo(
+      footer,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        duration: 2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: footer,
+          start: start,
+        },
+      }
+    );
+  }, []);
 
   const subscribeHandler = () => {
     if (!email || email.trim().length === 0) {
@@ -61,7 +91,9 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <div className="w-full py-10 px-5 custom-flex bg-black text-white">
+    <div
+      ref={footerRef}
+      className="w-full py-10 px-5 custom-flex bg-black text-white">
       <div className="sm:max-w-[75%] w-full">
         <div className="w-full flex md:flex-row flex-col sm:py-10 py-3">
           <div className="md:w-[45%] w-full md:p-2">
