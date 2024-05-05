@@ -55,6 +55,8 @@ const SliderProduct: React.FC<SliderProps> = ({ title, categoryID }) => {
         },
       },
     ],
+    prevArrow: <></>, // Hide the default previous arrow button
+    nextArrow: <></>,
     customPaging: function (i: any) {
       return (
         <div
@@ -68,7 +70,7 @@ const SliderProduct: React.FC<SliderProps> = ({ title, categoryID }) => {
     },
   };
   return (
-    <div className="w-full  px-5 my-10 overflow-hidden ">
+    <div className="w-full  sm:px-5 px-1 my-10 overflow-hidden ">
       <div className="sm:my-10 my-3 ">
         <h3 className=" sm:text-4xl text-2xl font-normal ">{title}</h3>
       </div>
