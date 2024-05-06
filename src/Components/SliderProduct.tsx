@@ -139,14 +139,26 @@ const SliderProduct: React.FC<SliderProps> = ({ title, categoryID }) => {
             </div>
           </div>
         ) : (
-          <Slider {...settings}>
-            {/* Render the Product component within Slider */}
-            {products.map((product: ProductType) => (
-              <div key={product._id}>
-                <ProductCard product={product} />
+          <div>
+            {products.length > 4 ? (
+              <Slider {...settings}>
+                {/* Render the Product component within Slider */}
+                {products.map((product: ProductType) => (
+                  <div key={product._id}>
+                    <ProductCard product={product} />
+                  </div>
+                ))}
+              </Slider>
+            ) : (
+              <div className="grid md:grid-cols-4 grid-cols-2">
+                {products.map((product: ProductType) => (
+                  <div key={product._id}>
+                    <ProductCard product={product} />
+                  </div>
+                ))}
               </div>
-            ))}
-          </Slider>
+            )}
+          </div>
         )}
       </div>
     </div>
