@@ -6,8 +6,21 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/Components/ui/accordion";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/types/state.js";
+import { Link } from "react-router-dom";
+import { toggleHamburger } from "@/features/features";
 
 const Drawer: React.FC = () => {
+  const menCategory = useSelector(
+    (state: RootState) => state.features.category.men
+  );
+  const womenCategory = useSelector(
+    (state: RootState) => state.features.category.women
+  );
+
+  const dispatch = useDispatch();
+
   const drawerRef = useRef(null);
   useEffect(() => {
     gsap.to(drawerRef.current, {
@@ -16,6 +29,26 @@ const Drawer: React.FC = () => {
       ease: "sine.in",
     });
   }, []);
+  const Hambuger = () => {
+    dispatch(toggleHamburger());
+  };
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth > 768) {
+        Hambuger();
+      }
+    }
+
+    handleResize(); // Call initially to set the initial state
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [dispatch]);
+
   return (
     <div
       ref={drawerRef}
@@ -23,62 +56,65 @@ const Drawer: React.FC = () => {
       <div>
         <ul>
           <div className="w-full text-[15px] px-5 py-3 font-medium border-b-2 border-b-gray-100">
-            Home
+            <Link to="/" onClick={Hambuger}>
+              Home
+            </Link>
           </div>
           <div className="w-full text-[15px] px-5 py-3 font-medium border-b-2 border-b-gray-100">
-            New
+            <Link to="collection/new" onClick={Hambuger}>
+              New
+            </Link>
           </div>
           <Accordion type="single" className="bg-white" collapsible>
             <AccordionItem value="item-1">
               <AccordionTrigger className=" text-[15px] px-5">
-                Men
+                <Link
+                  to="collection/men"
+                  onClick={Hambuger}
+                  className="underline">
+                  Men
+                </Link>
               </AccordionTrigger>
-              <AccordionContent className=" text-[14px] px-5">
-                Sneakers
-              </AccordionContent>
-              <AccordionContent className=" text-[14px] px-5">
-                Boot
-              </AccordionContent>
-              <AccordionContent className=" text-[14px] px-5">
-                Boat Shoes
-              </AccordionContent>
-              <AccordionContent className=" text-[14px] px-5">
-                Loafers
-              </AccordionContent>
-              <AccordionContent className=" text-[14px] px-5">
-                Sandals
-              </AccordionContent>
-              <AccordionContent className=" text-[14px] px-5">
-                Slip-ons
-              </AccordionContent>
+              {menCategory.map((category) => {
+                return (
+                  <AccordionContent
+                    className=" text-[14px] px-5"
+                    key={category._id}>
+                    <Link
+                      to={`/collection/men/${category._id}`}
+                      onClick={Hambuger}>
+                      {" "}
+                      {category.name}
+                    </Link>
+                  </AccordionContent>
+                );
+              })}
             </AccordionItem>
           </Accordion>
           <Accordion type="single" className="bg-white" collapsible>
             <AccordionItem value="item-1">
               <AccordionTrigger className=" text-[15px] px-5">
-                Women
+                <Link
+                  to="collection/women"
+                  onClick={Hambuger}
+                  className="underline">
+                  Women
+                </Link>
               </AccordionTrigger>
-              <AccordionContent className=" text-[14px] px-5">
-                Boots
-              </AccordionContent>
-              <AccordionContent className=" text-[14px] px-5">
-                Comfort
-              </AccordionContent>
-              <AccordionContent className=" text-[14px] px-5">
-                Heel
-              </AccordionContent>
-              <AccordionContent className=" text-[14px] px-5">
-                Platforms
-              </AccordionContent>
-              <AccordionContent className=" text-[14px] px-5">
-                Sandals
-              </AccordionContent>
-              <AccordionContent className=" text-[14px] px-5">
-                Sneakers
-              </AccordionContent>
-              <AccordionContent className=" text-[14px] px-5">
-                Water Shoes
-              </AccordionContent>
+              {womenCategory.map((category) => {
+                return (
+                  <AccordionContent
+                    className=" text-[14px] px-5"
+                    key={category._id}>
+                    <Link
+                      to={`/collection/women/${category._id}`}
+                      onClick={Hambuger}>
+                      {" "}
+                      {category.name}
+                    </Link>
+                  </AccordionContent>
+                );
+              })}
             </AccordionItem>
           </Accordion>
         </ul>

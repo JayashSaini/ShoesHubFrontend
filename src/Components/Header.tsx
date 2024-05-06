@@ -1,27 +1,43 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../assets/favicon1.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { FaRegUser } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa";
 import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleHamburger } from "../features/features.js";
+import {
+  toggleHamburger,
+  setMenCategory,
+  setWomenCategory,
+} from "../features/features.js";
 import { RootState } from "../types/state.js";
 import Drawer from "./Drawer.js";
 import men1 from "../assets/men1.jpg";
+import women1 from "../assets/women1.jpg";
+import { ApiCall } from "@/utils/index.js";
+import { CategoryType } from "@/types/category.js";
 
 const Header: React.FC = () => {
   const hamburger = useSelector((state: RootState) => state.features.hamburger);
+  const menCategory = useSelector(
+    (state: RootState) => state.features.category.men
+  );
+  const womenCategory = useSelector(
+    (state: RootState) => state.features.category.women
+  );
   const [showCategoryContainer, setShowCategoryContainer] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
+  const [currentCategoryName, setCurrentCategoryName] = useState<string>("men");
+  const [currentCategory, setCurrentCategory] = useState<CategoryType[]>([]);
 
   const dispatch = useDispatch();
 
   const handleMouseEnter = (category: string) => {
-    // category to be called via api and get it's API
-    console.log("category to be called" + category);
+    setCurrentCategoryName(category);
+    if (category == "men") setCurrentCategory(menCategory);
+    else setCurrentCategory(womenCategory);
     setShowCategoryContainer(true);
   };
 
@@ -53,6 +69,28 @@ const Header: React.FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    ApiCall({
+      url: `/api/v1/category/c/662fd720288f5b59eb7d3917`,
+      method: "GET",
+    })
+      .then((res) => {
+        if (res.data) {
+          dispatch(setMenCategory([...res.data.data.childCategories]));
+        }
+      })
+      .catch();
+    ApiCall({
+      url: `/api/v1/category/c/662fd9c4d2c102242565f2c2`,
+      method: "GET",
+    })
+      .then((res) => {
+        if (res.data) {
+          dispatch(setWomenCategory([...res.data.data.childCategories]));
+        }
+      })
+      .catch();
+  }, []);
   return (
     <>
       <div
@@ -162,32 +200,24 @@ const Header: React.FC = () => {
           <div className="w-full min-h-[300px] fixed bg-white py-6 px-8 flex justify-between z-50 ">
             <div className="px-5 w-1/2">
               <h2 className="text-[#f68c23] roboto-bold sm:text-3xl text-2xl text-left mb-8 ">
-                Men Shoes
+                {currentCategoryName == "men" ? "Men Shoes" : "Women Shoes"}
               </h2>
               <ul className="grid grid-cols-2 gap-x-20 gap-y-4">
-                <li className="text-base hover:text-[#f68c23]">
-                  <a href="#"> Boots</a>
-                </li>
-                <li className="text-base hover:text-[#f68c23]">
-                  <a href="#"> Sneaker</a>
-                </li>
-                <li className="text-base hover:text-[#f68c23]">
-                  <a href="#"> Boat Shoes</a>
-                </li>
-                <li className="text-base hover:text-[#f68c23]">
-                  <a href="#"> Loafers</a>
-                </li>
-                <li className="text-base hover:text-[#f68c23]">
-                  <a href="#"> Sandals</a>
-                </li>
-                <li className="text-base hover:text-[#f68c23]">
-                  <a href="#"> Slip-ons</a>
-                </li>
+                {currentCategory.map((category) => (
+                  <li
+                    key={category._id}
+                    className="text-base hover:text-[#f68c23]">
+                    <Link
+                      to={`/collection/${currentCategoryName}/${category._id}`}>
+                      {category.name}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
             <div className="w-1/2">
               <img
-                src={men1}
+                src={currentCategoryName == "men" ? men1 : women1}
                 alt=""
                 loading="lazy"
                 className="w-full h-auto bg-cover"

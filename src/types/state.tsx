@@ -1,5 +1,11 @@
+import { CategoryType } from "./category";
+
 export interface featureState {
   hamburger: boolean;
+  category: {
+    men: CategoryType[] | [];
+    women: CategoryType[] | [];
+  };
 }
 
 export interface UserState {
