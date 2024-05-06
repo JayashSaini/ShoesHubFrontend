@@ -72,7 +72,7 @@ const ResetPassword = () => {
           <div className="w-full sm:p-16 px-6  h-full custom-flex">
             <div className="md:w-[500px] w-full h-auto md:px-16  px-8 md:py-10 py-6">
               <form onSubmit={resetPasswordHandler}>
-                <h2 className="text-[#000] roboto-bold sm:text-3xl text-2xl text-center">
+                <h2 className="text-[#000] main-heading-font sm:text-3xl text-2xl text-center">
                   Reset Password
                 </h2>
 

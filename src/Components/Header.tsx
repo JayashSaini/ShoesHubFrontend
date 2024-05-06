@@ -29,14 +29,15 @@ const Header: React.FC = () => {
   );
   const [showCategoryContainer, setShowCategoryContainer] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
-  const [currentCategoryName, setCurrentCategoryName] = useState<string>("men");
+  const [currentCategoryName, setCurrentCategoryName] =
+    useState<string>("men's");
   const [currentCategory, setCurrentCategory] = useState<CategoryType[]>([]);
 
   const dispatch = useDispatch();
 
   const handleMouseEnter = (category: string) => {
     setCurrentCategoryName(category);
-    if (category == "men") setCurrentCategory(menCategory);
+    if (category == "men's") setCurrentCategory(menCategory);
     else setCurrentCategory(womenCategory);
     setShowCategoryContainer(true);
   };
@@ -116,7 +117,8 @@ const Header: React.FC = () => {
                     isActive
                       ? "text-sm px-3 text-[#f68c23]"
                       : "text-sm px-3 hover:text-[#f68c23]"
-                  }>
+                  }
+                  onClick={handleMouseLeave}>
                   Home
                 </NavLink>
               </li>
@@ -127,35 +129,38 @@ const Header: React.FC = () => {
                     isActive
                       ? "text-sm px-3 text-[#f68c23]"
                       : "text-sm px-3 hover:text-[#f68c23]"
-                  }>
+                  }
+                  onClick={handleMouseLeave}>
                   New
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/men"
+                  to="collection/men's"
                   className={({ isActive }) =>
                     isActive
                       ? "text-sm px-3 text-[#f68c23]"
                       : "text-sm px-3 hover:text-[#f68c23]"
                   }
                   onMouseEnter={() => {
-                    handleMouseEnter("men");
-                  }}>
+                    handleMouseEnter("men's");
+                  }}
+                  onClick={handleMouseLeave}>
                   Men
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/women"
+                  to="collection/women's"
                   className={({ isActive }) =>
                     isActive
                       ? "text-sm px-3 text-[#f68c23]"
                       : "text-sm px-3 hover:text-[#f68c23]"
                   }
                   onMouseEnter={() => {
-                    handleMouseEnter("women");
-                  }}>
+                    handleMouseEnter("women's");
+                  }}
+                  onClick={handleMouseLeave}>
                   Women
                 </NavLink>
               </li>
@@ -200,24 +205,25 @@ const Header: React.FC = () => {
           <div className="w-full min-h-[300px] fixed bg-white py-6 px-8 flex justify-between z-50 ">
             <div className="px-5 w-1/2">
               <h2 className="text-[#f68c23] roboto-bold sm:text-3xl text-2xl text-left mb-8 ">
-                {currentCategoryName == "men" ? "Men Shoes" : "Women Shoes"}
+                {currentCategoryName == "men's" ? "Men Shoes" : "Women Shoes"}
               </h2>
               <ul className="grid grid-cols-2 gap-x-20 gap-y-4">
                 {currentCategory.map((category) => (
                   <li
                     key={category._id}
                     className="text-base hover:text-[#f68c23]">
-                    <Link
-                      to={`/collection/${currentCategoryName}/${category._id}`}>
+                    <a
+                      onClick={handleMouseLeave}
+                      href={`/collection/${currentCategoryName}-${category.name}/${category._id}`}>
                       {category.name}
-                    </Link>
+                    </a>
                   </li>
                 ))}
               </ul>
             </div>
             <div className="w-1/2">
               <img
-                src={currentCategoryName == "men" ? men1 : women1}
+                src={currentCategoryName == "men's" ? men1 : women1}
                 alt=""
                 loading="lazy"
                 className="w-full h-auto bg-cover"

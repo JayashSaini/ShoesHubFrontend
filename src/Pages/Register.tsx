@@ -143,7 +143,7 @@ const Register = () => {
         <div className="w-full md:w-[45%] p-6 md:p-4 h-full custom-flex">
           <div className="w-full md:w-[90%]  sm:w-[60%] w-full h-auto px-4 md:px-8 py-3">
             <form onSubmit={registerHandler}>
-              <h2 className="roboto-bold sm:text-3xl text-2xl md:text-4xl text-center mb-6">
+              <h2 className="main-heading-font sm:text-3xl text-2xl md:text-4xl text-center mb-6">
                 Sign up
               </h2>
               <Input

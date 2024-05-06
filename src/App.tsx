@@ -13,6 +13,7 @@ import {
   Redirect,
   ErrorMessage,
   Product,
+  Collection,
 } from "./Pages";
 import Layout from "./Layout.jsx";
 import { useEffect /*,useState*/ } from "react";
@@ -126,6 +127,11 @@ function App() {
           <Route
             path="/product/:productTitle/:productId"
             element={<Product />}
+          />
+          {/* Collection routes  */}
+          <Route
+            path="/collection/:collectionTitle/:collectionId"
+            element={<Collection />}
           />
           {/* error message handler route*/}
           <Route path="/error" element={<ErrorMessage />} />

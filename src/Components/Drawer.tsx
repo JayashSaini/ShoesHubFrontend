@@ -69,7 +69,7 @@ const Drawer: React.FC = () => {
             <AccordionItem value="item-1">
               <AccordionTrigger className=" text-[15px] px-5">
                 <Link
-                  to="collection/men"
+                  to="collection/men's"
                   onClick={Hambuger}
                   className="underline">
                   Men
@@ -80,12 +80,12 @@ const Drawer: React.FC = () => {
                   <AccordionContent
                     className=" text-[14px] px-5"
                     key={category._id}>
-                    <Link
-                      to={`/collection/men/${category._id}`}
+                    <a
+                      href={`/collection/men's-${category.name}/${category._id}`}
                       onClick={Hambuger}>
                       {" "}
                       {category.name}
-                    </Link>
+                    </a>
                   </AccordionContent>
                 );
               })}
@@ -95,7 +95,7 @@ const Drawer: React.FC = () => {
             <AccordionItem value="item-1">
               <AccordionTrigger className=" text-[15px] px-5">
                 <Link
-                  to="collection/women"
+                  to="collection/women's"
                   onClick={Hambuger}
                   className="underline">
                   Women
@@ -106,12 +106,12 @@ const Drawer: React.FC = () => {
                   <AccordionContent
                     className=" text-[14px] px-5"
                     key={category._id}>
-                    <Link
-                      to={`/collection/women/${category._id}`}
+                    <a
+                      href={`/collection/women's-${category.name}/${category._id}`}
                       onClick={Hambuger}>
                       {" "}
                       {category.name}
-                    </Link>
+                    </a>
                   </AccordionContent>
                 );
               })}

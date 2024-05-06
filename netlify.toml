@@ -49,6 +49,11 @@
   status = 200
 
 [[redirects]]
+  from = "/collection/:collectionTitle/:collectionId"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200

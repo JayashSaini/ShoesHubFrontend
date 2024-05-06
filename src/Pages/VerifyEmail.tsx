@@ -60,7 +60,7 @@ const VerifyEmail = () => {
             alt="envelope"
           />
           <form onSubmit={resendEmailVerificationHandler} className="w-full">
-            <h2 className="text-[#000] font-bold text-2xl sm:text-3xl text-center mt-4">
+            <h2 className="text-[#000] main-heading-font font-bold text-2xl sm:text-3xl text-center mt-4">
               Verify your email address
             </h2>
             <p className="text-center text-xs sm:text-sm text-gray-500 my-4">

@@ -16,6 +16,11 @@
       "source": "/product/:productTitle/:productId",
       "destination": "/index.html"
     },
+
+    {
+      "source": "/collection/:collectionTitle/:collectionId",
+      "destination": "/index.html"
+    },
     {
       "source": "/api/(.*)",
       "destination": "https://shoeshubbackend.onrender.com/api/$1"

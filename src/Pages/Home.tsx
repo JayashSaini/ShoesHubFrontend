@@ -99,7 +99,7 @@ const Home = () => {
           ref={homeRef}
           className="home-bg w-full h-[85vh] flex justify-center items-end py-24 px-3">
           <div className="hidden sm:block">
-            <h2 className="text-white md:text-6xl sm:text-4xl text-5xl font-extrabold sm:text-center text-left text-shadow-lg custom-text-shadow ">
+            <h2 className="text-white main-heading-font md:text-6xl sm:text-4xl text-5xl font-extrabold sm:text-center text-left text-shadow-lg custom-text-shadow ">
               Comfort Meets Style. Discover <br /> Your Perfect Pair Today.
             </h2>
           </div>
@@ -123,7 +123,7 @@ const Home = () => {
             <img src={blockWomen} alt="women" />
           </div>
           <div className="flex items-center justify-between p-2">
-            <h2 className="sm:text-4xl text-2xl font-base">Women</h2>
+            <h2 className="sm:text-4xl text-xl font-normal">Women</h2>
             <a
               href="#"
               className="flex items-center gap-2 sm:text-sm text-xs group">
@@ -139,7 +139,7 @@ const Home = () => {
             <img src={blockMen} alt="women" className="w-full " />
           </div>
           <div className="flex items-center justify-between p-2">
-            <h2 className="sm:text-4xl text-2xl font-base">Men</h2>
+            <h2 className="sm:text-4xl text-xl font-normal">Men</h2>
             <a
               href="#"
               className="flex items-center gap-2 sm:text-sm text-xs group">
@@ -156,7 +156,7 @@ const Home = () => {
           <p className="md:text-xl sm:text-base  font-normal ">
             SHOP BY CATEGORY
           </p>
-          <h2 className="md:text-5xl sm:text-3xl text-xl font-base ">
+          <h2 className="md:text-4xl sm:text-2xl text-xl font-base ">
             Featured Collections
           </h2>
         </div>

@@ -102,7 +102,9 @@ const SliderProduct: React.FC<SliderProps> = ({ title, categoryID }) => {
       ref={productSliderRef}
       className="w-full  sm:px-5 px-1 my-10 overflow-hidden ">
       <div className="sm:my-10 my-3 ">
-        <h3 className=" sm:text-4xl text-2xl font-normal ">{title}</h3>
+        <h3 className=" sm:text-4xl text-2xl font-normal main-heading-font px-4">
+          {title}
+        </h3>
       </div>
       <div className="slider-container relative">
         {isLoading ? (

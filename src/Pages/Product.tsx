@@ -12,7 +12,9 @@ const Product: React.FC = () => {
   const [quantity, setQuantity] = useState(1);
   const subImagesContainerRef = useRef(null);
   const { productId } = useParams();
+
   const [size, setSize] = useState(0);
+
   const [product, setProduct] = useState<ProductType>({
     _id: "",
     category: "",

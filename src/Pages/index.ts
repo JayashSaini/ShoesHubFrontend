@@ -9,6 +9,7 @@ import NotFound from "./NotFound.js";
 import Redirect from "./Redirect.js";
 import ErrorMessage from "./ErrorMessage.js";
 import Product from "./Product.js";
+import Collection from "./Collection.js";
 
 export {
   Home,
@@ -22,4 +23,5 @@ export {
   Redirect,
   ErrorMessage,
   Product,
+  Collection,
 };

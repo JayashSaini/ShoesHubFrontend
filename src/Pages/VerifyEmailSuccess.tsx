@@ -63,7 +63,7 @@ const VerifyEmailSuccess = () => {
                 </h2>
                 <div className="w-full custom-flex sm:my-4 my-4">
                   <button
-                    className="w-[200px] rounded-lg sm:p-[9px] p-1 text-center sm:text-sm text-[12px] font-bold text-[#000] border-2 border-custom hover:scale-[1.02]"
+                    className="w-[200px] rounded-lg sm:p-[9px] p-1 text-center sm:text-sm text-[12px] font-bold text-[#000] border-2 border-black hover:scale-[1.02]"
                     onClick={verifySuccessHandler}>
                     Go Back to Log in
                   </button>

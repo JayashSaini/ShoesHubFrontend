@@ -8,7 +8,7 @@ const Product: React.FC<ProductCardType> = ({ product }) => {
 
   return (
     <>
-      <div className="min-w-[150px] h-auto mx-4">
+      <div className="min-w-[150px] h-auto mx-3">
         <div className="w-full max-h-[450px] overflow-hidden flex justify-center items-center ">
           <img
             src={hovered ? product.subImages[0].url : product.mainImage.url}
