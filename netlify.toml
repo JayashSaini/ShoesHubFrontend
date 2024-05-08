@@ -39,6 +39,11 @@
   status = 200
 
 [[redirects]]
+  from = "/new"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
   from = "/user/:accessToken/:refreshToken"
   to = "/index.html"
   status = 200

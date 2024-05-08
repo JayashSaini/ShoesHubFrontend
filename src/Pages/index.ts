@@ -10,6 +10,7 @@ import Redirect from "./Redirect.js";
 import ErrorMessage from "./ErrorMessage.js";
 import Product from "./Product.js";
 import Collection from "./Collection.js";
+import New from "./New.js";
 
 export {
   Home,
@@ -24,4 +25,5 @@ export {
   ErrorMessage,
   Product,
   Collection,
+  New,
 };

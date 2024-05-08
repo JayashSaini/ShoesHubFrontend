@@ -13,6 +13,7 @@ import {
   Redirect,
   ErrorMessage,
   Product,
+  New,
   Collection,
 } from "./Pages";
 import Layout from "./Layout.jsx";
@@ -133,6 +134,7 @@ function App() {
             path="/collection/:collectionTitle/:collectionId"
             element={<Collection />}
           />
+          <Route path="/new" element={<New />} />
           {/* error message handler route*/}
           <Route path="/error" element={<ErrorMessage />} />
           {/* Define the 404 route */}

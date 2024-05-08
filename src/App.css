@@ -181,4 +181,10 @@ h2 {
     background-position: center; /* Adjust the percentage as needed */
     background-repeat: no-repeat;
   }
+  .collection-new-bg {
+    background-image: url("./assets/newBanner.jpg");
+    background-size: cover;
+    background-position: center; /* Adjust the percentage as needed */
+    background-repeat: no-repeat;
+  }
 }

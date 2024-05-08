@@ -8,6 +8,7 @@
     { "source": "/email-verification", "destination": "/index.html" },
     { "source": "/email-verification/:token", "destination": "/index.html" },
     { "source": "/error", "destination": "/index.html" },
+    { "source": "/new", "destination": "/index.html" },
     {
       "source": "/user/:accessToken/:refreshToken",
       "destination": "/index.html"
