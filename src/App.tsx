@@ -15,6 +15,7 @@ import {
   Product,
   New,
   Collection,
+  Category,
 } from "./Pages";
 import Layout from "./Layout.jsx";
 import { useEffect /*,useState*/ } from "react";
@@ -133,6 +134,10 @@ function App() {
           <Route
             path="/collection/:collectionTitle/:collectionId"
             element={<Collection />}
+          />
+          <Route
+            path="/p/collection/:collectionTitle/:collectionId"
+            element={<Category />}
           />
           <Route path="/new" element={<New />} />
           {/* error message handler route*/}

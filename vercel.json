@@ -23,6 +23,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/p/collection/:collectionTitle/:collectionId",
+      "destination": "/index.html"
+    },
+    {
       "source": "/api/(.*)",
       "destination": "https://shoeshubbackend.onrender.com/api/$1"
     },

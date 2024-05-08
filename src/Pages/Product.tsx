@@ -44,9 +44,8 @@ const Product: React.FC = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    gsap.fromTo(
+    gsap.to(
       productRef.current,
-      { opacity: 0 }, // Start with opacity 0
       { opacity: 1, duration: 1, ease: "power3.out", delay: 1 } // End with opacity 1 after a delay of 0.5 seconds
     );
   }, []);
@@ -82,7 +81,7 @@ const Product: React.FC = () => {
     <>
       <div
         ref={productRef}
-        className="w-full min-h-[100vh] relative md:px-10 sm:px-6 px-4 py-4">
+        className="w-full min-h-[100vh]  opacity-0 relative md:px-10 sm:px-6 px-4 py-4">
         <div className="w-full flex flex-col sm:flex-row justify-between sm:items-center items-start">
           <h4 className="text-sm font-base text-gray-500">
             Home / <span className="text-black">{product.description}</span>
@@ -116,7 +115,7 @@ const Product: React.FC = () => {
               <img
                 src={mainImage.url}
                 alt="Main Image"
-                className="w-full h-full main-image"
+                className="w-full h-full main-image "
               />
             </div>
           </div>

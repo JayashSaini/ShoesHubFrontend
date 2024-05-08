@@ -11,6 +11,7 @@ import ErrorMessage from "./ErrorMessage.js";
 import Product from "./Product.js";
 import Collection from "./Collection.js";
 import New from "./New.js";
+import Category from "./Category.js";
 
 export {
   Home,
@@ -26,4 +27,5 @@ export {
   Product,
   Collection,
   New,
+  Category,
 };

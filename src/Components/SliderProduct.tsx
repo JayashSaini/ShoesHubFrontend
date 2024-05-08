@@ -37,9 +37,9 @@ const SliderProduct: React.FC<SliderProps> = ({ title, categoryID }) => {
     const productSliderElement = productSliderRef.current; // Access the current DOM element
 
     if (!productSliderElement) return;
-    gsap.fromTo(
+    gsap.to(
       productSliderElement,
-      { opacity: 0 },
+
       {
         opacity: 1,
         duration: 2,
@@ -100,7 +100,7 @@ const SliderProduct: React.FC<SliderProps> = ({ title, categoryID }) => {
   return (
     <div
       ref={productSliderRef}
-      className="w-full  sm:px-5 px-1 my-10 overflow-hidden ">
+      className="w-full  sm:px-5 px-1 opacity-0 my-10 overflow-hidden ">
       <div className="sm:my-10 my-3 ">
         <h3 className=" sm:text-4xl text-2xl font-normal main-heading-font px-4">
           {title}
