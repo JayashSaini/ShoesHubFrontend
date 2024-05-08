@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { ProductType } from "@/types/product";
-import { useState, useEffect } from "react";
 import { ApiCall } from "@/utils";
 import { TailSpin } from "react-loader-spinner";
 import { ProductCard } from "@/Components";
 import women1 from "@/assets/collectionWomenBanner.jpg";
 import women2 from "@/assets/collectionWomenBanner2.jpg";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const New = () => {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
+  const newRef = useRef(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -33,17 +37,38 @@ const New = () => {
       });
   }, [page]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    gsap.fromTo(
+      newRef.current,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        duration: 2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: newRef.current,
+          start: "top 50%", // Start animation when the top of the element is 80% in view
+        },
+      }
+    );
+  });
+
   return (
     <>
       <div>
         <div
+          ref={newRef}
           className={`w-full md:h-80 custom-flex py-2 md:text-5xl  sm:text-2xl collection-new-bg text-lg md:text-white text-black font-semibold main-heading-font
           `}>
           New In
         </div>
         <div>
           <div>
-            <div className="w-full grid grid-cols-2 md:grid-cols-4 px-5 md:py-10 py-5 gap-4">
+            <div
+              ref={newRef}
+              className="w-full grid grid-cols-2 md:grid-cols-4 px-5 md:py-10 py-5 gap-4">
               {products.map((product, index) => (
                 <React.Fragment key={product._id}>
                   <div>

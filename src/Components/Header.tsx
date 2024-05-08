@@ -136,7 +136,7 @@ const Header: React.FC = () => {
               </li>
               <li>
                 <NavLink
-                  to="collection/men's"
+                  to="/p/collection/men's/662fd720288f5b59eb7d3917"
                   className={({ isActive }) =>
                     isActive
                       ? "text-sm px-3 text-[#f68c23]"
@@ -151,7 +151,7 @@ const Header: React.FC = () => {
               </li>
               <li>
                 <NavLink
-                  to="collection/women's"
+                  to="/p/collection/women's/662fd9c4d2c102242565f2c2"
                   className={({ isActive }) =>
                     isActive
                       ? "text-sm px-3 text-[#f68c23]"
