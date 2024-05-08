@@ -221,12 +221,12 @@ const Header: React.FC = () => {
                 ))}
               </ul>
             </div>
-            <div className="w-1/2">
+            <div className="w-1/2 flex justify-end">
               <img
                 src={currentCategoryName == "men's" ? men1 : women1}
                 alt=""
                 loading="lazy"
-                className="w-full h-auto bg-cover"
+                className="w-auto max-h-[400px] bg-cover"
               />
             </div>
           </div>

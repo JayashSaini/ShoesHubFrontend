@@ -113,7 +113,7 @@ const Footer: React.FC = () => {
             </div>
           </div>
           <div className="md:w-[55%] w-full md:px-16 flex sm:flex-row flex-col sm:gap-16 px-2 py-5  gap-5 ">
-            <ul className="  text-base sm:text-white ">
+            <ul className="  sm:text-base text-sm text-white ">
               <li className="mb-2 font-bold">Customer Care</li>
               <li>
                 <a href="#"> Start Return</a>
@@ -131,7 +131,7 @@ const Footer: React.FC = () => {
                 <a href="#"> Contact Us</a>
               </li>
             </ul>
-            <ul className="text-base  sm:text-white">
+            <ul className="sm:text-base text-sm text-white">
               <li className="mb-2 font-bold">Service</li>
               <li>
                 <a href="#">About Us</a>
@@ -146,11 +146,11 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div>
-          <h3 className=" w-full h-auto custom-flex gap-1  text-sm pb-1">
+          <h3 className=" w-full h-auto custom-flex gap-1  sm:text-sm text-[10px] pb-1">
             <MdOutlineSendToMobile /> <span>Call Us: +91 9079830785</span>
           </h3>
-          <h2 className="sm:text-sm text-[12px] text-center ">
-            Copyright © 2024 by Grupo Shoes Hub. All rights reserved Privacy
+          <h2 className="sm:text-sm text-[9px] text-center ">
+            Copyright © 2024 by Group Shoes Hub. All rights reserved Privacy
             Policy Legal Use Do not sell my personal information
           </h2>
         </div>
