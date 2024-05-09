@@ -1,5 +1,5 @@
 import { CategoryType } from "./category";
-
+import { CartType } from "./Cart";
 export interface featureState {
   hamburger: boolean;
   category: {
@@ -26,7 +26,14 @@ export interface AuthState {
   error: string | null;
 }
 
+export interface CartState {
+  cart: CartType[] | [];
+  totalPrice: number;
+  discountedTotalPrice: number;
+}
+
 export interface RootState {
   user: AuthState;
   features: featureState;
+  cart: CartState;
 }

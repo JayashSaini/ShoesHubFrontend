@@ -1,19 +1,77 @@
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { CartProduct } from "@/Components";
+import { useEffect, useState } from "react";
+import { PrimaryButton } from "@/Components";
+import { ApiCall } from "@/utils";
+import { useRef } from "react";
+import { CartType } from "@/types/Cart";
+import { gsap } from "gsap";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "@/types/state";
+import { setCart } from "@/features/Cart.js";
 
 const Cart = () => {
+  const [discountCode, setDiscountCode] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const cartRef = useRef(null);
+
+  const products: CartType[] = useSelector(
+    (state: RootState) => state.cart.cart || []
+  );
+  const cartTotalPrice = useSelector(
+    (state: RootState) => state.cart.totalPrice
+  );
+  const discountedTotalPrice = useSelector(
+    (state: RootState) => state.cart.discountedTotalPrice
+  );
+
   const goBack = () => {
-    const navigate = useNavigate();
     navigate(-1); // Go back to the previous page
   };
 
+  useEffect(() => {
+    ApiCall({
+      url: `/api/v1/cart/`,
+      method: "GET",
+    })
+      .then((response) => {
+        dispatch(
+          setCart({
+            cart: [...response.data.data.items],
+            totalPrice: response.data.data.cartTotal,
+            discountedTotalPrice: response.data.data.discountedTotal,
+          })
+        );
+      })
+      .catch((error) => {
+        console.log("cart error: " + error);
+        dispatch(
+          setCart({
+            cart: [],
+            totalPrice: 0,
+            discountedTotalPrice: 0,
+          })
+        );
+      });
+  }, []);
+
+  useEffect(() => {
+    gsap.to(cartRef.current, {
+      opacity: 1,
+      duration: 2,
+      delay: 1,
+      ease: "power3.out",
+    });
+  }, []);
+
   return (
     <>
-      <div className="w-full h-auto  py-2 px-2 flex justify-start flex-col items-center">
+      <div className="w-full h-auto   py-2 px-2 flex justify-start flex-col items-center">
         <div className="md:w-[80%] w-full ">
           <div className="w-full flex flex-col sm:flex-row justify-between sm:items-center items-start">
-            <h4 className="text-sm font-base text-gray-500">
+            <h4 className="text-sm font-base text-gray-500 sm:block hidden">
               Home / <span className="text-black">Cart</span>
             </h4>
             <div
@@ -24,144 +82,76 @@ const Cart = () => {
             </div>
           </div>
         </div>
-        <div className="w-full text-center md:h-32 h-24 bg-orange-100 custom-flex">
-          <h2 className="main-heading-font md:text-4xl text-xl text-gray-800 font-bold">
+        <div className="w-full text-center md:h-32 h-24 bg-black custom-flex mt-2">
+          <h2 className="main-heading-font md:text-4xl text-xl text-white font-bold">
             Your Cart
           </h2>
         </div>
-        <div className="md:w-[80%] w-full ">
-          <div className="w-full custom-flex flex-col gap-2">
-            <CartProduct
-              product={{
-                _id: "6637d92279917943aa981a6e",
-                category: "662fd7aeef0b27b2064e5088",
-                description: "Baldric Jp 13693 Tan Soft Tumb Lea",
-                mainImage: {
-                  url: "http://res.cloudinary.com/dcvb5vgyf/image/upload/v1714936095/ezyjqbqmyiq89qlhpcua.jpg",
-                  public_id: "ezyjqbqmyiq89qlhpcua",
-                  _id: "6637d92279917943aa981a6f",
-                },
-                color: "Tan",
-                size: [6, 9],
-                name: "REEBOK",
-                owner: "66156788310b0b4660966b38",
-                price: 5000,
-                stock: 31,
-                subImages: [
-                  {
-                    url: "http://res.cloudinary.com/dcvb5vgyf/image/upload/v1714936096/vzkgs73ickvrkg3vgc5l.jpg",
-                    public_id: "vzkgs73ickvrkg3vgc5l",
-                    _id: "6637d92279917943aa981a70",
-                  },
-                  {
-                    url: "http://res.cloudinary.com/dcvb5vgyf/image/upload/v1714936097/ni94c0klqqic5w7ikcty.jpg",
-                    public_id: "ni94c0klqqic5w7ikcty",
-                    _id: "6637d92279917943aa981a71",
-                  },
-                  {
-                    url: "http://res.cloudinary.com/dcvb5vgyf/image/upload/v1714936097/s1jmv5lilam8psmrsekz.jpg",
-                    public_id: "s1jmv5lilam8psmrsekz",
-                    _id: "6637d92279917943aa981a72",
-                  },
-                  {
-                    url: "http://res.cloudinary.com/dcvb5vgyf/image/upload/v1714936098/sk54htdjx9odmsk5xg6c.jpg",
-                    public_id: "sk54htdjx9odmsk5xg6c",
-                    _id: "6637d92279917943aa981a73",
-                  },
-                ],
-                createdAt: "2024-05-05T19:08:18.839Z",
-                updatedAt: "2024-05-08T09:47:06.834Z",
-                __v: 0,
-              }}
-            />
-            <CartProduct
-              product={{
-                _id: "6637d92279917943aa981a6e",
-                category: "662fd7aeef0b27b2064e5088",
-                description: "Baldric Jp 13693 Tan Soft Tumb Lea",
-                mainImage: {
-                  url: "http://res.cloudinary.com/dcvb5vgyf/image/upload/v1714936095/ezyjqbqmyiq89qlhpcua.jpg",
-                  public_id: "ezyjqbqmyiq89qlhpcua",
-                  _id: "6637d92279917943aa981a6f",
-                },
-                color: "Tan",
-                size: [6, 9],
-                name: "REEBOK",
-                owner: "66156788310b0b4660966b38",
-                price: 5000,
-                stock: 31,
-                subImages: [
-                  {
-                    url: "http://res.cloudinary.com/dcvb5vgyf/image/upload/v1714936096/vzkgs73ickvrkg3vgc5l.jpg",
-                    public_id: "vzkgs73ickvrkg3vgc5l",
-                    _id: "6637d92279917943aa981a70",
-                  },
-                  {
-                    url: "http://res.cloudinary.com/dcvb5vgyf/image/upload/v1714936097/ni94c0klqqic5w7ikcty.jpg",
-                    public_id: "ni94c0klqqic5w7ikcty",
-                    _id: "6637d92279917943aa981a71",
-                  },
-                  {
-                    url: "http://res.cloudinary.com/dcvb5vgyf/image/upload/v1714936097/s1jmv5lilam8psmrsekz.jpg",
-                    public_id: "s1jmv5lilam8psmrsekz",
-                    _id: "6637d92279917943aa981a72",
-                  },
-                  {
-                    url: "http://res.cloudinary.com/dcvb5vgyf/image/upload/v1714936098/sk54htdjx9odmsk5xg6c.jpg",
-                    public_id: "sk54htdjx9odmsk5xg6c",
-                    _id: "6637d92279917943aa981a73",
-                  },
-                ],
-                createdAt: "2024-05-05T19:08:18.839Z",
-                updatedAt: "2024-05-08T09:47:06.834Z",
-                __v: 0,
-              }}
-            />
-            <CartProduct
-              product={{
-                _id: "6637d92279917943aa981a6e",
-                category: "662fd7aeef0b27b2064e5088",
-                description: "Baldric Jp 13693 Tan Soft Tumb Lea",
-                mainImage: {
-                  url: "http://res.cloudinary.com/dcvb5vgyf/image/upload/v1714936095/ezyjqbqmyiq89qlhpcua.jpg",
-                  public_id: "ezyjqbqmyiq89qlhpcua",
-                  _id: "6637d92279917943aa981a6f",
-                },
-                color: "Tan",
-                size: [6, 9],
-                name: "REEBOK",
-                owner: "66156788310b0b4660966b38",
-                price: 5000,
-                stock: 31,
-                subImages: [
-                  {
-                    url: "http://res.cloudinary.com/dcvb5vgyf/image/upload/v1714936096/vzkgs73ickvrkg3vgc5l.jpg",
-                    public_id: "vzkgs73ickvrkg3vgc5l",
-                    _id: "6637d92279917943aa981a70",
-                  },
-                  {
-                    url: "http://res.cloudinary.com/dcvb5vgyf/image/upload/v1714936097/ni94c0klqqic5w7ikcty.jpg",
-                    public_id: "ni94c0klqqic5w7ikcty",
-                    _id: "6637d92279917943aa981a71",
-                  },
-                  {
-                    url: "http://res.cloudinary.com/dcvb5vgyf/image/upload/v1714936097/s1jmv5lilam8psmrsekz.jpg",
-                    public_id: "s1jmv5lilam8psmrsekz",
-                    _id: "6637d92279917943aa981a72",
-                  },
-                  {
-                    url: "http://res.cloudinary.com/dcvb5vgyf/image/upload/v1714936098/sk54htdjx9odmsk5xg6c.jpg",
-                    public_id: "sk54htdjx9odmsk5xg6c",
-                    _id: "6637d92279917943aa981a73",
-                  },
-                ],
-                createdAt: "2024-05-05T19:08:18.839Z",
-                updatedAt: "2024-05-08T09:47:06.834Z",
-                __v: 0,
-              }}
-            />
+        {products && (
+          <div className="sm:w-[65%] w-full py-5">
+            <div className="w-full custom-flex flex-col gap-2">
+              <div className=" sm:max-w-[700px] w-full md:flex hidden">
+                <div className="w-1/2">
+                  <h3 className="text-sm text-gray-600">Product</h3>
+                </div>
+                <div className=" w-1/2 flex justify-evenly">
+                  <h3 className="text-sm text-gray-600">Price</h3>
+                  <h3 className="text-sm text-gray-600">Quantity</h3>
+                  <h3 className="text-sm text-gray-600">Total</h3>
+                </div>
+              </div>
+              {products.map((item) => {
+                return (
+                  <div key={item.product._id} className="w-full">
+                    <CartProduct
+                      product={item.product}
+                      quantity={item.quantity}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+            <div
+              ref={cartRef}
+              className="w-full md:px-10 px-1 md:py-6 py-3  opacity-0 ">
+              <div className="px-1 my-2">
+                <label htmlFor="discount" className="block md:text-xl text-sm">
+                  Discount Code
+                </label>
+                <input
+                  type="text"
+                  value={discountCode}
+                  onChange={(e) => {
+                    setDiscountCode(e.target.value.toUpperCase());
+                  }}
+                  className="w-[300px] my-1  border-gray-200 border-[2px] rounded-sm font-medium px-2 py-1 focus:outline-orange-300 text-base"
+                />
+              </div>
+              <div className="px-1">
+                <div className="flex justify-between items-center">
+                  <h3 className="sm:text-base text-[12px]">Subtotal</h3>
+                  <h3 className="sm:text-base text-[12px]">
+                    RS. <span>{cartTotalPrice}</span>
+                  </h3>
+                </div>
+                <p className="sm:text-base text-[12px]">
+                  Taxes and shipping calculated at checkout
+                </p>
+                <div className="flex justify-between items-center">
+                  <h3 className="sm:text-xl text-sm main-heading-font">
+                    Total
+                  </h3>
+                  <h3 className="sm:text-xl text-sm main-heading-font">
+                    RS. <span>{discountedTotalPrice}</span>
+                  </h3>
+                </div>
+                <div className="mt-2">
+                  <PrimaryButton text="Secure Checkout" />
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

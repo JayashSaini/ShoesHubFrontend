@@ -68,12 +68,12 @@ const Drawer: React.FC = () => {
           <Accordion type="single" className="bg-white" collapsible>
             <AccordionItem value="item-1">
               <AccordionTrigger className=" text-[15px] px-5">
-                <a
-                  href="/p/collection/men's/662fd720288f5b59eb7d3917"
+                <Link
+                  to="/p/collection/men's/662fd720288f5b59eb7d3917"
                   onClick={Hambuger}
                   className="underline">
                   Men
-                </a>
+                </Link>
               </AccordionTrigger>
               {menCategory.map((category) => {
                 return (
@@ -94,12 +94,12 @@ const Drawer: React.FC = () => {
           <Accordion type="single" className="bg-white" collapsible>
             <AccordionItem value="item-1">
               <AccordionTrigger className=" text-[15px] px-5">
-                <a
-                  href="/p/collection/women's/662fd9c4d2c102242565f2c2"
+                <Link
+                  to="/p/collection/women's/662fd9c4d2c102242565f2c2"
                   onClick={Hambuger}
                   className="underline">
                   Women
-                </a>
+                </Link>
               </AccordionTrigger>
               {womenCategory.map((category) => {
                 return (

@@ -95,6 +95,11 @@ const Register = () => {
         setIsLoading(false);
         if (response.data) {
           dispatch(register(response.data.data.user.email));
+          await ApiCall({
+            url: "/api/v1/cart",
+            method: "GET",
+          });
+
           navigate("/email-verification");
         }
         if (response.error) {

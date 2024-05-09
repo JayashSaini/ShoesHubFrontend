@@ -7,11 +7,15 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { SliderProduct } from "@/Components";
 import { ApiCall } from "@/utils";
+import { toast } from "sonner";
+import { TailSpin } from "react-loader-spinner";
+import { Toaster } from "@/Components/ui/sonner";
 
 const Product: React.FC = () => {
   const [quantity, setQuantity] = useState(1);
   const subImagesContainerRef = useRef(null);
   const { productId } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [size, setSize] = useState(0);
 
@@ -75,6 +79,39 @@ const Product: React.FC = () => {
 
   const goBack = () => {
     navigate(-1); // Go back to the previous page
+  };
+
+  const AddToCartHandler = async () => {
+    setIsLoading(true);
+    await ApiCall({
+      url: `/api/v1/cart/item/${productId}`,
+      method: "POST",
+      data: {
+        quantity: quantity,
+      },
+    })
+      .then((response) => {
+        setIsLoading(false);
+        if (response.data) {
+          toast("Product added to cart successfully ", {
+            description: `${product.name}, ${product.description}, ${product.price}`,
+            action: {
+              label: "Go to Cart",
+              onClick: () => {
+                navigate("/cart");
+              },
+            },
+          });
+        }
+        if (response.error) {
+          setIsLoading(false);
+          toast.error(response.error.data.message);
+        }
+      })
+      .catch(() => {
+        setIsLoading(false);
+        toast.error(`${product.name} has already been in cart`);
+      });
   };
 
   return (
@@ -232,11 +269,27 @@ const Product: React.FC = () => {
               </button>
               <div className="w-full">
                 <button
-                  className="w-full custom-flex bg-[#f68c23] hover:bg-black py-2 text-sm text-white duration-150 ease-in gap-1 hover:gap-2"
+                  onClick={AddToCartHandler}
+                  className="w-full custom-flex bg-[#f68c23] hover:bg-black focus:bg-black py-2 text-sm text-white duration-150 ease-in gap-1 hover:gap-2"
                   style={{ userSelect: "none" }} // Prevent text selection
                 >
-                  <MdOutlineShoppingCart />
-                  Add to cart
+                  {isLoading ? (
+                    <TailSpin
+                      visible={true}
+                      height="20"
+                      width="20"
+                      color="#ffffff"
+                      ariaLabel="tail-spin-loading"
+                      radius="1"
+                      wrapperStyle={{}}
+                      wrapperClass=""
+                    />
+                  ) : (
+                    <div className="flex gap-2">
+                      <MdOutlineShoppingCart />
+                      Add to cart
+                    </div>
+                  )}
                 </button>
               </div>
             </div>
@@ -250,6 +303,7 @@ const Product: React.FC = () => {
             />
           )}
         </div>
+        <Toaster position="top-center" />
       </div>
     </>
   );
