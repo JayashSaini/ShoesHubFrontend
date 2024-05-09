@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../assets/favicon1.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { FaRegUser } from "react-icons/fa6";
@@ -101,12 +101,14 @@ const Header: React.FC = () => {
         onMouseLeave={handleMouseLeave}>
         <div className="w-full h-auto bg-white  md:px-16 px-4 py-2 flex justify-between items-center border-b-2 border-gray-200 ">
           <div>
-            <img
-              src={Logo}
-              alt="Shoes Hub"
-              loading="lazy"
-              className="md:w-[70px] w-[55px]"
-            />
+            <Link to="/">
+              <img
+                src={Logo}
+                alt="Shoes Hub"
+                loading="lazy"
+                className="md:w-[70px] w-[55px] cursor-pointer"
+              />
+            </Link>
           </div>
           <div className="hidden md:block">
             <ul className="flex justify-evenly">
@@ -172,11 +174,15 @@ const Header: React.FC = () => {
                 <li className="px-2">
                   <IoSearch className="text-[18px]   cursor-pointer hover:scale-105" />
                 </li>
+                <Link to="/login">
+                  <li className="px-2">
+                    <FaRegUser className="text-[18px]   cursor-pointer hover:scale-105" />
+                  </li>
+                </Link>
                 <li className="px-2">
-                  <FaRegUser className="text-[18px]   cursor-pointer hover:scale-105" />
-                </li>
-                <li className="px-2">
-                  <MdOutlineShoppingCart className="text-[18px]   cursor-pointer hover:scale-105" />
+                  <Link to="/cart">
+                    <MdOutlineShoppingCart className="text-[18px]   cursor-pointer hover:scale-105" />
+                  </Link>
                 </li>
                 <li className="px-2">
                   <FaRegHeart className="text-[18px]   cursor-pointer hover:scale-105" />
@@ -185,7 +191,12 @@ const Header: React.FC = () => {
             </div>
             <div className="block md:hidden flex gap-2">
               {!hamburger && (
-                <IoSearch className="text-[23px]   cursor-pointer hover:scale-105" />
+                <div className="flex gap-2">
+                  <Link to="/cart">
+                    <MdOutlineShoppingCart className="text-[23px]   cursor-pointer hover:scale-105" />
+                  </Link>
+                  <IoSearch className="text-[23px]   cursor-pointer hover:scale-105" />
+                </div>
               )}
               {hamburger ? (
                 <RxCross1

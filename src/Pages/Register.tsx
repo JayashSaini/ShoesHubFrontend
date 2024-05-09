@@ -8,6 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { ThreeDots } from "react-loader-spinner";
 import { useDispatch } from "react-redux";
 import { register } from "../features/auth";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [username, setUsername] = useState<string>("");
@@ -131,7 +132,7 @@ const Register = () => {
 
   return (
     <>
-      <div className="w-full h-screen flex justify-around items-center">
+      <div className="w-full md:h-full h-[80vh] flex justify-around items-center">
         <div className="w-[55%] h-full custom-flex md:flex hidden">
           <img
             src={sidesection}
@@ -207,9 +208,9 @@ const Register = () => {
               <div className="text-center">
                 <h3 className="sm:text-sm text-[12px] text-gray-600">
                   Already have an account?&nbsp;
-                  <a href="/login" className="text-[#f68c23] font-bold">
+                  <Link to="/login" className="text-[#f68c23] font-bold">
                     Login
-                  </a>
+                  </Link>
                 </h3>
               </div>
             </form>

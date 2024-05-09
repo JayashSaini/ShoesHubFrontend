@@ -8,7 +8,7 @@ import { ApiCall } from "../utils";
 import { useDispatch } from "react-redux";
 import { login, loginFailed } from "../features/auth";
 import { AuthState, UserState } from "../types/state";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -143,8 +143,8 @@ const Login = () => {
 
   return (
     <>
-      <div className="w-full h-screen flex justify-around items-center">
-        <div className="w-[55%] h-full custom-flex md:flex hidden">
+      <div className="w-full md:h-full h-[70vh] flex justify-around items-center">
+        <div className="w-[55%] h-screen custom-flex md:flex hidden">
           <img
             src={sidesection}
             alt="sidesection"
@@ -152,7 +152,7 @@ const Login = () => {
             ref={imgRef}
           />
         </div>
-        <div className="w-full md:w-[45%] p-6 md:p-4 h-full custom-flex">
+        <div className="w-full md:w-[45%]  p-6 md:p-4 h-full custom-flex">
           <div className="w-full md:w-[90%]  sm:w-[60%] w-full h-auto px-4 md:px-8 py-3">
             <form onSubmit={loginHandler}>
               <h2 className="main-heading-font sm:text-3xl text-2xl md:text-4xl text-center mb-6">
@@ -190,11 +190,11 @@ const Login = () => {
               <div className="text-center">
                 <h3 className="sm:text-sm text-[12px] text-gray-600">
                   Don't have an account? &nbsp;
-                  <a
+                  <Link
                     className="text-[#f68c23] sm:text-[15px] text-[13px] font-bold"
-                    href="/register">
+                    to="/register">
                     Register
-                  </a>
+                  </Link>
                 </h3>
               </div>
             </form>

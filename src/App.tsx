@@ -16,6 +16,7 @@ import {
   New,
   Collection,
   Category,
+  Cart,
 } from "./Pages";
 import Layout from "./Layout.jsx";
 import { useEffect /*,useState*/ } from "react";
@@ -139,6 +140,8 @@ function App() {
             path="/p/collection/:collectionTitle/:collectionId"
             element={<Category />}
           />
+          {/* Cart Routes  */}
+          <Route path="/cart" element={<Cart />} />
           <Route path="/new" element={<New />} />
           {/* error message handler route*/}
           <Route path="/error" element={<ErrorMessage />} />

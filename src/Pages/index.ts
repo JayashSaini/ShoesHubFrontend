@@ -12,6 +12,7 @@ import Product from "./Product.js";
 import Collection from "./Collection.js";
 import New from "./New.js";
 import Category from "./Category.js";
+import Cart from "./Cart";
 
 export {
   Home,
@@ -28,4 +29,5 @@ export {
   Collection,
   New,
   Category,
+  Cart
 };

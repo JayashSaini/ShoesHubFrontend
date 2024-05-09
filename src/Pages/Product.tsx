@@ -209,7 +209,7 @@ const Product: React.FC = () => {
                 <FaMinus
                   className="text-gray-500 text-base"
                   onClick={() => {
-                    if (quantity > 0) {
+                    if (quantity > 1) {
                       setQuantity((prev) => prev - 1);
                     }
                   }}
