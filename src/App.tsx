@@ -89,7 +89,7 @@ function App() {
             })
           );
         })
-        .catch((error) => {
+        .catch(() => {
           dispatch(
             setCart({
               cart: [],
