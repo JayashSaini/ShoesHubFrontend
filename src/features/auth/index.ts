@@ -53,16 +53,19 @@ const userSlice = createSlice({
       state.user = initialState.user;
     },
     logout(state) {
-      // Reset user state on logout
       Object.assign(state, initialState);
     },
     register(state, action) {
       state.user.email = action.payload;
+    },
+    setIsAuthenticated(state, action) {
+      state.isAuthenticated = action.payload;
     },
     // Add other reducers as needed (e.g., for updating user profile, email verification status, etc.)
   },
 });
 
 // Export actions and reducer
-export const { login, logout, loginFailed, register } = userSlice.actions;
+export const { login, logout, loginFailed, register, setIsAuthenticated } =
+  userSlice.actions;
 export default userSlice.reducer;

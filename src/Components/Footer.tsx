@@ -2,30 +2,28 @@ import React, { useState } from "react";
 import { MdOutlineSendToMobile } from "react-icons/md";
 import { FaInstagram, FaSquareGithub, FaLinkedin } from "react-icons/fa6";
 import { ApiCall } from "@/utils";
-import { toast, ToastContainer } from "react-toastify";
+import { Toaster } from "@/Components/ui/sonner";
+import { toast } from "sonner";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { TailSpin } from "react-loader-spinner";
 gsap.registerPlugin(ScrollTrigger);
 
 const Footer: React.FC = () => {
   const [email, setEmail] = useState("");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const [isLoading, setIsLoading] = useState(false);
 
   const subscribeHandler = () => {
     if (!email || email.trim().length === 0) {
-      toast.error("Email is required", {
-        position: "top-center",
-        autoClose: 4000,
-      });
+      toast.error("Email is required");
       return;
     }
     if (!email.match(emailRegex)) {
-      toast.error("Invalid Email", {
-        position: "top-center",
-        autoClose: 4000,
-      });
+      toast.error("Invalid Email");
       return;
     } else {
+      setIsLoading(true);
       ApiCall({
         url: "/api/v1/subscribe/",
         method: "POST",
@@ -35,29 +33,21 @@ const Footer: React.FC = () => {
       })
         .then((response) => {
           if (response.data) {
-            console.log("response : " + JSON.stringify(response.data));
             const message = response.data.message;
-            toast.success(message, {
-              position: "top-center",
-              autoClose: 4000,
-            });
+            setIsLoading(false);
+            toast.success(message);
             return;
           }
           if (response.error) {
+            setIsLoading(false);
             const errorMessage = response.error.data.message;
-            toast.error(errorMessage, {
-              position: "top-center",
-              autoClose: 4000,
-            });
+            toast.error(errorMessage);
             return;
           }
         })
-        .catch((err) => {
-          console.log("error custom" + err);
-          toast.error("Try again something went wrong", {
-            position: "top-center",
-            autoClose: 4000,
-          });
+        .catch(() => {
+          setIsLoading(false);
+          toast.error("Try again something went wrong");
           return;
         });
     }
@@ -70,7 +60,7 @@ const Footer: React.FC = () => {
           <div className="md:w-[45%] w-full md:p-2">
             <h2 className="text-base font-medium">NEWSLETTER</h2>
             <p className="text-base font-normal my-2">
-              Subscribe and Get Your 10% OFF Coupon Today!
+              Subscribe and Get Your Rs.500 FLAT OFF Coupon Today!
             </p>
             <div className="flex h-auto w-full my-4 max-w-[400px]">
               <input
@@ -83,9 +73,22 @@ const Footer: React.FC = () => {
                 className="w-full sm:p-[9px] p-2 text-black text-sm focus:outline-none"
               />
               <button
-                className="primary-button-bg sm:p-[9px] p-1 text-center sm:text-sm text-[12px] font-bold text-white button"
+                className="primary-button-bg min-w-20 sm:p-[9px] p-1 text-center sm:text-sm text-[12px] font-bold text-white button custom-flex"
                 onClick={subscribeHandler}>
-                Subscribe
+                {isLoading ? (
+                  <TailSpin
+                    visible={true}
+                    height="20"
+                    width="20"
+                    color="#ffffff"
+                    ariaLabel="tail-spin-loading"
+                    radius="1"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                  />
+                ) : (
+                  "Subscribe"
+                )}
               </button>
             </div>
             <div className="flex gap-2 py-2 text-xl text-black ">
@@ -155,7 +158,7 @@ const Footer: React.FC = () => {
           </h2>
         </div>
       </div>
-      <ToastContainer />
+      <Toaster position="top-center" className="bg-black" />
     </div>
   );
 };

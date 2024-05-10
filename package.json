@@ -10,6 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/material": "^5.15.17",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "@radix-ui/react-accordion": "^1.1.2",
     "@reduxjs/toolkit": "^2.2.3",
     "axios": "^1.6.8",
@@ -29,6 +33,7 @@
     "react-toastify": "^10.0.5",
     "slick-carousel": "^1.8.1",
     "sonner": "^1.4.41",
+    "styled-components": "^6.1.11",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7"
   },

@@ -10,12 +10,15 @@ import { ApiCall } from "@/utils";
 import { toast } from "sonner";
 import { TailSpin } from "react-loader-spinner";
 import { Toaster } from "@/Components/ui/sonner";
+import { useDispatch } from "react-redux";
+import { setCart } from "@/features/Cart";
 
 const Product: React.FC = () => {
   const [quantity, setQuantity] = useState(1);
   const subImagesContainerRef = useRef(null);
   const { productId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const [size, setSize] = useState(0);
 
@@ -93,6 +96,13 @@ const Product: React.FC = () => {
       .then((response) => {
         setIsLoading(false);
         if (response.data) {
+          dispatch(
+            setCart({
+              cart: [...response.data.data.items],
+              totalPrice: response.data.data.cartTotal,
+              discountedTotalPrice: response.data.data.discountedTotal,
+            })
+          );
           toast("Product added to cart successfully ", {
             description: `${product.name}, ${product.description}, ${product.price}`,
             action: {
@@ -105,7 +115,14 @@ const Product: React.FC = () => {
         }
         if (response.error) {
           setIsLoading(false);
-          toast.error(response.error.data.message);
+          toast("Before adding the product to your cart, please login.", {
+            action: {
+              label: "Login",
+              onClick: () => {
+                navigate("/login");
+              },
+            },
+          });
         }
       })
       .catch(() => {
@@ -303,7 +320,7 @@ const Product: React.FC = () => {
             />
           )}
         </div>
-        <Toaster position="top-center" />
+        <Toaster position="top-center" className="bg-black" />
       </div>
     </>
   );

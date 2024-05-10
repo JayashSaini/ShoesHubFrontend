@@ -21,90 +21,104 @@ import {
 import Layout from "./Layout.jsx";
 import { useEffect, useState } from "react";
 import { ApiCall } from "./utils";
-import { useDispatch } from "react-redux";
-import { login } from "./features/auth";
-import { UserState, AuthState } from "./types/state.js";
+import { useDispatch, useSelector } from "react-redux";
+import { login, setIsAuthenticated } from "./features/auth";
+import { UserState, AuthState, RootState } from "./types/state.js";
 import { Loading } from "./Components";
+import { setCart } from "@/features/Cart.js";
 
 function App() {
   const dispatch = useDispatch();
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.user.isAuthenticated
+  );
 
   useEffect(() => {
-    const sendData = async () => {
+    (async () => {
+      const accessToken = localStorage.getItem("accessToken");
+      const refreshToken = localStorage.getItem("refreshToken");
+      if (!accessToken || accessToken.trim() == "") {
+        dispatch(setIsAuthenticated(false));
+      }
       try {
-        await ApiCall({
-          url: "/api/v1/healthcheck",
+        const response = await ApiCall({
+          url: "/api/v1/users/self",
           method: "GET",
           data: {},
-          debounceTime: 1000,
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
         });
-      } catch (error) {}
-    };
-    sendData();
+        if (response.data) {
+          const user: any = response.data?.data;
+          const userState: UserState = {
+            userId: user?._id,
+            username: user?.username,
+            email: user?.email,
+            isEmailVerified: user?.isEmailVerified,
+            avatar: user?.avatar,
+            role: user?.role,
+            accessToken: accessToken,
+            refreshToken: refreshToken,
+            isLoggedIn: true,
+          };
+
+          const loginPayload: AuthState = {
+            isAuthenticated: true,
+            user: userState,
+            error: null,
+          };
+          dispatch(login(loginPayload));
+        } else if (response.error) {
+          dispatch(setIsAuthenticated(false));
+        }
+      } catch (error) {
+        dispatch(setIsAuthenticated(false));
+      }
+
+      ApiCall({
+        url: `/api/v1/cart/`,
+        method: "GET",
+      })
+        .then((response) => {
+          dispatch(
+            setCart({
+              cart: [...response.data.data.items],
+              totalPrice: response.data.data.cartTotal,
+              discountedTotalPrice: response.data.data.discountedTotal,
+            })
+          );
+        })
+        .catch((error) => {
+          dispatch(
+            setCart({
+              cart: [],
+              totalPrice: 0,
+              discountedTotalPrice: 0,
+            })
+          );
+        });
+    })();
   }, []);
 
-  const Authenticated = async () => {
-    const accessToken = localStorage.getItem("accessToken");
-    const refreshToken = localStorage.getItem("refreshToken");
-    if (!accessToken || accessToken.trim() == "") {
-      return false;
-    }
-
-    try {
-      const response = await ApiCall({
-        url: "/api/v1/users/self",
-        method: "GET",
-        data: {},
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      if (response.data) {
-        const user: any = response.data?.data;
-        const userState: UserState = {
-          userId: user?._id,
-          username: user?.username,
-          email: user?.email,
-          isEmailVerified: user?.isEmailVerified,
-          avatar: user?.avatar,
-          role: user?.role,
-          accessToken: accessToken,
-          refreshToken: refreshToken,
-          isLoggedIn: true,
-        };
-
-        const loginPayload: AuthState = {
-          isAuthenticated: true,
-          user: userState,
-          error: null,
-        };
-        dispatch(login(loginPayload));
-        return true;
-      } else if (response.error) {
-        return false;
-      }
-    } catch (error) {
-      return false;
-    }
-  };
-
   const AuthRoute = () => {
-    const [loading, setLoading] = useState(true);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-      const checkAuthentication = async () => {
-        const isAuthenticated = await Authenticated();
-        setIsAuthenticated(isAuthenticated || false);
-        setLoading(false); // Set loading to false when authentication check is complete
-      };
-      checkAuthentication();
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
+
+      return () => clearTimeout(timer);
     }, []);
 
-    if (loading) {
-      return <Loading />;
-    }
-    return isAuthenticated ? <Cart /> : <Navigate to="/login" />;
+    return isLoading ? (
+      <Loading />
+    ) : isAuthenticated ? (
+      <Cart />
+    ) : (
+      <Navigate to="/login" />
+    );
   };
 
   return (

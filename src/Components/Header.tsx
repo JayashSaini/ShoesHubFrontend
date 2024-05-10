@@ -18,6 +18,11 @@ import men1 from "../assets/men1.jpg";
 import women1 from "../assets/women1.jpg";
 import { ApiCall } from "@/utils/index.js";
 import { CategoryType } from "@/types/category.js";
+import Badge, { BadgeProps } from "@mui/material/Badge";
+import { styled } from "@mui/material/styles";
+import IconButton from "@mui/material/IconButton";
+import { ThemeProvider } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 
 const Header: React.FC = () => {
   const hamburger = useSelector((state: RootState) => state.features.hamburger);
@@ -32,6 +37,9 @@ const Header: React.FC = () => {
   const [currentCategoryName, setCurrentCategoryName] =
     useState<string>("men's");
   const [currentCategory, setCurrentCategory] = useState<CategoryType[]>([]);
+  const cartCount = useSelector((state: RootState) => {
+    return state.cart.cart.length;
+  });
 
   const dispatch = useDispatch();
 
@@ -92,158 +100,185 @@ const Header: React.FC = () => {
       })
       .catch();
   }, []);
+
+  const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
+    "& .MuiBadge-badge": {
+      right: -0,
+      top: 5,
+      border: `2px solid ${theme.palette.background.paper}`,
+      padding: "0 4px",
+    },
+  }));
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#ff5722", // Change this to your desired primary color
+      },
+    },
+  });
   return (
     <>
-      <div
-        className={`w-full h-auto ${
-          isFixed ? "fixed top-0 z-40 transition-all duration-500" : ""
-        }`}
-        onMouseLeave={handleMouseLeave}>
-        <div className="w-full h-auto bg-white  md:px-16 px-4 py-2 flex justify-between items-center border-b-2 border-gray-200 ">
-          <div>
-            <Link to="/">
-              <img
-                src={Logo}
-                alt="Shoes Hub"
-                loading="lazy"
-                className="md:w-[70px] w-[55px] cursor-pointer"
-              />
-            </Link>
-          </div>
-          <div className="hidden md:block">
-            <ul className="flex justify-evenly">
-              <li>
-                <NavLink
-                  to="/"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "text-sm px-3 text-[#f68c23]"
-                      : "text-sm px-3 hover:text-[#f68c23]"
-                  }
-                  onClick={handleMouseLeave}>
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/new"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "text-sm px-3 text-[#f68c23]"
-                      : "text-sm px-3 hover:text-[#f68c23]"
-                  }
-                  onClick={handleMouseLeave}>
-                  New
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/p/collection/men's/662fd720288f5b59eb7d3917"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "text-sm px-3 text-[#f68c23]"
-                      : "text-sm px-3 hover:text-[#f68c23]"
-                  }
-                  onMouseEnter={() => {
-                    handleMouseEnter("men's");
-                  }}
-                  onClick={handleMouseLeave}>
-                  Men
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/p/collection/women's/662fd9c4d2c102242565f2c2"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "text-sm px-3 text-[#f68c23]"
-                      : "text-sm px-3 hover:text-[#f68c23]"
-                  }
-                  onMouseEnter={() => {
-                    handleMouseEnter("women's");
-                  }}
-                  onClick={handleMouseLeave}>
-                  Women
-                </NavLink>
-              </li>
-            </ul>
-          </div>
-          <div>
+      <ThemeProvider theme={theme}>
+        <div
+          className={`w-full h-auto ${
+            isFixed ? "fixed top-0 z-40 transition-all duration-500" : ""
+          }`}
+          onMouseLeave={handleMouseLeave}>
+          <div className="w-full h-auto bg-white  md:px-16 px-4 py-2 flex justify-between items-center border-b-2 border-gray-200 ">
+            <div>
+              <Link to="/">
+                <img
+                  src={Logo}
+                  alt="Shoes Hub"
+                  loading="lazy"
+                  className="md:w-[70px] w-[55px] cursor-pointer"
+                />
+              </Link>
+            </div>
             <div className="hidden md:block">
               <ul className="flex justify-evenly">
-                <li className="px-2">
-                  <IoSearch className="text-[18px]   cursor-pointer hover:scale-105" />
+                <li>
+                  <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-sm px-3 text-[#f68c23]"
+                        : "text-sm px-3 hover:text-[#f68c23]"
+                    }
+                    onClick={handleMouseLeave}>
+                    Home
+                  </NavLink>
                 </li>
-                <Link to="/login">
+                <li>
+                  <NavLink
+                    to="/new"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-sm px-3 text-[#f68c23]"
+                        : "text-sm px-3 hover:text-[#f68c23]"
+                    }
+                    onClick={handleMouseLeave}>
+                    New
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/p/collection/men's/662fd720288f5b59eb7d3917"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-sm px-3 text-[#f68c23]"
+                        : "text-sm px-3 hover:text-[#f68c23]"
+                    }
+                    onMouseEnter={() => {
+                      handleMouseEnter("men's");
+                    }}
+                    onClick={handleMouseLeave}>
+                    Men
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/p/collection/women's/662fd9c4d2c102242565f2c2"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-sm px-3 text-[#f68c23]"
+                        : "text-sm px-3 hover:text-[#f68c23]"
+                    }
+                    onMouseEnter={() => {
+                      handleMouseEnter("women's");
+                    }}
+                    onClick={handleMouseLeave}>
+                    Women
+                  </NavLink>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <div className="hidden md:block">
+                <ul className="flex justify-evenly items-center">
                   <li className="px-2">
-                    <FaRegUser className="text-[18px]   cursor-pointer hover:scale-105" />
+                    <IoSearch className="text-[18px]   cursor-pointer hover:scale-105" />
                   </li>
-                </Link>
-                <li className="px-2">
-                  <Link to="/cart">
-                    <MdOutlineShoppingCart className="text-[18px]   cursor-pointer hover:scale-105" />
+                  <Link to="/login">
+                    <li className="px-2">
+                      <FaRegUser className="text-[18px]   cursor-pointer hover:scale-105" />
+                    </li>
                   </Link>
-                </li>
-                <li className="px-2">
-                  <FaRegHeart className="text-[18px]   cursor-pointer hover:scale-105" />
-                </li>
-              </ul>
-            </div>
-            <div className="block md:hidden flex gap-2">
-              {!hamburger && (
-                <div className="flex gap-2">
-                  <Link to="/cart">
-                    <MdOutlineShoppingCart className="text-[23px]   cursor-pointer hover:scale-105" />
-                  </Link>
-                  <IoSearch className="text-[23px]   cursor-pointer hover:scale-105" />
-                </div>
-              )}
-              {hamburger ? (
-                <RxCross1
-                  onClick={toggleHamburgerHander}
-                  className="text-[25px]   cursor-pointer hover:scale-105"
-                />
-              ) : (
-                <RxHamburgerMenu
-                  onClick={toggleHamburgerHander}
-                  className="text-[25px]   cursor-pointer hover:scale-105"
-                />
-              )}
+                  <li className="">
+                    <Link to="/cart">
+                      <IconButton aria-label="cart">
+                        <StyledBadge badgeContent={cartCount} color="primary">
+                          <MdOutlineShoppingCart />
+                        </StyledBadge>
+                      </IconButton>
+                    </Link>
+                  </li>
+                  <li className="px-2">
+                    <FaRegHeart className="text-[18px]   cursor-pointer hover:scale-105" />
+                  </li>
+                </ul>
+              </div>
+              <div className="block md:hidden flex gap-2 items-center justify-evenly">
+                {!hamburger && (
+                  <div className="flex gap-2 items-center">
+                    <Link to="/cart">
+                      <IconButton aria-label="cart">
+                        <StyledBadge badgeContent={cartCount} color="primary">
+                          <MdOutlineShoppingCart />
+                        </StyledBadge>
+                      </IconButton>
+                    </Link>
+                    <IoSearch className="text-[23px]   cursor-pointer hover:scale-105" />
+                  </div>
+                )}
+                {hamburger ? (
+                  <RxCross1
+                    onClick={toggleHamburgerHander}
+                    className="text-[25px]   cursor-pointer hover:scale-105"
+                  />
+                ) : (
+                  <RxHamburgerMenu
+                    onClick={toggleHamburgerHander}
+                    className="text-[25px]   cursor-pointer hover:scale-105"
+                  />
+                )}
+              </div>
             </div>
           </div>
+          {showCategoryContainer && (
+            <div className="w-full min-h-[300px] fixed bg-white py-6 px-8 flex justify-between z-50 ">
+              <div className="px-5 w-1/2">
+                <h2 className="text-[#f68c23] roboto-bold sm:text-3xl text-2xl text-left mb-8 ">
+                  {currentCategoryName == "men's" ? "Men Shoes" : "Women Shoes"}
+                </h2>
+                <ul className="grid grid-cols-2 gap-x-20 gap-y-4">
+                  {currentCategory.map((category) => (
+                    <li
+                      key={category._id}
+                      className="text-base hover:text-[#f68c23]">
+                      <a
+                        onClick={handleMouseLeave}
+                        href={`/collection/${currentCategoryName}-${category.name}/${category._id}`}>
+                        {category.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="w-1/2 flex justify-end">
+                <img
+                  src={currentCategoryName == "men's" ? men1 : women1}
+                  alt=""
+                  loading="lazy"
+                  className="w-auto max-h-[400px] bg-cover"
+                />
+              </div>
+            </div>
+          )}
+          <div>{hamburger && <Drawer />}</div>
         </div>
-        {showCategoryContainer && (
-          <div className="w-full min-h-[300px] fixed bg-white py-6 px-8 flex justify-between z-50 ">
-            <div className="px-5 w-1/2">
-              <h2 className="text-[#f68c23] roboto-bold sm:text-3xl text-2xl text-left mb-8 ">
-                {currentCategoryName == "men's" ? "Men Shoes" : "Women Shoes"}
-              </h2>
-              <ul className="grid grid-cols-2 gap-x-20 gap-y-4">
-                {currentCategory.map((category) => (
-                  <li
-                    key={category._id}
-                    className="text-base hover:text-[#f68c23]">
-                    <a
-                      onClick={handleMouseLeave}
-                      href={`/collection/${currentCategoryName}-${category.name}/${category._id}`}>
-                      {category.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="w-1/2 flex justify-end">
-              <img
-                src={currentCategoryName == "men's" ? men1 : women1}
-                alt=""
-                loading="lazy"
-                className="w-auto max-h-[400px] bg-cover"
-              />
-            </div>
-          </div>
-        )}
-        <div>{hamburger && <Drawer />}</div>
-      </div>
+      </ThemeProvider>
     </>
   );
 };

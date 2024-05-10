@@ -117,7 +117,7 @@ const CartProduct: React.FC<CartType> = ({ product, quantity }) => {
               {product.description}
             </h2>
             <h3 className="sm:text-sm md:hidden block text-[12px]">
-              Rs. ${product.price}
+              Rs. {product.price}
             </h3>
             <h3 className="sm:text-sm text-[12px]">COLOR: {product.color}</h3>
             <h3 className="sm:text-sm text-[12px]">SIZE: {product.size}</h3>
@@ -157,7 +157,7 @@ const CartProduct: React.FC<CartType> = ({ product, quantity }) => {
           </div>
         </div>
         <div className="md:w-1/2 md:flex hidden  justify-evenly items-center">
-          <p className="sm:text-sm text-[12px]">Rs. ${product.price}</p>
+          <p className="sm:text-sm text-[12px]">Rs. {product.price}</p>
           <button className="flex items-center gap-5 bg-gray-50 p-2 rounded-sm border-[2px] border-gray-100">
             <FaMinus
               className="text-gray-500 text-[12px]"
@@ -185,7 +185,7 @@ const CartProduct: React.FC<CartType> = ({ product, quantity }) => {
               }}
             />
           </button>
-          <p className="sm:text-sm text-[12px]">Rs. ${total}</p>
+          <p className="sm:text-sm text-[12px]">Rs. {total}</p>
         </div>
         <Toaster position="top-center" />
       </div>
