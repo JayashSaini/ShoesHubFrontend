@@ -209,7 +209,7 @@ const Header: React.FC = () => {
                     <Link to="/cart">
                       <IconButton aria-label="cart">
                         <StyledBadge badgeContent={cartCount} color="primary">
-                          <MdOutlineShoppingCart />
+                          <MdOutlineShoppingCart className="text-gray-700" />
                         </StyledBadge>
                       </IconButton>
                     </Link>
@@ -221,11 +221,11 @@ const Header: React.FC = () => {
               </div>
               <div className="block md:hidden flex gap-2 items-center justify-evenly">
                 {!hamburger && (
-                  <div className="flex gap-2 items-center">
+                  <div className="flex md:gap-2   items-center">
                     <Link to="/cart">
                       <IconButton aria-label="cart">
                         <StyledBadge badgeContent={cartCount} color="primary">
-                          <MdOutlineShoppingCart />
+                          <MdOutlineShoppingCart className="text-black" />
                         </StyledBadge>
                       </IconButton>
                     </Link>
