@@ -106,7 +106,6 @@ const CartProduct: React.FC<CartType> = ({ product, quantity }) => {
               onMouseLeave={() => setHovered(false)}
               onClick={() => {
                 naviagate(`/product/${product.name}/${product._id}`);
-                window.location.reload();
               }}
             />
           </div>

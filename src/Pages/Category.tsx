@@ -90,7 +90,7 @@ const Category = () => {
               wishlist,
             };
           });
-          setProducts(updatedProducts);
+          setProducts((prev) => [...prev, ...updatedProducts]);
         }
       })
       .catch(() => {
@@ -107,6 +107,7 @@ const Category = () => {
   }
 
   useEffect(() => {
+    window.scroll(0, 0);
     gsap.to(newRef.current, {
       opacity: 1,
       duration: 2,
@@ -116,14 +117,13 @@ const Category = () => {
         start: "top 50%", // Start animation when the top of the element is 80% in view
       },
     });
-  });
+  }, [collectionId]);
 
   return (
     <>
-      <div>
+      <div ref={newRef} className="opacity-0">
         <div
-          ref={newRef}
-          className={`w-full md:h-80 opacity-0 custom-flex py-2 md:text-5xl  sm:text-2xl text-lg md:text-white text-black font-semibold main-heading-font  ${
+          className={`w-full md:h-80 custom-flex py-2 md:text-5xl  sm:text-2xl text-lg md:text-white text-black font-semibold main-heading-font  ${
             collectionTitle?.charAt(0) === "m"
               ? "collection-men-bg"
               : "collection-women-bg"
@@ -139,7 +139,7 @@ const Category = () => {
                     <ProductCard product={product} />
                   </div>
                   {(index + 1) % 8 === 0 && (
-                    <div className="col-span-2 md:col-span-2">
+                    <div className="col-span-2 md:col-span-2 ">
                       <img
                         src={
                           collectionTitle?.charAt(0) === "m"

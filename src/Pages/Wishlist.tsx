@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { ProductCard } from "../Components";
@@ -8,9 +8,11 @@ import { useEffect } from "react";
 import { ApiCall } from "@/utils";
 import { ProductType } from "@/types/product";
 import { TailSpin } from "react-loader-spinner";
+import { gsap } from "gsap";
 
 const Wishlist = () => {
   const navigate = useNavigate();
+  const wishlistRef = useRef(null);
   const productIds = useSelector((state: RootState) => state.wishlist.proudcts);
 
   const [products, setProducts] = useState<ProductType[]>([]);
@@ -41,12 +43,24 @@ const Wishlist = () => {
     // Call the fetchProducts function
     fetchProducts();
   }, [productIds]);
+
   const goBack = () => {
     navigate(-1);
   };
 
+  useEffect(() => {
+    window.scroll(0, 0);
+    gsap.to(wishlistRef.current, {
+      opacity: 1,
+      duration: 2,
+      delay: 1,
+      ease: "power3.out",
+    });
+  }, []);
   return (
-    <div className="w-full h-auto   py-2 px-2 flex justify-start flex-col items-center">
+    <div
+      ref={wishlistRef}
+      className="w-full h-auto   opacity-0 py-2 px-2 flex justify-start flex-col items-center">
       <div className="md:w-[80%] w-full ">
         <div className="w-full flex flex-col sm:flex-row justify-between sm:items-center items-start">
           <h4 className="text-sm font-base text-gray-500 sm:block hidden">

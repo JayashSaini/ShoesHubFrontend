@@ -66,12 +66,30 @@ const Collection = () => {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
   }
+  const collectionRef = React.useRef(null);
+  const productsRef = React.useRef(null);
+  useEffect(() => {
+    window.scroll(0, 0);
+    gsap.to(collectionRef.current, {
+      opacity: 1,
+      duration: 2,
+      ease: "power3.out",
+    });
+    if (!isLoading) {
+      gsap.to(productsRef.current, {
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
+      });
+    }
+  }, [collectionId, isLoading]);
 
   return (
     <>
       <div>
         <div
-          className={`w-full md:h-80 custom-flex py-2 md:text-5xl  sm:text-2xl text-lg md:text-white text-black font-semibold main-heading-font  ${
+          ref={collectionRef}
+          className={`w-full opacity-0 md:h-80 custom-flex py-2 md:text-5xl  sm:text-2xl text-lg md:text-white text-black font-semibold main-heading-font  ${
             collectionTitle?.charAt(0) === "m"
               ? "collection-men-bg"
               : "collection-women-bg"
@@ -94,7 +112,9 @@ const Collection = () => {
                 />
               </div>
             ) : (
-              <div className="w-full grid grid-cols-2 md:grid-cols-4 px-5 md:py-10 py-5 gap-4">
+              <div
+                ref={productsRef}
+                className=" opacity-0 w-full grid grid-cols-2 md:grid-cols-4 px-5 md:py-10 py-5 gap-4">
                 {products.map((product, index) => (
                   <React.Fragment key={product._id + Math.random() * 10}>
                     <div>
