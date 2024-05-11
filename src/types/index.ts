@@ -38,3 +38,7 @@ export interface SliderProps {
   title: string;
   categoryID: React.ReactNode;
 }
+
+export interface AuthRouteProps {
+  component: React.ComponentType<any>;
+}

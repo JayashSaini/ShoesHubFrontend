@@ -7,12 +7,20 @@ import { ProductType } from "@/types/product.ts";
 import { Skeleton } from "@/Components/ui/skeleton";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useSelector } from "react-redux";
+import { RootState } from "@/types/state";
 gsap.registerPlugin(ScrollTrigger);
 
 const SliderProduct: React.FC<SliderProps> = ({ title, categoryID }) => {
   const [products, setProducts] = React.useState<any>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const wishlistProducts = useSelector(
+    (state: RootState) => state.wishlist.proudcts
+  );
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.user.isAuthenticated
+  );
   const autoPlaySpeed = categoryID === "662fd7c3ef0b27b2064e5092" ? 2500 : 3000;
   useEffect(() => {
     ApiCall({
@@ -24,7 +32,21 @@ const SliderProduct: React.FC<SliderProps> = ({ title, categoryID }) => {
       },
     })
       .then((response: any) => {
-        setProducts([...response.data.data.products]);
+        const products = response.data.data.products;
+        if (!isAuthenticated) {
+          setProducts(products);
+        } else {
+          const updatedProducts = products.map((product: ProductType) => {
+            const wishlist = Array.isArray(wishlistProducts)
+              ? (wishlistProducts as string[]).includes(product._id)
+              : (wishlistProducts as Set<string>).has(product._id);
+            return {
+              ...product,
+              wishlist,
+            };
+          });
+          setProducts(updatedProducts);
+        }
         setIsLoading(false);
       })
       .catch(() => {

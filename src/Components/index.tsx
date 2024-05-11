@@ -10,6 +10,7 @@ import ProductCard from "./ProductCard";
 import SliderProduct from "./SliderProduct";
 import Footer from "./Footer";
 import CartProduct from "./CartProduct";
+import StateMiddlewareComponent from "./State";
 
 export {
   Input,
@@ -24,4 +25,5 @@ export {
   SliderProduct,
   Footer,
   CartProduct,
+  StateMiddlewareComponent,
 };

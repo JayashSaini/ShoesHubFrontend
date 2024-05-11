@@ -4,7 +4,7 @@ import { ApiCall } from "../utils";
 import { toast, ToastContainer } from "react-toastify";
 import { ThreeDots } from "react-loader-spinner";
 // import shield from "../assets/shield .png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState<string>("");
@@ -142,11 +142,11 @@ const ForgotPassword = () => {
                     <PrimaryButton text="Confirm email" />
                   </div>
                   <div className="text-center">
-                    <a
+                    <Link
                       className="text-[#f68c23] sm:text-sm text-[10px] font-medium"
-                      href="/login">
+                      to="/login">
                       Back to log in
-                    </a>
+                    </Link>
                   </div>
                 </form>
               </div>

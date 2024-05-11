@@ -4,14 +4,14 @@ import { CartProduct } from "@/Components";
 import { useEffect, useState } from "react";
 import { PrimaryButton } from "@/Components";
 import { useRef } from "react";
-import { CartType } from "@/types/Cart";
+import { CartType } from "@/types/cart";
 import { gsap } from "gsap";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/types/state";
 import { toast } from "sonner";
 import { Toaster } from "@/Components/ui/sonner";
 import { ApiCall } from "@/utils";
-import { setCart } from "@/features/Cart";
+import { setCart } from "@/features/cart";
 import { MdArrowRightAlt } from "react-icons/md";
 
 const Cart = () => {

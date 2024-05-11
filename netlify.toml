@@ -49,6 +49,11 @@
   status = 200
 
 [[redirects]]
+  from = "/wishlist"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
   from = "/user/:accessToken/:refreshToken"
   to = "/index.html"
   status = 200

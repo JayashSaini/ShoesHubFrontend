@@ -9,11 +9,23 @@ import men from "@/assets/collectionMenBanner.jpg";
 import men2 from "@/assets/collectionMenBanner2.jpg";
 import women1 from "@/assets/collectionWomenBanner.jpg";
 import women2 from "@/assets/collectionWomenBanner2.jpg";
+import { useSelector } from "react-redux";
+import { RootState } from "@/types/state";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Collection = () => {
   let { collectionTitle, collectionId } = useParams();
   const [products, setProducts] = useState<ProductType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const wishlistProducts = useSelector(
+    (state: RootState) => state.wishlist.proudcts
+  );
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.user.isAuthenticated
+  );
 
   useEffect(() => {
     ApiCall({
@@ -25,13 +37,28 @@ const Collection = () => {
       },
     })
       .then((response: any) => {
-        setProducts([...response.data.data.products]);
-        setIsLoading(false);
+        const products = response.data.data.products;
+        if (!isAuthenticated) {
+          setProducts(products);
+          setIsLoading(false);
+        } else {
+          const updatedProducts = products.map((product: ProductType) => {
+            const wishlist = Array.isArray(wishlistProducts)
+              ? (wishlistProducts as string[]).includes(product._id)
+              : (wishlistProducts as Set<string>).has(product._id);
+            return {
+              ...product,
+              wishlist,
+            };
+          });
+          setProducts(updatedProducts);
+          setIsLoading(false);
+        }
       })
       .catch(() => {
         return <></>;
       });
-  }, []);
+  }, [collectionId]);
 
   function formatTitle(title: string) {
     return title
@@ -69,7 +96,7 @@ const Collection = () => {
             ) : (
               <div className="w-full grid grid-cols-2 md:grid-cols-4 px-5 md:py-10 py-5 gap-4">
                 {products.map((product, index) => (
-                  <React.Fragment key={product._id}>
+                  <React.Fragment key={product._id + Math.random() * 10}>
                     <div>
                       <ProductCard product={product} />
                     </div>

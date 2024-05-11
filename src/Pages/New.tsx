@@ -7,6 +7,8 @@ import women1 from "@/assets/collectionWomenBanner.jpg";
 import women2 from "@/assets/collectionWomenBanner2.jpg";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useSelector } from "react-redux";
+import { RootState } from "@/types/state";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,6 +17,12 @@ const New = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
   const newRef = useRef(null);
+  const wishlistProducts = useSelector(
+    (state: RootState) => state.wishlist.proudcts
+  );
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.user.isAuthenticated
+  );
 
   useEffect(() => {
     setIsLoading(true);
@@ -27,10 +35,30 @@ const New = () => {
       },
     })
       .then((response: any) => {
-        setProducts((prev) => {
-          return [...prev, ...response.data.data.products];
-        });
-        setIsLoading(false);
+        const products = response.data.data.products;
+        if (!isAuthenticated) {
+          setProducts(products);
+          setIsLoading(false);
+        } else {
+          const updatedProducts = products.map((product: ProductType) => {
+            const wishlist = wishlistProducts.find(
+              (proudctId) => proudctId == product._id
+            );
+            if (wishlist) {
+              return {
+                ...product,
+                wishlist: true,
+              };
+            } else {
+              return {
+                ...product,
+                wishlis: false,
+              };
+            }
+          });
+          setProducts((prev) => [...prev, ...updatedProducts]);
+          setIsLoading(false);
+        }
       })
       .catch(() => {
         return <></>;
@@ -38,6 +66,7 @@ const New = () => {
   }, [page]);
 
   useEffect(() => {
+    window.scroll(0, 0);
     gsap.to(newRef.current, {
       opacity: 1,
       duration: 2,
@@ -48,10 +77,6 @@ const New = () => {
       },
     });
   });
-
-  useEffect(() => {
-    window.scroll(0, 0);
-  }, []);
 
   return (
     <>
@@ -66,7 +91,7 @@ const New = () => {
           <div>
             <div className="w-full grid grid-cols-2 md:grid-cols-4 px-5 md:py-10 py-5 gap-4">
               {products.map((product, index) => (
-                <React.Fragment key={product._id}>
+                <React.Fragment key={product._id + Math.random() * 10}>
                   <div>
                     <ProductCard product={product} />
                   </div>

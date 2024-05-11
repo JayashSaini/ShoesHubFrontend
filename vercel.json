@@ -10,6 +10,7 @@
     { "source": "/error", "destination": "/index.html" },
     { "source": "/new", "destination": "/index.html" },
     { "source": "/cart", "destination": "/index.html" },
+    { "source": "/wishlist", "destination": "/index.html" },
     {
       "source": "/user/:accessToken/:refreshToken",
       "destination": "/index.html"

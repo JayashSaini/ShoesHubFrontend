@@ -13,6 +13,7 @@ import Collection from "./Collection.js";
 import New from "./New.js";
 import Category from "./Category.js";
 import Cart from "./Cart";
+import Wishlist from "./Wishlist.js";
 
 export {
   Home,
@@ -29,5 +30,6 @@ export {
   Collection,
   New,
   Category,
-  Cart
+  Cart,
+  Wishlist,
 };

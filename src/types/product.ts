@@ -21,6 +21,7 @@ export interface ProductType {
   createdAt: string;
   updatedAt: string;
   __v: number;
+  wishlist?: boolean;
 }
 
 export interface ProductCardType {

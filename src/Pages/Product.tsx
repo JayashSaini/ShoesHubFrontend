@@ -11,7 +11,7 @@ import { toast } from "sonner";
 import { TailSpin } from "react-loader-spinner";
 import { Toaster } from "@/Components/ui/sonner";
 import { useDispatch } from "react-redux";
-import { setCart } from "@/features/Cart";
+import { setCart } from "@/features/cart";
 
 const Product: React.FC = () => {
   const [quantity, setQuantity] = useState(1);
@@ -50,7 +50,6 @@ const Product: React.FC = () => {
   const productRef = useRef(null);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     gsap.to(
       productRef.current,
       { opacity: 1, duration: 1, ease: "power3.out", delay: 1 } // End with opacity 1 after a delay of 0.5 seconds
@@ -58,6 +57,7 @@ const Product: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     ApiCall({
       url: `/api/v1/product/${productId}`,
       method: "GET",
@@ -71,7 +71,7 @@ const Product: React.FC = () => {
       .catch(() => {
         navigate("/404");
       });
-  }, []);
+  }, [productId]);
 
   const handleSubImageClick = (image: any) => {
     // Slide animation

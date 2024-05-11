@@ -11,16 +11,61 @@ import women1 from "@/assets/collectionWomenBanner.jpg";
 import women2 from "@/assets/collectionWomenBanner2.jpg";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useSelector } from "react-redux";
+import { RootState } from "@/types/state";
 gsap.registerPlugin(ScrollTrigger);
 
 const Category = () => {
   let { collectionTitle, collectionId } = useParams();
   const [products, setProducts] = useState<ProductType[]>([]);
+
   const [isLoading, setIsLoading] = useState(true);
+
   const [page, setPage] = useState(1);
   const newRef = useRef(null);
 
+  const wishlistProducts = useSelector(
+    (state: RootState) => state.wishlist.proudcts
+  );
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.user.isAuthenticated
+  );
+
   useEffect(() => {
+    setIsLoading(true);
+    ApiCall({
+      url: `/api/v1/product/pcategory/${collectionId}`,
+      method: "GET",
+      params: {
+        limit: 10,
+        page: 1,
+      },
+    })
+      .then((response: any) => {
+        setIsLoading(false);
+        const products = response.data.data;
+        if (!isAuthenticated) {
+          setProducts(products);
+        } else {
+          const updatedProducts = products.map((product: ProductType) => {
+            const wishlist = Array.isArray(wishlistProducts)
+              ? (wishlistProducts as string[]).includes(product._id)
+              : (wishlistProducts as Set<string>).has(product._id);
+            return {
+              ...product,
+              wishlist,
+            };
+          });
+          setProducts(updatedProducts);
+        }
+      })
+      .catch(() => {
+        setIsLoading(false);
+        return <></>;
+      });
+  }, [collectionId]);
+
+  const loadMoreHandler = () => {
     setIsLoading(true);
     ApiCall({
       url: `/api/v1/product/pcategory/${collectionId}`,
@@ -31,13 +76,28 @@ const Category = () => {
       },
     })
       .then((response: any) => {
-        setProducts((prev) => [...prev, ...response.data.data]);
         setIsLoading(false);
+        const products = response.data.data;
+        if (!isAuthenticated) {
+          setProducts((prev) => [...prev, ...products]);
+        } else {
+          const updatedProducts = products.map((product: ProductType) => {
+            const wishlist = Array.isArray(wishlistProducts)
+              ? (wishlistProducts as string[]).includes(product._id)
+              : (wishlistProducts as Set<string>).has(product._id);
+            return {
+              ...product,
+              wishlist,
+            };
+          });
+          setProducts(updatedProducts);
+        }
       })
       .catch(() => {
+        setIsLoading(false);
         return <></>;
       });
-  }, [page]);
+  };
 
   function formatTitle(title: string) {
     return title
@@ -58,9 +118,6 @@ const Category = () => {
     });
   });
 
-  useEffect(() => {
-    window.scroll(0, 0);
-  }, []);
   return (
     <>
       <div>
@@ -121,6 +178,7 @@ const Category = () => {
                   className="border-[1px] border-black hover:bg-black hover:text-white py-2 px-3 text-base my-3 duration-200 ease-in"
                   onClick={() => {
                     setPage((prev) => prev + 1);
+                    loadMoreHandler();
                   }}>
                   Load More
                 </button>

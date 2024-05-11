@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TailSpin } from "react-loader-spinner";
+import { Link } from "react-router-dom";
 gsap.registerPlugin(ScrollTrigger);
 
 const Footer: React.FC = () => {
@@ -119,31 +120,31 @@ const Footer: React.FC = () => {
             <ul className="  sm:text-base text-sm text-white ">
               <li className="mb-2 font-bold">Customer Care</li>
               <li>
-                <a href="#"> Start Return</a>
+                <Link to="#"> Start Return</Link>
               </li>
               <li>
-                <a href="#"> Order Tracking</a>
+                <Link to="#"> Order Tracking</Link>
               </li>
               <li>
-                <a href="#"> My Account</a>
+                <Link to="#"> My Account</Link>
               </li>
               <li>
-                <a href="#"> FAQ</a>
+                <Link to="#"> FAQ</Link>
               </li>
               <li>
-                <a href="#"> Contact Us</a>
+                <Link to="#"> Contact Us</Link>
               </li>
             </ul>
             <ul className="sm:text-base text-sm text-white">
               <li className="mb-2 font-bold">Service</li>
               <li>
-                <a href="#">About Us</a>
+                <Link to="#">About Us</Link>
               </li>
               <li>
-                <a href="#">Store Locator</a>
+                <Link to="#">Store Locator</Link>
               </li>
               <li>
-                <a href="#">Careers</a>
+                <Link to="#">Careers</Link>
               </li>
             </ul>
           </div>

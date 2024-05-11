@@ -1,14 +1,40 @@
 import React, { useState } from "react";
 import { ProductCardType } from "@/types/product";
 import { useNavigate } from "react-router-dom";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
+import { RootState } from "@/types/state";
+import { useSelector, useDispatch } from "react-redux";
+import { ApiCall } from "@/utils";
+import { setWishlist } from "@/features/wishlist";
 
 const Product: React.FC<ProductCardType> = ({ product }) => {
   const [hovered, setHovered] = useState(false);
-  const naviagate = useNavigate();
+  const navigate = useNavigate();
+  const [isWishlist, setIsWishlist] = useState(product.wishlist);
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.user.isAuthenticated
+  );
+  const dispatch = useDispatch();
+
+  const toggleWishlist = async () => {
+    setIsWishlist((prev) => !prev);
+    const method = isWishlist ? "DELETE" : "POST";
+    try {
+      const response = await ApiCall({
+        url: `/api/v1/wishlist/${product._id}`,
+        method,
+      });
+      if (response.data) {
+        dispatch(setWishlist(response.data.data.products));
+      }
+    } catch (error) {
+      console.log("Wishlist error:", error);
+    }
+  };
 
   return (
     <>
-      <div className="min-w-[150px] h-auto mx-3">
+      <div className="min-w-[150px] h-auto mx-3 relative">
         <div className="w-full max-h-[450px] overflow-hidden flex justify-center items-center ">
           <img
             src={hovered ? product.subImages[0].url : product.mainImage.url}
@@ -17,8 +43,7 @@ const Product: React.FC<ProductCardType> = ({ product }) => {
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
             onClick={() => {
-              naviagate(`/product/${product.name}/${product._id}`);
-              window.location.reload();
+              navigate(`/product/${product.name}/${product._id}`);
             }}
           />
         </div>
@@ -31,6 +56,21 @@ const Product: React.FC<ProductCardType> = ({ product }) => {
           </div>
           <p className="sm:text-base text-[10px]">{product.description}</p>
         </div>
+        {isAuthenticated && (
+          <div className="absolute top-4 right-4">
+            {isWishlist ? (
+              <FaHeart
+                onClick={toggleWishlist}
+                className="text-[18px] text-gray-700 cursor-pointer"
+              />
+            ) : (
+              <FaRegHeart
+                onClick={toggleWishlist}
+                className="text-[18px] text-gray-700 cursor-pointer"
+              />
+            )}
+          </div>
+        )}
       </div>
     </>
   );

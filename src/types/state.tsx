@@ -1,5 +1,5 @@
 import { CategoryType } from "./category";
-import { CartType } from "./Cart";
+import { CartType } from "./cart";
 export interface featureState {
   hamburger: boolean;
   category: {
@@ -32,8 +32,13 @@ export interface CartState {
   discountedTotalPrice: number;
 }
 
+export interface wishlistState {
+  proudcts: string[] | [];
+}
+
 export interface RootState {
   user: AuthState;
   features: featureState;
   cart: CartState;
+  wishlist: wishlistState;
 }

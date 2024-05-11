@@ -9,6 +9,8 @@ import { useDispatch } from "react-redux";
 import { login, loginFailed } from "../features/auth";
 import { AuthState, UserState } from "../types/state";
 import { useNavigate, Link } from "react-router-dom";
+import { setCart } from "@/features/cart.js";
+import { setWishlist } from "../features/wishlist.js";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -47,19 +49,16 @@ const Login = () => {
             password,
           },
         });
-        setIsLoading(false);
         if (response.data) {
           const user: any = response.data?.data?.user;
           const accessToken: string = response.data?.data?.accessToken;
           const refreshToken: string = response.data?.data?.refreshToken;
 
-          try {
-            await Promise.all([
-              localStorage.setItem("accessToken", accessToken),
-              localStorage.setItem("refreshToken", refreshToken),
-              localStorage.setItem("username", user?.username),
-            ]);
-          } catch (error) {}
+          await Promise.all([
+            localStorage.setItem("accessToken", accessToken),
+            localStorage.setItem("refreshToken", refreshToken),
+            localStorage.setItem("username", user?.username),
+          ]);
 
           const userState: UserState = {
             userId: user?._id,
@@ -80,13 +79,29 @@ const Login = () => {
           };
 
           dispatch(login(loginPayload));
+          const cartResponse = await ApiCall({
+            url: `/api/v1/cart/`,
+            method: "GET",
+          });
+          dispatch(
+            setCart({
+              cart: [...cartResponse.data.data.items],
+              totalPrice: cartResponse.data.data.cartTotal,
+              discountedTotalPrice: cartResponse.data.data.discountedTotal,
+            })
+          );
 
-          const getAccessToken = localStorage.getItem("accessToken");
-          if (getAccessToken) {
-            navigate("/", { replace: true });
-          }
+          // Fetch wishlist data
+          const wishlistResponse = await ApiCall({
+            url: `/api/v1/wishlist/`,
+            method: "GET",
+          });
+          dispatch(setWishlist(wishlistResponse.data.data.products));
+          setIsLoading(false);
+          navigate("/", { replace: true });
         }
         if (response.error) {
+          setIsLoading(false);
           if (response.error.data.errors) {
             const errorKeys = Object.keys(response.error.data.errors);
             if (errorKeys.length > 0) {
@@ -117,6 +132,7 @@ const Login = () => {
           }
         }
       } catch (error) {
+        setIsLoading(false);
         toast.error("Login Failed", {
           position: "top-center",
           autoClose: 3000,
@@ -177,11 +193,11 @@ const Login = () => {
                 value={password}
               />
               <div className="text-right">
-                <a
+                <Link
                   className="text-[#f68c23] sm:text-sm text-[11px] font-medium"
-                  href="/forgot-password">
+                  to="/forgot-password">
                   Forgot Password?
-                </a>
+                </Link>
               </div>
               <div className="sm:my-10 my-6 flex flex-col sm:gap-4 gap-3">
                 <PrimaryButton text="Log in" />

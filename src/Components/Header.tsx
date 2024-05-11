@@ -200,11 +200,11 @@ const Header: React.FC = () => {
                   <li className="px-2">
                     <IoSearch className="text-[18px]   cursor-pointer hover:scale-105" />
                   </li>
-                  <Link to="/login">
-                    <li className="px-2">
+                  <li className="px-2">
+                    <Link to="/login">
                       <FaRegUser className="text-[18px]   cursor-pointer hover:scale-105" />
-                    </li>
-                  </Link>
+                    </Link>
+                  </li>
                   <li className="">
                     <Link to="/cart">
                       <IconButton aria-label="cart">
@@ -215,7 +215,9 @@ const Header: React.FC = () => {
                     </Link>
                   </li>
                   <li className="px-2">
-                    <FaRegHeart className="text-[18px]   cursor-pointer hover:scale-105" />
+                    <Link to="/wishlist">
+                      <FaRegHeart className="text-[18px]   cursor-pointer hover:scale-105" />
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -257,11 +259,11 @@ const Header: React.FC = () => {
                     <li
                       key={category._id}
                       className="text-base hover:text-[#f68c23]">
-                      <a
+                      <Link
                         onClick={handleMouseLeave}
-                        href={`/collection/${currentCategoryName}-${category.name}/${category._id}`}>
+                        to={`/collection/${currentCategoryName}-${category.name}/${category._id}`}>
                         {category.name}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>

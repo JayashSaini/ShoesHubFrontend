@@ -10,8 +10,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/types/state.js";
 import { Link } from "react-router-dom";
 import { toggleHamburger } from "@/features/features";
+import { FaRegUser } from "react-icons/fa6";
+import { FaRegHeart } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Drawer: React.FC = () => {
+  const navigate = useNavigate();
+
   const menCategory = useSelector(
     (state: RootState) => state.features.category.men
   );
@@ -53,7 +58,7 @@ const Drawer: React.FC = () => {
     <div
       ref={drawerRef}
       className="w-[100vw] h-[90vh]  top-0 left-0 bg-white translate-x-[-100vh]">
-      <div>
+      <div className="w-full h-full flex flex-col justify-between">
         <ul>
           <div className="w-full text-[15px] px-5 py-3 font-medium border-b-2 border-b-gray-100">
             <Link to="/" onClick={Hambuger}>
@@ -80,12 +85,12 @@ const Drawer: React.FC = () => {
                   <AccordionContent
                     className=" text-[14px] px-5"
                     key={category._id}>
-                    <a
-                      href={`/collection/men's-${category.name}/${category._id}`}
+                    <Link
+                      to={`/collection/men's-${category.name}/${category._id}`}
                       onClick={Hambuger}>
                       {" "}
                       {category.name}
-                    </a>
+                    </Link>
                   </AccordionContent>
                 );
               })}
@@ -106,18 +111,36 @@ const Drawer: React.FC = () => {
                   <AccordionContent
                     className=" text-[14px] px-5"
                     key={category._id}>
-                    <a
-                      href={`/collection/women's-${category.name}/${category._id}`}
+                    <Link
+                      to={`/collection/women's-${category.name}/${category._id}`}
                       onClick={Hambuger}>
                       {" "}
                       {category.name}
-                    </a>
+                    </Link>
                   </AccordionContent>
                 );
               })}
             </AccordionItem>
           </Accordion>
         </ul>
+        <div className="w-full">
+          <div
+            onClick={() => {
+              Hambuger();
+              navigate("/login");
+            }}
+            className="w-full p-5  font-medium text-base border-t-[2px] border-gray-100 flex gap-4  items-center">
+            <FaRegUser /> Account
+          </div>
+          <div
+            onClick={() => {
+              Hambuger();
+              navigate("/wishlist");
+            }}
+            className="w-full p-5   text-base  font-medium border-t-[2px] border-gray-100 flex gap-4 items-center">
+            <FaRegHeart /> Wishlist
+          </div>
+        </div>
       </div>
     </div>
   );

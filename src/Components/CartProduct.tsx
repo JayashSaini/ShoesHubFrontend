@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
-import { CartType } from "@/types/Cart";
+import { CartType } from "@/types/cart";
 import { useNavigate } from "react-router-dom";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { gsap } from "gsap";
 import { ApiCall } from "@/utils";
 import { useDispatch } from "react-redux";
-import { setCart } from "@/features/Cart";
+import { setCart } from "@/features/cart";
 import { toast } from "sonner";
 import { Toaster } from "@/Components/ui/sonner";
 
@@ -50,8 +50,7 @@ const CartProduct: React.FC<CartType> = ({ product, quantity }) => {
             toast.error(response.error.data.message);
           }
         })
-        .catch((error) => {
-          console.log("cart error: " + error);
+        .catch(() => {
           dispatch(
             setCart({
               cart: [],
