@@ -13,7 +13,8 @@ import { toggleHamburger } from "@/features/features";
 import { FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/Components/ui/avatar";
-
+import { toast } from "sonner";
+import { Toaster } from "@/Components/ui/sonner";
 const Drawer: React.FC = () => {
   const navigate = useNavigate();
 
@@ -26,6 +27,9 @@ const Drawer: React.FC = () => {
   const avatar: any = useSelector((state: RootState) => state.user.user.avatar);
   const username = useSelector((state: RootState) => state.user.user.username);
   const dispatch = useDispatch();
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.user.isAuthenticated
+  );
 
   const drawerRef = useRef(null);
   useEffect(() => {
@@ -128,6 +132,9 @@ const Drawer: React.FC = () => {
           <div
             onClick={() => {
               Hambuger();
+              if (!isAuthenticated) {
+                toast("Please login to view your cart.");
+              }
               navigate("/profile");
             }}
             className="w-full p-5  font-medium text-base border-t-[2px] border-gray-100 flex gap-4  items-center">
@@ -143,6 +150,9 @@ const Drawer: React.FC = () => {
           </div>
           <div
             onClick={() => {
+              if (!isAuthenticated) {
+                toast("Please login to view your cart.");
+              }
               Hambuger();
               navigate("/wishlist");
             }}
@@ -151,6 +161,7 @@ const Drawer: React.FC = () => {
           </div>
         </div>
       </div>
+      <Toaster position="top-center" />
     </div>
   );
 };

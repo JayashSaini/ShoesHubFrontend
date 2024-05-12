@@ -17,9 +17,12 @@ const cartReducer = createSlice({
       state.discountedTotalPrice = action.payload.discountedTotalPrice;
     },
     // Add other reducers as needed (e.g., for updating user profile, email verification status, etc.)
+    initCart: (state) => {
+      Object.assign(state, initialState);
+    },
   },
 });
 
 // Export actions and reducer
-export const { setCart } = cartReducer.actions;
+export const { setCart, initCart } = cartReducer.actions;
 export default cartReducer.reducer;

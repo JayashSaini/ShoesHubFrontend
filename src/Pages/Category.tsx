@@ -152,6 +152,7 @@ const Category = () => {
                         }
                         alt="Large Image"
                         className="w-full"
+                        loading="lazy"
                       />
                     </div>
                   )}

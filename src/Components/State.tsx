@@ -79,7 +79,6 @@ const StateMiddlewareComponent: React.FC = () => {
           });
           const { firstName, lastName, email, phoneNumber } =
             profileResponse.data.data;
-          console.log("response: " + JSON.stringify(profileResponse.data.data));
 
           dispatch(setProfile({ firstName, lastName, email, phoneNumber }));
         } else if (response.error) {

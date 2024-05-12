@@ -4,11 +4,8 @@ import { FaInstagram, FaSquareGithub, FaLinkedin } from "react-icons/fa6";
 import { ApiCall } from "@/utils";
 import { Toaster } from "@/Components/ui/sonner";
 import { toast } from "sonner";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TailSpin } from "react-loader-spinner";
 import { Link } from "react-router-dom";
-gsap.registerPlugin(ScrollTrigger);
 
 const Footer: React.FC = () => {
   const [email, setEmail] = useState("");

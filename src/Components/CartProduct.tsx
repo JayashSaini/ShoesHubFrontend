@@ -107,6 +107,7 @@ const CartProduct: React.FC<CartType> = ({ product, quantity }) => {
               onClick={() => {
                 naviagate(`/product/${product.name}/${product._id}`);
               }}
+              loading="lazy"
             />
           </div>
           <div className="p2">

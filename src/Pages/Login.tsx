@@ -19,6 +19,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const imgRef = useRef(null);
+  const loginRef = useRef(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,6 +27,12 @@ const Login = () => {
   useEffect(() => {
     gsap.to(imgRef.current, {
       duration: 3,
+      opacity: 1,
+
+      ease: "power3.out",
+    });
+    gsap.to(loginRef.current, {
+      duration: 1,
       opacity: 1,
 
       ease: "power3.out",
@@ -179,7 +186,9 @@ const Login = () => {
             ref={imgRef}
           />
         </div>
-        <div className="w-full md:w-[45%]  p-6 md:p-4 h-full custom-flex">
+        <div
+          ref={loginRef}
+          className="w-full md:w-[45%] opacity-0 p-6 md:p-4 h-full custom-flex">
           <div className="w-full md:w-[90%]  sm:w-[60%] w-full h-auto px-4 md:px-8 py-3">
             <form onSubmit={loginHandler}>
               <h2 className="main-heading-font sm:text-3xl text-2xl md:text-4xl text-center mb-6">

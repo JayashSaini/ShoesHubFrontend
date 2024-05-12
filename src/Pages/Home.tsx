@@ -8,11 +8,13 @@ import category3 from "@/assets/Collection4.jpg";
 import category4 from "@/assets/Collection3.jpg";
 import { MdArrowRightAlt } from "react-icons/md";
 import Slider from "react-slick";
+import { Link, useNavigate } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const Home = () => {
+  const navigate = useNavigate();
   const settings = {
     infinite: true,
     speed: 1000,
@@ -155,48 +157,72 @@ const Home = () => {
                 src={category1}
                 alt="women"
                 className="min-w-[150px] cursor-pointer"
+                loading="lazy"
+                onClick={() => {
+                  navigate(
+                    `/collection/women's-Boots/662fd9dbd2c102242565f2c7`
+                  );
+                }}
               />
-              <a
-                href="#"
+              <Link
+                to="/collection/women's-Boots/662fd9dbd2c102242565f2c7"
                 className="absolute bottom-9 left-10 z-10 sm:text-xl text-sm text-white  font-bold hover:scale-105 ">
                 Shop Now!
-              </a>
+              </Link>
             </div>
             <div className=" p-4 w-auto relative h-auto ">
               <img
                 src={category2}
                 alt="women"
                 className="min-w-[150px] cursor-pointer"
+                loading="lazy"
+                onClick={() => {
+                  navigate(
+                    `/collection/men's-Sneakers/662fd7c3ef0b27b2064e5092`
+                  );
+                }}
               />
-              <a
-                href="#"
+              <Link
+                to="/collection/men's-Sneakers/662fd7c3ef0b27b2064e5092"
                 className="absolute bottom-9 left-10 z-10 sm:text-xl text-sm text-white  font-bold hover:scale-105 ">
                 Shop Now!
-              </a>
+              </Link>
             </div>
             <div className=" p-4 w-auto relative h-auto ">
               <img
                 src={category3}
                 alt="women"
                 className="min-w-[150px] cursor-pointer"
+                loading="lazy"
+                onClick={() => {
+                  navigate(
+                    `/collection/men's-Oxfords/662fd7ebef0b27b2064e5097`
+                  );
+                }}
               />
-              <a
-                href="#"
+              <Link
+                to="/collection/men's-Oxfords/662fd7ebef0b27b2064e5097"
                 className="absolute bottom-9 left-10 z-10 sm:text-xl text-sm text-white  font-bold hover:scale-105 ">
                 Shop Now!
-              </a>
+              </Link>
             </div>
             <div className=" p-4 w-auto relative h-auto ">
               <img
                 src={category4}
                 alt="women"
                 className="min-w-[150px] cursor-pointer"
+                loading="lazy"
+                onClick={() => {
+                  navigate(
+                    `/collection/women's-Heels/6636597b2542298af701506c`
+                  );
+                }}
               />
-              <a
-                href="#"
+              <Link
+                to="/collection/women's-Heels/6636597b2542298af701506c"
                 className="absolute bottom-9 left-10 z-10 sm:text-xl text-sm text-white  font-bold hover:scale-105 ">
                 Shop Now!
-              </a>
+              </Link>
             </div>
           </Slider>
         </div>

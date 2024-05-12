@@ -18,10 +18,13 @@ const profileReducer = createSlice({
       state.lastName = action.payload.lastName;
       state.phone = action.payload.phoneNumber;
     },
+    initProfile: (state) => {
+      Object.assign(state, initialState);
+    },
     // Add other reducers as needed (e.g., for updating user profile, email verification status, etc.)
   },
 });
 
 // Export actions and reducer
-export const { setProfile } = profileReducer.actions;
+export const { setProfile, initProfile } = profileReducer.actions;
 export default profileReducer.reducer;

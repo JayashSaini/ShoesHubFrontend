@@ -37,7 +37,7 @@ const New = () => {
       .then((response: any) => {
         const products = response.data.data.products;
         if (!isAuthenticated) {
-          setProducts(products);
+          setProducts((prev) => [...prev, ...products]);
           setIsLoading(false);
         } else {
           const updatedProducts = products.map((product: ProductType) => {
@@ -76,7 +76,7 @@ const New = () => {
         start: "top 50%", // Start animation when the top of the element is 80% in view
       },
     });
-  });
+  }, []);
 
   return (
     <>

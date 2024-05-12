@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../assets/favicon1.svg";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { FaRegHeart } from "react-icons/fa";
@@ -23,6 +23,7 @@ import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
+import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/Components/ui/avatar";
 
 const Header: React.FC = () => {
@@ -45,7 +46,11 @@ const Header: React.FC = () => {
     return state.cart.cart.length;
   });
 
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.user.isAuthenticated
+  );
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleMouseEnter = (category: string) => {
     setCurrentCategoryName(category);
@@ -205,12 +210,26 @@ const Header: React.FC = () => {
                     <IoSearch className="text-[18px]   cursor-pointer hover:scale-105" />
                   </li>
                   <li className="px-2">
-                    <Link to="/wishlist">
+                    <Link
+                      to="/wishlist"
+                      onClick={() => {
+                        if (!isAuthenticated) {
+                          toast("Please login to view your wishlist.");
+                          navigate("/login");
+                        }
+                      }}>
                       <FaRegHeart className="text-[18px]   cursor-pointer hover:scale-105" />
                     </Link>
                   </li>
                   <li className="">
-                    <Link to="/cart">
+                    <Link
+                      to="/cart"
+                      onClick={() => {
+                        if (!isAuthenticated) {
+                          toast("Please login to view your cart.");
+                          navigate("/login");
+                        }
+                      }}>
                       <IconButton aria-label="cart">
                         <StyledBadge badgeContent={cartCount} color="primary">
                           <MdOutlineShoppingCart className="text-gray-700" />
@@ -219,7 +238,14 @@ const Header: React.FC = () => {
                     </Link>
                   </li>
                   <li className="px-2">
-                    <Link to="/profile">
+                    <Link
+                      to="/profile"
+                      onClick={() => {
+                        if (!isAuthenticated) {
+                          toast("Please login to view your profile.");
+                          navigate("/login");
+                        }
+                      }}>
                       <Avatar>
                         <AvatarImage src={avatar.url} alt="" />
                         <AvatarFallback className="text-lg">

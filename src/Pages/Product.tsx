@@ -161,6 +161,7 @@ const Product: React.FC = () => {
                   className="w-full mb-2 cursor-pointer"
                   style={{ opacity: mainImage === image ? 1 : 0.7 }} // Change opacity based on active image
                   onClick={() => handleSubImageClick(image)}
+                  loading="lazy"
                 />
               ))}
             </div>
@@ -170,6 +171,7 @@ const Product: React.FC = () => {
                 src={mainImage.url}
                 alt="Main Image"
                 className="w-full h-full main-image "
+                loading="lazy"
               />
             </div>
           </div>

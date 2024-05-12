@@ -6,9 +6,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/types/state";
 import { GoPlus } from "react-icons/go";
 import { PrimaryButton, Input } from "@/Components";
-import { updateAvatar } from "@/features/auth";
+import { updateAvatar, logout } from "@/features/auth";
+import { initCart } from "@/features/cart";
+import { initProfile } from "@/features/profile";
 import { toast } from "sonner";
 import { setProfile } from "@/features/profile";
+import { useNavigate } from "react-router-dom";
+import { initWishlist } from "@/features/wishlist";
+
 const Profile = () => {
   const [selectedFile, setSelectedFile] = useState<any>(null);
   const editorRef = useRef<AvatarEditor | null>(null);
@@ -16,6 +21,8 @@ const Profile = () => {
   const { firstName, lastName, phone, email } = useSelector(
     (state: RootState) => state.profile
   );
+
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
@@ -123,6 +130,31 @@ const Profile = () => {
     setIsEditing(true);
   };
 
+  const logoutHandler = () => {
+    ApiCall({
+      url: "/api/v1/users/logout",
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.data) {
+          dispatch(logout());
+          dispatch(initCart());
+          dispatch(initWishlist());
+          dispatch(initProfile());
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+          navigate("/login");
+        } else {
+          toast.error("Error while logging out");
+        }
+      })
+      .catch(() => {
+        toast.error("Error while logging out");
+      });
+  };
   return (
     <div>
       <div className="w-full md:h-[90vh] md:py-0 py-16 md:flex block">
@@ -229,10 +261,12 @@ const Profile = () => {
                 <div className="md:mt-10 mt-5">
                   <PrimaryButton text="Save" />
                 </div>
-                <button className="w-full sm:p-2 p-1 mt-2 border-[2px] rounded-md sm:text-sm text-[12px] main-heading-font border-orange-500 hover:text-white hover:bg-[#f48617] duration-200 ease-in-out">
-                  Log out
-                </button>
               </form>
+              <button
+                onClick={logoutHandler}
+                className="w-full sm:p-2 p-1 mt-2 border-[2px] rounded-md sm:text-sm text-[12px] main-heading-font border-orange-500 hover:text-white hover:bg-[#f48617] duration-200 ease-in-out">
+                Log out
+              </button>
             </div>
           </div>
         </div>

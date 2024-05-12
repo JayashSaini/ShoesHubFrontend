@@ -12,6 +12,7 @@ const SSOButton: React.FC<SSOButtonData> = ({ onClick }) => {
           src="https://www.vectorlogo.zone/logos/google/google-icon.svg"
           alt=""
           className="w-[15px] sm:w-[20px]"
+          loading="lazy"
         />
         Sign in with Google
       </button>
