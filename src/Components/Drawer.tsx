@@ -10,9 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/types/state.js";
 import { Link } from "react-router-dom";
 import { toggleHamburger } from "@/features/features";
-import { FaRegUser } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { Avatar, AvatarFallback, AvatarImage } from "@/Components/ui/avatar";
 
 const Drawer: React.FC = () => {
   const navigate = useNavigate();
@@ -23,7 +23,8 @@ const Drawer: React.FC = () => {
   const womenCategory = useSelector(
     (state: RootState) => state.features.category.women
   );
-
+  const avatar: any = useSelector((state: RootState) => state.user.user.avatar);
+  const username = useSelector((state: RootState) => state.user.user.username);
   const dispatch = useDispatch();
 
   const drawerRef = useRef(null);
@@ -127,10 +128,18 @@ const Drawer: React.FC = () => {
           <div
             onClick={() => {
               Hambuger();
-              navigate("/login");
+              navigate("/profile");
             }}
             className="w-full p-5  font-medium text-base border-t-[2px] border-gray-100 flex gap-4  items-center">
-            <FaRegUser /> Account
+            <Link to="/profile">
+              <Avatar>
+                <AvatarImage src={avatar.url} alt="Avatar" />
+                <AvatarFallback className="text-lg">
+                  {username.charAt(0).toUpperCase()}
+                </AvatarFallback>
+              </Avatar>{" "}
+            </Link>{" "}
+            Account
           </div>
           <div
             onClick={() => {
@@ -138,7 +147,7 @@ const Drawer: React.FC = () => {
               navigate("/wishlist");
             }}
             className="w-full p-5   text-base  font-medium border-t-[2px] border-gray-100 flex gap-4 items-center">
-            <FaRegHeart /> Wishlist
+            <FaRegHeart className="m-3" /> Wishlist
           </div>
         </div>
       </div>

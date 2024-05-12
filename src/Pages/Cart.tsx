@@ -42,7 +42,7 @@ const Cart = () => {
       delay: 1,
       ease: "power3.out",
     });
-  }, []);
+  }, [cartCount]);
 
   const discountHandler = () => {
     if (discountCode.length < 4) {
@@ -174,7 +174,7 @@ const Cart = () => {
             </div>
           )
         ) : (
-          <div className="w-full h-[60vh] custom-flex">
+          <div ref={cartRef} className=" opacity-0 w-full h-[60vh] custom-flex">
             <div className="flex flex-col justify-center items-center gap-2">
               <h3 className="md:text-4xl text-xl main-heading-font">
                 Cart is Empty

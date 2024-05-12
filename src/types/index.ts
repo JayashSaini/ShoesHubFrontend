@@ -6,6 +6,7 @@ export interface InputData {
   value: string | number;
   placeholder?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  isRequired?: boolean;
 }
 
 export interface ButtonData {

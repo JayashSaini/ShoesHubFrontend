@@ -1,5 +1,7 @@
 import { CategoryType } from "./category";
 import { CartType } from "./cart";
+import { ProfileType } from "./profile";
+
 export interface featureState {
   hamburger: boolean;
   category: {
@@ -12,7 +14,9 @@ export interface UserState {
   accessToken: string | null;
   refreshToken: string | null;
   username: string;
-  avatar: string;
+  avatar: {
+    url: string;
+  };
   email: string;
   userId: string;
   isEmailVerified: boolean;
@@ -36,9 +40,12 @@ export interface wishlistState {
   proudcts: string[] | [];
 }
 
+export interface profileState extends ProfileType {}
+
 export interface RootState {
   user: AuthState;
   features: featureState;
   cart: CartState;
   wishlist: wishlistState;
+  profile: profileState;
 }

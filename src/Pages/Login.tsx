@@ -11,6 +11,7 @@ import { AuthState, UserState } from "../types/state";
 import { useNavigate, Link } from "react-router-dom";
 import { setCart } from "@/features/cart.js";
 import { setWishlist } from "../features/wishlist.js";
+import { setProfile } from "@/features/profile.js";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -97,6 +98,15 @@ const Login = () => {
             method: "GET",
           });
           dispatch(setWishlist(wishlistResponse.data.data.products));
+
+          const profileResponse = await ApiCall({
+            url: "/api/v1/profile",
+            method: "GET",
+          });
+          const { firstName, lastName, email, phoneNubmer } =
+            profileResponse.data.data;
+          dispatch(setProfile({ firstName, lastName, email, phoneNubmer }));
+
           setIsLoading(false);
           navigate("/", { replace: true });
         }
@@ -132,6 +142,7 @@ const Login = () => {
           }
         }
       } catch (error) {
+        console.log("error is : ", error);
         setIsLoading(false);
         toast.error("Login Failed", {
           position: "top-center",

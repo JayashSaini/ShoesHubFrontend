@@ -54,6 +54,11 @@
   status = 200
 
 [[redirects]]
+  from = "/profile"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
   from = "/user/:accessToken/:refreshToken"
   to = "/index.html"
   status = 200

@@ -14,6 +14,7 @@ import New from "./New.js";
 import Category from "./Category.js";
 import Cart from "./Cart";
 import Wishlist from "./Wishlist.js";
+import Profile from "./Profile.js";
 
 export {
   Home,
@@ -32,4 +33,5 @@ export {
   Category,
   Cart,
   Wishlist,
+  Profile,
 };

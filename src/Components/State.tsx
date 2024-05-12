@@ -7,6 +7,7 @@ import { ApiCall } from "../utils/index.js";
 import { login, setIsAuthenticated } from "../features/auth/index.js";
 import { UserState, AuthState } from "../types/state.js";
 import { useDispatch } from "react-redux";
+import { setProfile } from "@/features/profile.js";
 
 const StateMiddlewareComponent: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -71,6 +72,16 @@ const StateMiddlewareComponent: React.FC = () => {
           });
           const productIds = wishlistResponse.data.data.products;
           dispatch(setWishlist(productIds));
+
+          const profileResponse = await ApiCall({
+            url: "/api/v1/profile",
+            method: "GET",
+          });
+          const { firstName, lastName, email, phoneNumber } =
+            profileResponse.data.data;
+          console.log("response: " + JSON.stringify(profileResponse.data.data));
+
+          dispatch(setProfile({ firstName, lastName, email, phoneNumber }));
         } else if (response.error) {
           dispatch(setIsAuthenticated(false));
           setIsLoading(false);

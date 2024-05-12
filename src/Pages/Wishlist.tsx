@@ -93,14 +93,30 @@ const Wishlist = () => {
           />
         </div>
       ) : (
-        <div className="w-full grid grid-cols-2 md:grid-cols-4 px-5 md:py-10 py-5 gap-4">
-          {products.map((product) => (
-            <React.Fragment key={product._id + Math.random() * 1000}>
-              <div>
-                <ProductCard product={product} />
-              </div>
-            </React.Fragment>
-          ))}
+        <div>
+          <div className="w-full grid grid-cols-2 md:grid-cols-4 px-5 md:py-10 py-5 gap-4">
+            {products.map((product) => (
+              <React.Fragment key={product._id + Math.random() * 1000}>
+                <div>
+                  <ProductCard product={product} />
+                </div>
+              </React.Fragment>
+            ))}
+          </div>
+          <div className=" w-full h-[60vh] custom-flex">
+            <div className="flex flex-col justify-center items-center gap-2">
+              <h3 className="md:text-xl text-lg main-heading-font text-center">
+                Your wishlist is empty. Add some products to see them here!
+              </h3>
+              <button
+                onClick={() => {
+                  navigate("/new");
+                }}
+                className="py-2 px-3 border-[2px] border-black text-sm rounded-sm hover:bg-black hover:text-white duration-200 ease-in focus:outline-none">
+                Latest Proudct
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>

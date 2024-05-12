@@ -18,6 +18,7 @@ import {
   Category,
   Cart,
   Wishlist,
+  Profile,
 } from "./Pages";
 
 import { useSelector } from "react-redux";
@@ -75,6 +76,7 @@ function App() {
             path="/wishlist"
             element={<AuthRoute component={Wishlist} />}
           />
+          <Route path="/profile" element={<AuthRoute component={Profile} />} />
           <Route path="/new" element={<New />} />
           {/* error message handler route*/}
           <Route path="/error" element={<ErrorMessage />} />

@@ -61,7 +61,7 @@ const Product: React.FC<ProductCardType> = ({ product }) => {
             {isWishlist ? (
               <FaHeart
                 onClick={toggleWishlist}
-                className="text-[18px] text-gray-700 cursor-pointer"
+                className="text-[18px] text-orange-300 cursor-pointer"
               />
             ) : (
               <FaRegHeart

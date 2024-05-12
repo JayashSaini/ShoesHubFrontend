@@ -8,7 +8,9 @@ const initialState: AuthState = {
     refreshToken: null,
     username: "",
     email: "",
-    avatar: "https://via.placeholder.com/200x200.png",
+    avatar: {
+      url: "https://res.cloudinary.com/dcvb5vgyf/image/upload/c_scale,h_500,w_500/oysy3d5lzxjzjp8am3bi.jpg",
+    },
     userId: "",
     isEmailVerified: false,
     role: "user", // Default role, can be adjusted based on your application logic
@@ -61,11 +63,20 @@ const userSlice = createSlice({
     setIsAuthenticated(state, action) {
       state.isAuthenticated = action.payload;
     },
+    updateAvatar(state, action) {
+      state.user.avatar.url = action.payload;
+    },
     // Add other reducers as needed (e.g., for updating user profile, email verification status, etc.)
   },
 });
 
 // Export actions and reducer
-export const { login, logout, loginFailed, register, setIsAuthenticated } =
-  userSlice.actions;
+export const {
+  login,
+  logout,
+  loginFailed,
+  register,
+  setIsAuthenticated,
+  updateAvatar,
+} = userSlice.actions;
 export default userSlice.reducer;

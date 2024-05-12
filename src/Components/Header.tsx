@@ -3,10 +3,10 @@ import Logo from "../assets/favicon1.svg";
 import { NavLink, Link } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import { MdOutlineShoppingCart } from "react-icons/md";
-import { FaRegUser } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa";
 import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   toggleHamburger,
   setMenCategory,
@@ -23,6 +23,7 @@ import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
+import { Avatar, AvatarFallback, AvatarImage } from "@/Components/ui/avatar";
 
 const Header: React.FC = () => {
   const hamburger = useSelector((state: RootState) => state.features.hamburger);
@@ -32,6 +33,9 @@ const Header: React.FC = () => {
   const womenCategory = useSelector(
     (state: RootState) => state.features.category.women
   );
+  const avatar: any = useSelector((state: RootState) => state.user.user.avatar);
+  const username = useSelector((state: RootState) => state.user.user.username);
+
   const [showCategoryContainer, setShowCategoryContainer] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
   const [currentCategoryName, setCurrentCategoryName] =
@@ -201,8 +205,8 @@ const Header: React.FC = () => {
                     <IoSearch className="text-[18px]   cursor-pointer hover:scale-105" />
                   </li>
                   <li className="px-2">
-                    <Link to="/login">
-                      <FaRegUser className="text-[18px]   cursor-pointer hover:scale-105" />
+                    <Link to="/wishlist">
+                      <FaRegHeart className="text-[18px]   cursor-pointer hover:scale-105" />
                     </Link>
                   </li>
                   <li className="">
@@ -215,8 +219,13 @@ const Header: React.FC = () => {
                     </Link>
                   </li>
                   <li className="px-2">
-                    <Link to="/wishlist">
-                      <FaRegHeart className="text-[18px]   cursor-pointer hover:scale-105" />
+                    <Link to="/profile">
+                      <Avatar>
+                        <AvatarImage src={avatar.url} alt="" />
+                        <AvatarFallback className="text-lg">
+                          {username.charAt(0).toUpperCase()}
+                        </AvatarFallback>
+                      </Avatar>{" "}
                     </Link>
                   </li>
                 </ul>

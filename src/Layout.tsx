@@ -41,7 +41,7 @@ const Layout = () => {
     <>
       {!isSecurePage && <Header />}
       {hamburger ? "" : <Outlet />}
-      {!isSecurePage && <Footer />}
+      {!isSecurePage && !hamburger && <Footer />}
     </>
   );
 };
