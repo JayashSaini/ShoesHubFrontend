@@ -29,6 +29,7 @@ const SliderProduct: React.FC<SliderProps> = ({ title, categoryID }) => {
       params: {
         limit: 8,
         page: 1,
+        sortType: "relevance",
       },
     })
       .then((response: any) => {
