@@ -13,11 +13,22 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useSelector } from "react-redux";
 import { RootState } from "@/types/state";
+import { Button } from "@/Components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/Components/ui/dropdown-menu";
 gsap.registerPlugin(ScrollTrigger);
 
 const Category = () => {
   let { collectionTitle, collectionId } = useParams();
   const [products, setProducts] = useState<ProductType[]>([]);
+  const [sortType, setSortType] = React.useState("newest");
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -39,6 +50,7 @@ const Category = () => {
       params: {
         limit: 10,
         page: 1,
+        sortType,
       },
     })
       .then((response: any) => {
@@ -63,16 +75,18 @@ const Category = () => {
         setIsLoading(false);
         return <></>;
       });
-  }, [collectionId]);
+  }, [collectionId, sortType]);
 
   const loadMoreHandler = () => {
     setIsLoading(true);
+    console.log("page is ; ", page);
     ApiCall({
       url: `/api/v1/product/pcategory/${collectionId}`,
       method: "GET",
       params: {
         limit: 10,
         page: page,
+        sortType,
       },
     })
       .then((response: any) => {
@@ -117,7 +131,7 @@ const Category = () => {
         start: "top 50%", // Start animation when the top of the element is 80% in view
       },
     });
-  }, [collectionId]);
+  }, [collectionId, sortType]);
 
   return (
     <>
@@ -129,6 +143,44 @@ const Category = () => {
               : "collection-women-bg"
           }`}>
           {formatTitle(collectionTitle || "")}
+        </div>
+        <div className="p-2 px-5 bg-slate-50">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant={"ghost"} className="text-sm">
+                Sort & Filter
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              <DropdownMenuLabel>Sort & Filter</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuRadioGroup
+                value={sortType}
+                onValueChange={setSortType}>
+                <DropdownMenuRadioItem value="newest">
+                  Newest
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="lowToHigh">
+                  Price-Low to High
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="highToLow">
+                  Price-High to Low
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="oldest">
+                  Oldest
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="relevence">
+                  Relevence
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="aToz">
+                  Product A to Z
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="zToa">
+                  Product Z to A
+                </DropdownMenuRadioItem>
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
         <div>
           <div>

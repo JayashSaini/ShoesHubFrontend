@@ -9,7 +9,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useSelector } from "react-redux";
 import { RootState } from "@/types/state";
-import { Button } from "@/Components/ui/button"
+import { Button } from "@/Components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,8 +18,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/Components/ui/dropdown-menu"
-
+} from "@/Components/ui/dropdown-menu";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -27,7 +26,7 @@ const New = () => {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
-   const [position, setPosition] = React.useState("newest")
+  const [sortType, setSortType] = React.useState("newest");
   const newRef = useRef(null);
   const wishlistProducts = useSelector(
     (state: RootState) => state.wishlist.proudcts
@@ -43,7 +42,50 @@ const New = () => {
       method: "GET",
       params: {
         limit: 18,
+        page: 1,
+        sortType,
+      },
+    })
+      .then((response: any) => {
+        const products = response.data.data.products;
+        if (!isAuthenticated) {
+          setProducts(products);
+          setIsLoading(false);
+        } else {
+          const updatedProducts = products.map((product: ProductType) => {
+            const wishlist = wishlistProducts.find(
+              (proudctId) => proudctId == product._id
+            );
+            if (wishlist) {
+              return {
+                ...product,
+                wishlist: true,
+              };
+            } else {
+              return {
+                ...product,
+                wishlis: false,
+              };
+            }
+          });
+          setProducts(updatedProducts);
+          setIsLoading(false);
+        }
+      })
+      .catch(() => {
+        return <></>;
+      });
+  }, [sortType]);
+
+  useEffect(() => {
+    setIsLoading(true);
+    ApiCall({
+      url: `/api/v1/product/`,
+      method: "GET",
+      params: {
+        limit: 18,
         page: page,
+        sortType,
       },
     })
       .then((response: any) => {
@@ -90,10 +132,6 @@ const New = () => {
     });
   }, []);
 
-  const filterHandler = (sortType:string) => {
-    setPosition(sortType)
-    console.log("sortTYpe is : ",sortType)
-  }
   return (
     <>
       <div>
@@ -103,28 +141,41 @@ const New = () => {
           `}>
           New In
         </div>
-        <div className="p-2 px-16 bg-orange-50">
+        <div className="p-2 px-5 bg-slate-50">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button  variant={"ghost"} >Filter</Button>
+              <Button variant={"ghost"} className="text-sm">
+                Sort & Filter
+              </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
               <DropdownMenuLabel>Sort & Filter</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuRadioGroup value={position} onValueChange={ 
-(e)=>{
-  
-filterHandler(e)
-                }
-                } >
-                  <DropdownMenuRadioItem value="newest">Newest</DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem value="lowtohigh">Price-Low to High</DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem value="hightolow">Price-High to Low</DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem value="oldest">Oldest</DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem value="relevence">Relevence</DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem value="atoz">Product A to Z</DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem value="ztoa">Product Z to A</DropdownMenuRadioItem>
-                </DropdownMenuRadioGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuRadioGroup
+                value={sortType}
+                onValueChange={setSortType}>
+                <DropdownMenuRadioItem value="newest">
+                  Newest
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="lowToHigh">
+                  Price-Low to High
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="highToLow">
+                  Price-High to Low
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="oldest">
+                  Oldest
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="relevence">
+                  Relevence
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="aToz">
+                  Product A to Z
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="zToa">
+                  Product Z to A
+                </DropdownMenuRadioItem>
+              </DropdownMenuRadioGroup>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

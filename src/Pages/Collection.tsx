@@ -13,6 +13,16 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/types/state";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Button } from "@/Components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/Components/ui/dropdown-menu";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,6 +30,7 @@ const Collection = () => {
   let { collectionTitle, collectionId } = useParams();
   const [products, setProducts] = useState<ProductType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [sortType, setSortType] = React.useState("newest");
   const wishlistProducts = useSelector(
     (state: RootState) => state.wishlist.proudcts
   );
@@ -34,6 +45,7 @@ const Collection = () => {
       params: {
         limit: 10,
         page: 1,
+        sortType,
       },
     })
       .then((response: any) => {
@@ -58,7 +70,7 @@ const Collection = () => {
       .catch(() => {
         return <></>;
       });
-  }, [collectionId]);
+  }, [collectionId, sortType]);
 
   function formatTitle(title: string) {
     return title
@@ -95,6 +107,44 @@ const Collection = () => {
               : "collection-women-bg"
           }`}>
           {formatTitle(collectionTitle || "")}
+        </div>
+        <div className="p-2 px-5 bg-slate-50">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant={"ghost"} className="text-sm">
+                Sort & Filter
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              <DropdownMenuLabel>Sort & Filter</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuRadioGroup
+                value={sortType}
+                onValueChange={setSortType}>
+                <DropdownMenuRadioItem value="newest">
+                  Newest
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="lowToHigh">
+                  Price-Low to High
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="highToLow">
+                  Price-High to Low
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="oldest">
+                  Oldest
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="relevence">
+                  Relevence
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="aToz">
+                  Product A to Z
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="zToa">
+                  Product Z to A
+                </DropdownMenuRadioItem>
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
         <div>
           <div>
