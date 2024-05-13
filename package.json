@@ -16,6 +16,8 @@
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-avatar": "^1.0.4",
+    "@radix-ui/react-dropdown-menu": "^2.0.6",
+    "@radix-ui/react-slot": "^1.0.2",
     "@reduxjs/toolkit": "^2.2.3",
     "axios": "^1.6.8",
     "class-variance-authority": "^0.7.0",
