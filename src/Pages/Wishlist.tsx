@@ -37,7 +37,10 @@ const Wishlist = () => {
         setProducts(await Promise.all(productPromises));
         setIsLoading(false);
         // Now you have all products, you can proceed with further processing
-      } catch (error) {}
+      } catch (err) {
+        console.log("error is ; ",err)
+        setIsLoading(false);
+      }
     };
 
     // Call the fetchProducts function
@@ -94,7 +97,8 @@ const Wishlist = () => {
         </div>
       ) : (
         <div>
-          <div className="w-full grid grid-cols-2 md:grid-cols-4 px-5 md:py-10 py-5 gap-4">
+          {
+            products.length > 0 ? (<div className="w-full grid grid-cols-2 md:grid-cols-4 px-5 md:py-10 py-5 gap-4">
             {products.map((product) => (
               <React.Fragment key={product._id + Math.random() * 1000}>
                 <div>
@@ -102,8 +106,7 @@ const Wishlist = () => {
                 </div>
               </React.Fragment>
             ))}
-          </div>
-          <div className=" w-full h-[60vh] custom-flex">
+          </div>) : (<div className=" w-full h-[60vh] custom-flex">
             <div className="flex flex-col justify-center items-center gap-2">
               <h3 className="md:text-xl text-lg main-heading-font text-center">
                 Your wishlist is empty. Add some products to see them here!
@@ -116,7 +119,10 @@ const Wishlist = () => {
                 Latest Proudct
               </button>
             </div>
-          </div>
+          </div>)
+          }
+          
+          
         </div>
       )}
     </div>

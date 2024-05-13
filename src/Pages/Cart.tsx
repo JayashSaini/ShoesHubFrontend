@@ -165,7 +165,9 @@ const Cart = () => {
                       RS. <span>{discountedTotalPrice}</span>
                     </h3>
                   </div>
-                  <div className="mt-2">
+                  <div className="mt-2" onClick={()=>{
+                    navigate("/checkout")
+                  }}>
                     <PrimaryButton text="Secure Checkout" />
                   </div>
                 </div>

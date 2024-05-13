@@ -19,6 +19,11 @@
   status = 200
 
 [[redirects]]
+  from = "/checkout"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
   from = "/reset-password/:token"
   to = "/index.html"
   status = 200

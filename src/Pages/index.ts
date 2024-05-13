@@ -15,6 +15,7 @@ import Category from "./Category.js";
 import Cart from "./Cart";
 import Wishlist from "./Wishlist.js";
 import Profile from "./Profile.js";
+import Checkout from './Checkout.js'
 
 export {
   Home,
@@ -34,4 +35,5 @@ export {
   Cart,
   Wishlist,
   Profile,
+  Checkout
 };
