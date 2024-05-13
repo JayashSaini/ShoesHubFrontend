@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../assets/favicon1.svg";
 import { NavLink, Link, useNavigate } from "react-router-dom";
-import { IoSearch } from "react-icons/io5";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { FaRegHeart } from "react-icons/fa";
 import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
@@ -207,9 +206,6 @@ const Header: React.FC = () => {
               <div className="hidden md:block">
                 <ul className="flex justify-evenly items-center">
                   <li className="px-2">
-                    <IoSearch className="text-[18px]   cursor-pointer hover:scale-105" />
-                  </li>
-                  <li className="px-2">
                     <Link
                       to="/wishlist"
                       onClick={() => {
@@ -254,6 +250,17 @@ const Header: React.FC = () => {
                       </Avatar>{" "}
                     </Link>
                   </li>
+                  {!isAuthenticated && (
+                    <li
+                      className="px-2 md:block hidden"
+                      onClick={() => {
+                        navigate("/login");
+                      }}>
+                      <button className="bg-[#f68c23] py-[10px] px-5 text-sm main-heading-font text-black rounded-sm">
+                        Log in
+                      </button>
+                    </li>
+                  )}
                 </ul>
               </div>
               <div className="block md:hidden flex gap-2 items-center justify-evenly">
@@ -266,7 +273,6 @@ const Header: React.FC = () => {
                         </StyledBadge>
                       </IconButton>
                     </Link>
-                    <IoSearch className="text-[23px]   cursor-pointer hover:scale-105" />
                   </div>
                 )}
                 {hamburger ? (
