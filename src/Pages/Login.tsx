@@ -110,9 +110,9 @@ const Login = () => {
             url: "/api/v1/profile",
             method: "GET",
           });
-          const { firstName, lastName, email, phoneNubmer } =
+          const { firstName, lastName, email, phoneNumber } =
             profileResponse.data.data;
-          dispatch(setProfile({ firstName, lastName, email, phoneNubmer }));
+          dispatch(setProfile({ firstName, lastName, email, phoneNumber }));
 
           setIsLoading(false);
           navigate("/", { replace: true });
