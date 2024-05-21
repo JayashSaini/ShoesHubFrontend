@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState } from "react";
 import { ProductCardType } from "@/types/product";
 import { useNavigate } from "react-router-dom";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
@@ -35,24 +35,10 @@ const Product: React.FC<ProductCardType> = ({ product }) => {
       console.log("Wishlist error:", error);
     }
   };
-  const productRef = useRef(null);
-  useEffect(() => {
-    gsap.to(productRef.current, {
-      opacity: 1,
-      duration: 1,
-      delay: 0.3,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: productRef.current,
-        start: "top 60%", // Start animation when the top of the element is 80% in view
-      },
-    });
-  });
+
   return (
     <>
-      <div
-        ref={productRef}
-        className="min-w-[150px] opacity-0 h-auto mx-3 relative">
+      <div className="min-w-[150px] opacity-1 h-auto mx-3 relative">
         <div className="w-full max-h-[450px] overflow-hidden flex justify-center items-center ">
           <img
             src={hovered ? product.subImages[0].url : product.mainImage.url}
@@ -61,6 +47,7 @@ const Product: React.FC<ProductCardType> = ({ product }) => {
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
             onClick={() => {
+              window.scroll(0, 0);
               navigate(`/product/${product.name}/${product._id}`);
             }}
             loading="lazy"

@@ -47,7 +47,7 @@ const New = () => {
       },
     })
       .then((response: any) => {
-        const products = response.data.data.products;
+        const products = response.data.data.docs;
         if (!isAuthenticated) {
           setProducts(products);
           setIsLoading(false);
@@ -72,7 +72,9 @@ const New = () => {
           setIsLoading(false);
         }
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log("error is : ", error);
+
         return <></>;
       });
   }, [sortType]);
@@ -89,7 +91,7 @@ const New = () => {
       },
     })
       .then((response: any) => {
-        const products = response.data.data.products;
+        const products = response.data.data.docs;
         if (!isAuthenticated) {
           setProducts((prev) => [...prev, ...products]);
           setIsLoading(false);
@@ -138,7 +140,8 @@ const New = () => {
         <div
           ref={newRef}
           className={`w-full opacity-0 md:h-80 custom-flex py-2 md:text-5xl  sm:text-2xl collection-new-bg text-lg md:text-white text-black font-semibold main-heading-font
-          `}>
+          `}
+        >
           New In
         </div>
         <div className="p-2 px-5 bg-slate-50">
@@ -153,7 +156,8 @@ const New = () => {
               <DropdownMenuSeparator />
               <DropdownMenuRadioGroup
                 value={sortType}
-                onValueChange={setSortType}>
+                onValueChange={setSortType}
+              >
                 <DropdownMenuRadioItem value="newest">
                   Newest
                 </DropdownMenuRadioItem>
@@ -219,7 +223,8 @@ const New = () => {
                   className="border-[1px] border-black hover:bg-black hover:text-white py-2 px-3 text-base my-3 duration-200 ease-in"
                   onClick={() => {
                     setPage((prev) => prev + 1);
-                  }}>
+                  }}
+                >
                   Load More
                 </button>
               </div>

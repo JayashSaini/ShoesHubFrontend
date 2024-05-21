@@ -33,7 +33,6 @@ const Category = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [page, setPage] = useState(1);
-  const newRef = useRef(null);
 
   const wishlistProducts = useSelector(
     (state: RootState) => state.wishlist.proudcts
@@ -120,28 +119,36 @@ const Category = () => {
       .join(" ");
   }
 
+  const collectionRef = React.useRef(null);
+  const productsRef = React.useRef(null);
+
   useEffect(() => {
     window.scroll(0, 0);
-    gsap.to(newRef.current, {
+    gsap.to(collectionRef.current, {
       opacity: 1,
       duration: 2,
       ease: "power3.out",
-      scrollTrigger: {
-        trigger: newRef.current,
-        start: "top 50%", // Start animation when the top of the element is 80% in view
-      },
     });
-  }, [collectionId, sortType]);
+    if (!isLoading) {
+      gsap.to(productsRef.current, {
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
+      });
+    }
+  }, [collectionId, isLoading]);
 
   return (
     <>
-      <div ref={newRef} className="opacity-0">
+      <div>
         <div
-          className={`w-full md:h-80 custom-flex py-2 md:text-5xl  sm:text-2xl text-lg md:text-white text-black font-semibold main-heading-font  ${
+          ref={collectionRef}
+          className={`w-full opacity-0 md:h-80 custom-flex py-2 md:text-5xl  sm:text-2xl text-lg md:text-white text-black font-semibold main-heading-font  ${
             collectionTitle?.charAt(0) === "m"
               ? "collection-men-bg"
               : "collection-women-bg"
-          }`}>
+          }`}
+        >
           {formatTitle(collectionTitle || "")}
         </div>
         <div className="p-2 px-5 bg-slate-50">
@@ -156,7 +163,8 @@ const Category = () => {
               <DropdownMenuSeparator />
               <DropdownMenuRadioGroup
                 value={sortType}
-                onValueChange={setSortType}>
+                onValueChange={setSortType}
+              >
                 <DropdownMenuRadioItem value="newest">
                   Newest
                 </DropdownMenuRadioItem>
@@ -184,35 +192,8 @@ const Category = () => {
         </div>
         <div>
           <div>
-            <div className="w-full grid grid-cols-2 md:grid-cols-4 px-5 md:py-10 py-5 gap-4">
-              {products.map((product, index) => (
-                <React.Fragment key={product._id + Math.random() * 1000}>
-                  <div>
-                    <ProductCard product={product} />
-                  </div>
-                  {(index + 1) % 8 === 0 && (
-                    <div className="col-span-2 md:col-span-2 ">
-                      <img
-                        src={
-                          collectionTitle?.charAt(0) === "m"
-                            ? (index + 1) % 16 == 0
-                              ? men
-                              : men2
-                            : (index + 1) % 16 == 0
-                            ? women1
-                            : women2
-                        }
-                        alt="Large Image"
-                        className="w-full"
-                        loading="lazy"
-                      />
-                    </div>
-                  )}
-                </React.Fragment>
-              ))}
-            </div>
-            {isLoading && (
-              <div className="h-80 custom-flex">
+            {isLoading ? (
+              <div className="h-80 w-full custom-flex">
                 <TailSpin
                   visible={true}
                   height="50"
@@ -224,6 +205,37 @@ const Category = () => {
                   wrapperClass=""
                 />
               </div>
+            ) : (
+              <div
+                ref={productsRef}
+                className=" opacity-0 w-full grid grid-cols-2 md:grid-cols-4 px-5 md:py-10 py-5 gap-4"
+              >
+                {products.map((product, index) => (
+                  <React.Fragment key={product._id + Math.random() * 1000}>
+                    <div>
+                      <ProductCard product={product} />
+                    </div>
+                    {(index + 1) % 8 === 0 && (
+                      <div className="col-span-2 md:col-span-2 ">
+                        <img
+                          src={
+                            collectionTitle?.charAt(0) === "m"
+                              ? (index + 1) % 16 == 0
+                                ? men
+                                : men2
+                              : (index + 1) % 16 == 0
+                              ? women1
+                              : women2
+                          }
+                          alt="Large Image"
+                          className="w-full"
+                          loading="lazy"
+                        />
+                      </div>
+                    )}
+                  </React.Fragment>
+                ))}
+              </div>
             )}
             {!isLoading && (
               <div className="text-center mt-4">
@@ -232,7 +244,8 @@ const Category = () => {
                   onClick={() => {
                     setPage((prev) => prev + 1);
                     loadMoreHandler();
-                  }}>
+                  }}
+                >
                   Load More
                 </button>
               </div>
