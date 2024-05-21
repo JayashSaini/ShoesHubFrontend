@@ -1,6 +1,6 @@
 import React from "react";
 import { ProductType } from "@/types/product";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ApiCall } from "@/utils";
 import { TailSpin } from "react-loader-spinner";
